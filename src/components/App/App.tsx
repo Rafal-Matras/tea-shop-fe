@@ -1,8 +1,16 @@
-import './App.css';
+import { Footer } from '../Footer/Footer';
+import { Header } from '../Header/Header';
+import { Main } from '../Main/Main';
+
+import style from './App.module.css';
 
 export const App = () => {
 
   return (
-    <h1>App</h1>
+      <main className={style.container}>
+        <Header/>
+        <Main/>
+        <Footer/>
+      </main>
   );
 };

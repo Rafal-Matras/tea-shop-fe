@@ -1,6 +1,8 @@
+import { Home } from '../components/Home/Home';
+
 export const HomeViews = () => {
 
   return (
-    <h1>Home</h1>
+    <Home/>
   );
 };
