@@ -1,6 +1,6 @@
 export const AdminListOfActiveOrders = () => {
 
   return (
-    <h1>Admin Add Product</h1>
+    <h1>Admin Active order list</h1>
   );
 };
