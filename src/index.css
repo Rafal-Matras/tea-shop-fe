@@ -4,7 +4,7 @@
     --secondary-color: #eeffd7;
     --grey-light: #f2f2f2;
     --primary-text-color: #282828;
-    --secondary-text-color: #fafafa;
+    --secondary-text-color: #f8f8f8;
 }
 
 *,*::before,*::after{
@@ -13,4 +13,28 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     color: var(--primary-text-color);
+}
+
+body {
+    margin: 0 auto;
+    width: 100vw;
+    background-color: #fff;
+}
+
+@media (min-width: 576px) {
+    :root {
+        font-size: 11px;
+    }
+}
+
+@media (min-width: 768px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 992px) {
+    :root {
+        font-size: 14px;
+    }
 }
