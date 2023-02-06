@@ -11,10 +11,11 @@ import style from './App.module.css';
 
 export const App = () => {
 
-  const [userRole, setUserRole] = useState<string>('admin');
+  const [userRole, setUserRole] = useState<string>('user');
+  const [fullPrice, setFullPrice] = useState<number>(0);
 
   return (
-    <AppContext.Provider value={{userRole, setUserRole}}>
+    <AppContext.Provider value={{userRole, setUserRole, fullPrice, setFullPrice}}>
       <main className={style.container}>
         {userRole === 'admin'
           ? <>
