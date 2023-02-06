@@ -30,7 +30,7 @@ export const Footer = () => {
         <p className={style.text}>Herbaciany Zakątek S.C.</p>
         <p className={style.text}> ul. Herbaciana 12 m 1</p>
         <p className={style.text}>01-123 Warszawa</p>
-        <p className={style.text}>Pon - Pt: 8:00 - 16:00</p>
+        <p className={style.text}>Pon - Pt: <span>8:00 - 16:00</span></p>
         <p className={style.text}>Telefon: <span>+48 123 456 789</span></p>
         <p className={style.text}>E-mail: <span>info@herbacianyzakatek.pl</span></p>
         <p className={style.text}>NIP: <span>123 456 78 99</span></p>
