@@ -1,0 +1,39 @@
+.container {
+    padding: 20px 10px 100px;
+}
+
+.title {
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.paragraphTitle {
+    padding: 10px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.paragraphText {
+    padding-bottom: 5px;
+    font-size: 1.2rem;
+    text-align: justify;
+}
+
+@media (min-width: 992px) {
+    .container {
+        padding: 20px 20px 100px;
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .paragraphTitle {
+        font-size: 1.2rem;
+    }
+
+    .paragraphText {
+        font-size: 1.1rem;
+    }
+
+}

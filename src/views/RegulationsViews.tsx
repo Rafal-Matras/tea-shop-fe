@@ -1,6 +1,8 @@
+import { Regulations } from '../components/Regulations/Regulations';
+
 export const RegulationsViews = () => {
 
   return (
-    <h1>Regulations</h1>
+    <Regulations/>
   );
 };
