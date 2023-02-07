@@ -42,18 +42,21 @@
         float: right;
         width: 50%;
     }
-
 }
 
 @media (min-width: 768px) {
     .image {
         width: 40%;
+        max-width: 500px;
     }
 }
 
 @media (min-width: 992px) {
-    .image {
-        width: 35%;
+    .container{
+        padding: 0 30px;
     }
 
+    .text {
+        font-size: 1.2rem;
+    }
 }
