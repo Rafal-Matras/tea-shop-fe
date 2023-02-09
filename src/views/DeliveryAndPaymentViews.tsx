@@ -1,6 +1,7 @@
+import { DeliveryAndPayment } from '../components/DeliveryAndPayment/DeliveryAndPayment';
+
 export const DeliveryAndPaymentViews = () => {
 
-  return (
-    <h1>DeliveryAndPayment</h1>
-  );
+  return <DeliveryAndPayment/>;
+
 };
