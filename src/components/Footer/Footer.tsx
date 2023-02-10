@@ -21,6 +21,9 @@ export const Footer = () => {
           <Link className={style.link} to="/delivery-and-payment">Dlostawa i Płatnośći</Link>
         </p>
         <p className={style.text}>
+          <Link className={style.link} to="/how-do-we-package">Jak Pakujemy</Link>
+        </p>
+        <p className={style.text}>
           <Link className={style.link} to="/return-policy">Polityka Zwrotów</Link></p>
         <p className={style.text}>
           <Link className={style.link} to="/privacy-policy">Polityka Prywatności</Link></p>
@@ -31,8 +34,9 @@ export const Footer = () => {
         <p className={style.text}> ul. Herbaciana 12 m 1</p>
         <p className={style.text}>01-123 Warszawa</p>
         <p className={style.text}>Pon - Pt: <span>8:00 - 16:00</span></p>
-        <p className={style.text}>Telefon: <span>+48 123 456 789</span></p>
-        <p className={style.text}>E-mail: <span>info@herbacianyzakatek.pl</span></p>
+        <p className={style.text}>Telefon: <span><a href="tel:+48 123 456 789">+48 123 456 789</a></span></p>
+        <p className={style.text}>E-mail: <span><a href="mailto:info@herbacianyzakatek.pl">info@herbacianyzakatek.pl</a></span>
+        </p>
         <p className={style.text}>NIP: <span>123 456 78 99</span></p>
         <p className={style.text}>Regon: <span>123456789</span></p>
       </div>
