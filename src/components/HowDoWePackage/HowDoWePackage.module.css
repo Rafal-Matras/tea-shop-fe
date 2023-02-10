@@ -1,0 +1,65 @@
+.container {
+    padding: 10px 10px 40px;
+}
+
+.title {
+    margin: 10px 0 20px;
+    font-size: 2.4rem;
+    text-transform: uppercase;
+}
+
+.textImage,
+.image,
+.endImage {
+    position: relative;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+}
+
+.textImage {
+    max-width: 450px;
+}
+
+.image {
+    max-width: 900px;
+}
+
+.endImage {
+    max-width: 1200px;
+}
+
+.text {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    text-align: justify;
+}
+
+.text span {
+    color: var(--primary-color);
+    margin-right: 5px;
+    line-height: .2rem;
+}
+
+.textTitle{
+    margin-bottom: 20px;
+}
+
+
+@media (min-width: 576px) {
+
+    .textImage {
+        position: static;
+        float: right;
+        margin-left: 20px;
+        width: 50%;
+        transform: translateX(0);
+    }
+}
+
+@media (min-width: 992px){
+
+    .container{
+        padding: 10px 20px 80px;
+    }
+}

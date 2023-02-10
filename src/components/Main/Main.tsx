@@ -23,6 +23,7 @@ import { ContactViews } from '../../views/ContactViews';
 import { AboutUsViews } from '../../views/AboutUsViews';
 import { RegulationsViews } from '../../views/RegulationsViews';
 import { DeliveryAndPaymentViews } from '../../views/DeliveryAndPaymentViews';
+import { HowDoWePackageView } from '../../views/HowDoWePackageView';
 import { ReturnPolicyViews } from '../../views/ReturnPolicyViews';
 import { PrivacyPolicyViews } from '../../views/PrivacyPolicyViews';
 
@@ -38,6 +39,7 @@ export const Main = () => {
       <Route path="/about-us" element={<AboutUsViews/>}/>
       <Route path="/regulations" element={<RegulationsViews/>}/>
       <Route path="/delivery-and-payment" element={<DeliveryAndPaymentViews/>}/>
+      <Route path="/how-do-we-package" element={<HowDoWePackageView/>}/>
       <Route path="/return-policy" element={<ReturnPolicyViews/>}/>
       <Route path="/privacy-policy" element={<PrivacyPolicyViews/>}/>
 
