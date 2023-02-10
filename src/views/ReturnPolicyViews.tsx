@@ -1,6 +1,7 @@
+import { ReturnPolicy } from '../components/ReturnPolicy/ReturnPolicy';
+
 export const ReturnPolicyViews = () => {
 
-  return (
-    <h1>Policy Returns</h1>
-  );
+  return <ReturnPolicy/>;
+
 };
