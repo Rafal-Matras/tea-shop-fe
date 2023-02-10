@@ -24,6 +24,10 @@
         cursor: default;
     }
 
+    .topBoxItemText a {
+        text-decoration: none;
+    }
+
     .spanFree {
         font-weight: 600;
         color: var(--primary-color);
@@ -38,5 +42,10 @@
         display: flex;
         align-items: center;
         padding-right: 8px;
+        filter: opacity(50%);
+    }
+
+    .topBoxItem a:hover {
+        filter: opacity(100%);
     }
 }

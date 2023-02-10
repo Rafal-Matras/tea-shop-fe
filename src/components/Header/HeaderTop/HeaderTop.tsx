@@ -22,7 +22,7 @@ export const HeaderTop = () => {
       </div>
       <div className={style.topBoxItem}>
         <PhoneIcon/>
-        <p className={style.topBoxItemText}>123 456 789</p>
+        <p className={style.topBoxItemText}><a href="tel:+48-123-456-789">+48 123 456 789</a></p>
       </div>
       <div className={style.topBoxItem}>
         <a href="mailto:info@herbacianyzakatek.pl"><MailIcon/></a>
