@@ -7,13 +7,20 @@ import { HeaderNavExtraMobileMenu } from './HeaderNavExtraMobileMenu';
 import style from './HeaderNav.module.css';
 
 interface Props {
-  productType:ProductTypeInterface[];
-  activeProductType:boolean;
+  productType: ProductTypeInterface[];
+  activeProductType: boolean;
   selectProductType: (name: string, types: string[]) => void;
-  setActiveMenu:(name:boolean)=>void
+  setActiveMenu: (name: boolean) => void;
+  productTypeTitle: string;
 }
 
-export const HeaderNavProductList = ({productType,activeProductType,selectProductType,setActiveMenu}: Props) => {
+export const HeaderNavProductList = ({
+                                       productType,
+                                       activeProductType,
+                                       selectProductType,
+                                       setActiveMenu,
+                                       productTypeTitle,
+                                     }: Props) => {
 
   return (
     <div className={`${style.navTop} ${activeProductType ? style.displayNone : null}`}>
@@ -21,7 +28,10 @@ export const HeaderNavProductList = ({productType,activeProductType,selectProduc
         {productType.map(item => (
           <li
             key={item.id}
-            className={style.navTopItem}
+            className={`
+            ${style.navTopItem} 
+            ${productTypeTitle === item.name ? style.navTopItemActive : null}
+            `}
             onClick={() => selectProductType(item.name, item.types)}
           ><img
             src={`/images/icons/${item.icon}.png`} alt="ikonka produktu"
@@ -30,7 +40,7 @@ export const HeaderNavProductList = ({productType,activeProductType,selectProduc
           </li>
         ))}
         <HeaderNavExtraMobileMenu
-        setActiveMenu={setActiveMenu}
+          setActiveMenu={setActiveMenu}
         />
       </ul>
     </div>

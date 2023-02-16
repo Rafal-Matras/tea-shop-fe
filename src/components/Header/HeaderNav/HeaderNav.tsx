@@ -20,7 +20,7 @@ export const HeaderNav = ({activeMenu, setActiveMenu}: Props) => {
     {
       id: '123',
       name: 'herbaty',
-      types: ['czarna', 'zielona', 'biała', 'żułta', 'czerwona', 'niebieska', 'earl grey', 'owocowe', 'japońska', 'oolong', 'rooibos', 'yerba mate', 'kwitnąca'],
+      types: ['czarna', 'zielona','czerwona', 'biała', 'żułta',  'niebieska','specialna', 'earl grey', 'owocowe', 'japońska', 'oolong', 'rooibos', 'yerba mate', 'kwitnąca'],
       icon: 'herbata',
     },
     {id: '234', name: 'kawy', types: ['klasyczne', 'smakowe', 'świąteczne', 'naturalne eko'], icon: 'kawa'},
@@ -57,6 +57,7 @@ export const HeaderNav = ({activeMenu, setActiveMenu}: Props) => {
   const selectProductType = (type: string, typeList: string[]) => {
     if (type === 'na prezent' || type === 'promocje') {
       setActiveMenu(false);
+      setProductTypeTitle(type);
       setActiveProductType(false);
     } else {
       setActiveProductType(true);
@@ -91,6 +92,7 @@ export const HeaderNav = ({activeMenu, setActiveMenu}: Props) => {
         activeProductType={activeProductType}
         selectProductType={selectProductType}
         setActiveMenu={setActiveMenu}
+        productTypeTitle={productTypeTitle}
       />
       <HeaderNavProductsTypesList
         activeProductType={activeProductType}
