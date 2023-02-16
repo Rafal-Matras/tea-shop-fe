@@ -9,24 +9,32 @@ export const Footer = () => {
 
   const {userRole, setUserRole} = useContext(AppContext);
 
+  const scrollUp = () => {
+    window.scrollTo(0, 0);
+  };
+  const logout = () => {
+    setUserRole('');
+    scrollUp();
+  };
+
   return (
     <div className={style.container}>
       <div className={style.info}>
         <h1 className={style.title}>Informacje</h1>
         <p className={style.text}>
-          <Link className={style.link} to="/about-us">O Nas</Link></p>
+          <Link className={style.link} to="/about-us" onClick={scrollUp}>O Nas</Link></p>
         <p className={style.text}>
-          <Link className={style.link} to="/regulations">Regulamin</Link></p>
+          <Link className={style.link} to="/regulations" onClick={scrollUp}>Regulamin</Link></p>
         <p className={style.text}>
-          <Link className={style.link} to="/delivery-and-payment">Dlostawa i Płatnośći</Link>
+          <Link className={style.link} to="/delivery-and-payment" onClick={scrollUp}>Dlostawa i Płatnośći</Link>
         </p>
         <p className={style.text}>
-          <Link className={style.link} to="/how-do-we-package">Jak Pakujemy</Link>
+          <Link className={style.link} to="/how-do-we-package" onClick={scrollUp}>Jak Pakujemy</Link>
         </p>
         <p className={style.text}>
-          <Link className={style.link} to="/return-policy">Polityka Zwrotów</Link></p>
+          <Link className={style.link} to="/return-policy" onClick={scrollUp}>Polityka Zwrotów</Link></p>
         <p className={style.text}>
-          <Link className={style.link} to="/privacy-policy">Polityka Prywatności</Link></p>
+          <Link className={style.link} to="/privacy-policy" onClick={scrollUp}>Polityka Prywatności</Link></p>
       </div>
       <div className={style.contact}>
         <h1 className={style.title}>Kontakt</h1>
@@ -48,6 +56,7 @@ export const Footer = () => {
               <Link
                 className={style.link}
                 to="/user/profile/orders"
+                onClick={scrollUp}
               >Historia Zakupów
               </Link>
             </p>
@@ -55,13 +64,16 @@ export const Footer = () => {
               <Link
                 className={style.link}
                 to="/user/profile/data"
+                onClick={scrollUp}
               >Moje Dane
               </Link>
             </p>
             <p className={style.text}>
               <Link
                 className={style.link}
-                to="/user/profile/change-password">
+                to="/user/profile/change-password"
+                onClick={scrollUp}
+                >
                 Zmień Hasło
               </Link>
             </p>
@@ -69,14 +81,14 @@ export const Footer = () => {
               <Link
                 className={style.link}
                 to="/user/logout"
-                onClick={() => setUserRole('')}
+                onClick={logout}
               >Wyloguj
               </Link>
             </p>
           </>
           : <p className={style.text}>
-            <Link className={style.link} to="/user/login">Logowanie</Link> /
-            <Link className={style.link} to="/user/register">Rejestracja</Link>
+            <Link className={style.link} to="/user/login" onClick={scrollUp}>Logowanie</Link> /
+            <Link className={style.link} to="/user/register" onClick={scrollUp}>Rejestracja</Link>
           </p>
         }
       </div>
