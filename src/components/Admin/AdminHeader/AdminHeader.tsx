@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { AppContext } from '../../context/AppContext';
+import { AppContext } from '../../../context/AppContext';
 
-import { MenuIcon } from '../common/SvgIcons/MenuIcon';
-import { CloseIcon } from '../common/SvgIcons/CloseIcon';
+import { MenuIcon } from '../../common/SvgIcons/MenuIcon';
+import { CloseIcon } from '../../common/SvgIcons/CloseIcon';
 
 import style from './AdminHeader.module.css';
-import { Logo } from '../../assets/Logo';
+import { Logo } from '../../../assets/Logo';
 
 export const AdminHeader = () => {
 

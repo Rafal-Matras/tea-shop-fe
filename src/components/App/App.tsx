@@ -2,33 +2,50 @@ import { useState } from 'react';
 
 import { AppContext } from '../../context/AppContext';
 
-import { AdminHeader } from '../Header/AdminHeader';
+import { AdminHeader } from '../Admin/AdminHeader/AdminHeader';
+import { AdminMain } from '../Admin/AdminMain/AdminMain';
 import { Main } from '../Main/Main';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 
 import style from './App.module.css';
+import { TopBar } from '../TopBar/TopBar';
+import { Nav } from '../Nav/Nav';
 
 export const App = () => {
 
   const [userRole, setUserRole] = useState<string>('user');
+  const [productName, setProductName] = useState<string>('');
+  const [productType, setProductType] = useState<string>('');
   const [fullPrice, setFullPrice] = useState<number>(0);
+  const [activeMenu, setActiveMenu] = useState<boolean>(false);
 
   return (
-    <AppContext.Provider value={{userRole, setUserRole, fullPrice, setFullPrice}}>
-      <main className={style.container}>
+    <AppContext.Provider value={{
+      userRole,
+      setUserRole,
+      productName,
+      setProductName,
+      productType,
+      setProductType,
+      fullPrice,
+      setFullPrice,
+    }}>
+      <div className={style.container}>
         {userRole === 'admin'
           ? <>
             <AdminHeader/>
-            <Main/>
+            <AdminMain/>
           </>
           : <>
-            <Header/>
+            <TopBar/>
+            <Header setActiveMenu={setActiveMenu}/>
+            <Nav activeMenu={activeMenu} setActiveMenu={setActiveMenu}/>
             <Main/>
             <Footer/>
           </>
         }
-      </main>
+      </div>
     </AppContext.Provider>
   );
 };
