@@ -22,3 +22,11 @@ export interface ProductsListInterface {
   numberOfUnits: '1' | '50' | '100';
   state: number;
 }
+
+export interface SliderInterface{
+  id:number;
+  image:string;
+  page:string;
+  product:string;
+  productType:string;
+}

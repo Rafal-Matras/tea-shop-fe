@@ -1,56 +1,67 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { SliderInterface } from '../../../types';
 
 import style from './Slider.module.css';
+import { AppContext } from '../../../context/AppContext';
 
 export const Slider = () => {
 
-  const [activeImage, setActiveImage] = useState<number>(1);
+  const sliderData: SliderInterface[] = [
+    {id: 1, image: 'blackTea.jpg', page: '/store', product: 'herbaty', productType: 'czarna'},
+    {id: 2, image: 'newProducts.jpg', page: '/store', product: 'nowosci', productType: ''},
+    {id: 3, image: 'coffeeClassic.jpg', page: '/store', product: 'kawy', productType: 'klasyczne'},
+    {id: 4, image: 'greenTea.jpg', page: '/store', product: 'herbaty', productType: 'zielona'},
+    {id: 5, image: 'redTea.jpg', page: '/store', product: 'herbaty', productType: 'czerwona'},
+    {id: 6, image: 'coffee.jpg', page: '/store', product: 'kawy', productType: ''},
+    {id: 7, image: 'blueTea.jpg', page: '/store', product: 'herbaty', productType: 'niebieska'},
+    {id: 8, image: 'gift.jpg', page: '/store', product: 'na prezent', productType: ''},
+  ];
+
+  const {setProductName, setProductType} = useContext(AppContext);
+  const [activeSlide, setActiveSlide] = useState<SliderInterface>({
+    id: 1,
+    image: 'blackTea.jpg',
+    page: '/store',
+    product: 'herbaty',
+    productType: 'czarna',
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (activeImage < 7) {
-        setActiveImage(prev => prev + 1);
+      if (activeSlide.id < 8) {
+        const currentSlider = sliderData.find(item => item.id === activeSlide.id + 1);
+        if (currentSlider) setActiveSlide(currentSlider);
       } else {
-        setActiveImage(1);
+        const currentSlider = sliderData.find(item => item.id === 1);
+        if (currentSlider) setActiveSlide(currentSlider);
       }
     }, 5000);
     return () => clearInterval(interval);
-  }, [activeImage]);
+  }, [activeSlide]);
+
+  const goToCurrentPage = () => {
+    setProductName(activeSlide.product);
+    if (activeSlide.productType) setProductType(activeSlide.productType);
+  };
 
   return (
     <div className={style.container}>
-      <div className={style.slider}>
-        <img src={`/images/slider/image_${activeImage}.jpg`} alt=""/>
-        <div className={style.sliderNav}>
+      <Link className={style.slider} to="/shop" onClick={goToCurrentPage}>
+        <img
+          src={`/images/slider/${activeSlide.image}`}
+          alt={activeSlide.image}
+        />
+      </Link>
+      <div className={style.sliderNav}>
+        {sliderData.map(item => (
           <button
-            className={`${style.sliderNavButton} ${activeImage === 1 ? style.active : null}`}
-            onClick={() => setActiveImage(1)}>
-          </button>
-          <button
-            className={`${style.sliderNavButton} ${activeImage === 2 ? style.active : null}`}
-            onClick={() => setActiveImage(2)}>
-          </button>
-          <button
-            className={`${style.sliderNavButton} ${activeImage === 3 ? style.active : null}`}
-            onClick={() => setActiveImage(3)}>
-          </button>
-          <button
-            className={`${style.sliderNavButton} ${activeImage === 4 ? style.active : null}`}
-            onClick={() => setActiveImage(4)}>
-          </button>
-          <button
-            className={`${style.sliderNavButton} ${activeImage === 5 ? style.active : null}`}
-            onClick={() => setActiveImage(5)}>
-          </button>
-          <button
-            className={`${style.sliderNavButton} ${activeImage === 6 ? style.active : null}`}
-            onClick={() => setActiveImage(6)}>
-          </button>
-          <button
-            className={`${style.sliderNavButton} ${activeImage === 7 ? style.active : null}`}
-            onClick={() => setActiveImage(7)}>
-          </button>
-        </div>
+            key={item.id}
+            className={`${style.sliderNavButton} ${item.id === activeSlide.id ? style.active : null}`}
+            onClick={() => setActiveSlide(item)}
+          ></button>
+        ))}
       </div>
     </div>
   );
