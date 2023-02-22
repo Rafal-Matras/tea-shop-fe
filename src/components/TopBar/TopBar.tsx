@@ -1,14 +1,14 @@
-import { TruckIcon } from '../../common/SvgIcons/TruckIcon';
-import { CheckCircleIcon } from '../../common/SvgIcons/CheckCircleIcon';
-import { PhoneIcon } from '../../common/SvgIcons/PhoneIcon';
-import { MailIcon } from '../../common/SvgIcons/MailIcon';
-import { FacebookIcon } from '../../common/SvgIcons/FacebookIcon';
-import { YoutubeIcon } from '../../common/SvgIcons/YoutubeIcon';
-import { TwitterIcon } from '../../common/SvgIcons/TwitterIcon';
+import { TruckIcon } from '../common/SvgIcons/TruckIcon';
+import { CheckCircleIcon } from '../common/SvgIcons/CheckCircleIcon';
+import { PhoneIcon } from '../common/SvgIcons/PhoneIcon';
+import { MailIcon } from '../common/SvgIcons/MailIcon';
+import { FacebookIcon } from '../common/SvgIcons/FacebookIcon';
+import { YoutubeIcon } from '../common/SvgIcons/YoutubeIcon';
+import { TwitterIcon } from '../common/SvgIcons/TwitterIcon';
 
-import style from './HeaderTop.module.css';
+import style from './TopBar.module.css';
 
-export const HeaderTop = () => {
+export const TopBar = () => {
 
   return (
     <div className={style.top}>
