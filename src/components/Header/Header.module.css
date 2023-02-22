@@ -1,0 +1,233 @@
+.basketBox{
+    display: none;
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top:10px;
+    width: 100%;
+}
+
+.hamburgerMenu,
+.basket{
+    margin: 0 10px 0 5px
+}
+
+.basket{
+    position: relative;
+    text-decoration: none;
+}
+
+.productsInBasket{
+    position: absolute;
+    top:-5px;
+    left: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-weight: 500;
+    color: white;
+    background-color: var(--secondary-color);
+    z-index: -1;
+}
+
+.menuIcon,
+.cartIcon{
+    width: 40px;
+    height: 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    width: 130px;
+    height: 45px;
+}
+
+.searchBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 100vw;
+    height: 40px;
+    background-color: var(--primary-color);
+}
+
+.search {
+    position: relative;
+    display: flex;
+    width: 90%;
+    max-width: 450px;
+    height: 74%;
+}
+
+.searchInput {
+    padding: 2px 32px 2px 5px;
+    border: 2px solid #fff;
+    width: 100%;
+    outline: none;
+}
+
+.searchInput:focus,
+.searchInput:active {
+    border-color: #1c8e27;
+}
+
+.searchButton {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.searchIcon{
+    fill: var(--primary-color);
+}
+
+@media (min-width: 576px) {
+
+    .basket{
+        order: 4;
+    }
+
+    .searchBox{
+        order: 3;
+        width: 50%;
+        background-color: transparent;
+    }
+
+    .searchInput {
+        border: none;
+        border-bottom: 1px solid var(--primary-color);
+        font-size: 1.4rem;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .hamburgerMenu,
+    .basket{
+        display: none;
+    }
+
+    .header {
+        padding: 20px;
+    }
+
+    .logo {
+        width: 240px;
+    }
+
+    .searchBox {
+        order:0;
+        position: relative;
+        margin: 0 auto;
+        width: 40%;
+        background-color: transparent;
+    }
+
+    .searchInput {
+        padding: 10px 45px 20px 10px;
+        border: none;
+        border-bottom: 2px solid var(--grey-light);
+        width: 100%;
+        height: 40px;
+        font-size: 1.4rem;
+        font-style: italic;
+        font-weight: 200;
+        outline: none;
+    }
+
+    .searchInput:focus,
+    .searchInput:active {
+        border-color: var(--primary-color);
+    }
+
+    .searchButton {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        height: 40px;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .searchIcon {
+        width: 34px;
+        height: 34px;
+        fill: var(--primary-color);
+    }
+
+    .basketBox {
+        display: block;
+        width: 240px;
+        height: 120px;
+    }
+
+    .basketTop {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 8px;
+        height: 60%;
+        text-decoration: none;
+        background-color: var(--primary-color);
+        transition: background-color .6s;
+    }
+
+    .basketTop:hover {
+        background-color: #55a211;
+    }
+
+    .basketIcon {
+        fill: var(--secondary-text-color);
+    }
+
+    .basketTopText {
+        font-size: 1.4rem;
+        color: var(--secondary-text-color);
+    }
+
+    .basketBottom {
+        display: grid;
+        grid-template-columns:1fr 1fr;
+        height: 40%;
+    }
+
+    .basketBottomBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #c0c0c0;
+        height: 100%;
+        background-color: var(--grey-light);
+        transition: background-color .6s;
+    }
+
+    .basketBottomBox:hover {
+        background-color: #c0c0c0;
+    }
+
+    .basketBottomText {
+        font-size: 1.1rem;
+        text-decoration: none;
+        color: #909090;
+        transition: color .6s;
+    }
+
+    .basketBottomBox:hover .basketBottomText{
+        color: var(--primary-text-color);
+    }
+}
