@@ -19,7 +19,6 @@ import { AdminAddProduct } from '../../views/AdminAddProduct';
 import { AdminListOfActiveOrders } from '../../views/AdminListOfActiveOrders';
 import { AdminListOfCompletedOrders } from '../../views/AdminListOfCompletedOrders';
 import { AdminProductsListViews } from '../../views/AdminProductsListViews';
-import { ContactViews } from '../../views/ContactViews';
 import { AboutUsViews } from '../../views/AboutUsViews';
 import { RegulationsViews } from '../../views/RegulationsViews';
 import { DeliveryAndPaymentViews } from '../../views/DeliveryAndPaymentViews';
@@ -34,8 +33,7 @@ export const Main = () => {
       <Route path="/" element={<HomeViews/>}/>
       <Route path="/*" element={<NotFoundViews/>}/>
       <Route path="/shop" element={<ShopViews/>}/>
-      <Route path="/product/id" element={<ProductsViews/>}/>
-      <Route path="/contact" element={<ContactViews/>}/>
+      <Route path="/product/:id" element={<ProductsViews/>}/>
       <Route path="/about-us" element={<AboutUsViews/>}/>
       <Route path="/regulations" element={<RegulationsViews/>}/>
       <Route path="/delivery-and-payment" element={<DeliveryAndPaymentViews/>}/>
