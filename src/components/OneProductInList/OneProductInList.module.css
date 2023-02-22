@@ -1,0 +1,101 @@
+.productBox{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    text-decoration: none;
+    width: 49%;
+}
+
+.promo{
+    position: absolute;
+    top:5px;
+    left:5px;
+    width: 40px;
+}
+
+.image{
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.name{
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.priceBox{
+    position: relative;
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.price{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #7ab744;
+}
+
+.pricePromo{
+    position: absolute;
+    top: 24px;
+    left:12px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #d10101;
+}
+
+.pricePromo::after{
+    display: block;
+    content: '';
+    transform:translate(-.3rem,-1.3rem) rotate(15deg);
+    width: 120%;
+    height: 1px;
+    background-color: #d10101;
+}
+
+.unit{
+    display: flex;
+    align-items: end;
+    font-size: 1.3rem;
+}
+
+.state{
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+
+}
+.checkIcon,
+.errorIcon,
+.closeIcon{
+    margin-right: 10px;
+    fill: var(--primary-color);
+}
+
+.errorIcon{
+    fill: var(--secondary-color);
+}
+
+.closeIcon{
+    width: 24px;
+    height: 24px;
+    fill: #d10101;
+}
+
+@media (min-width: 578px) {
+    .productBox{
+        width: 32%;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .productBox{
+        width: 24%;
+    }
+}

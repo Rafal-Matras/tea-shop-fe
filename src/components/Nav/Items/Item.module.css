@@ -1,0 +1,126 @@
+.productItemDisable,
+.productIcon {
+    display: none;
+}
+
+.productItemText,
+.activeProductItemText{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2.8rem;
+    text-decoration: none;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.arrowDownIcon {
+    fill: #fff;
+    width: 32px;
+    height: 32px;
+}
+
+.productTypeText {
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    text-decoration: none;
+    font-size: 2.4rem;
+    color: #fff;
+}
+
+@media (min-width: 992px) {
+
+    .productIcon {
+        display: flex;
+    }
+
+    .productItem:nth-child(7),
+    .productItem:nth-child(8),
+    .productItem:nth-child(9),
+    .productItemDisable:nth-child(7),
+    .productItemDisable:nth-child(8),
+    .productItemDisable:nth-child(9),
+    .arrowDownIcon {
+        display: none;
+    }
+
+    .productItemDisable,
+    .activeProductItem,
+    .productItem {
+        display: flex;
+        border-right: 4px solid var(--grey-light);
+        width: 100%;
+        cursor: pointer;
+    }
+    
+    .activeProductItem{
+        background-color: #fff;
+    }
+
+    .productIcon{
+        margin-right: 10px;
+    }
+
+
+    .productItemText,
+    .activeProductItemText{
+        display: flex;
+        justify-content: center;
+        padding: 8px 0;
+        border-top: 2px solid #e3e3e3;
+        border-bottom: none;
+        width: 100%;
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: var(--primary-text-color);
+        transition: background-color .6s, border .6s;
+    }
+
+    .activeProductItemText {
+        border-top: 2px solid var(--primary-color);
+        width: 100%;
+        background-color: var(--grey-light);
+    }
+
+    .productItemText:hover {
+        border-top: 2px solid var(--primary-color);
+        /*background-color: var(--grey-light);*/
+    }
+
+    .productTypeItem {
+        display: flex;
+        align-items: center;
+        margin: 4px 10px 0 ;
+        padding-bottom: 4px;
+        border-bottom: 2px solid transparent;
+        width: auto;
+        cursor: pointer;
+        transition: border .6s;
+    }
+
+    .productTypeItem:hover{
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+
+    .productTypeItem::before {
+        display: flex;
+        content: '';
+        margin-right: 15px;
+        border-radius: 50%;
+        width: 8px;
+        height: 8px;
+
+        background-color: var(--primary-color);
+    }
+
+    .productTypeText {
+        display: flex;
+        width: auto;
+        border-bottom: none;
+        font-size: 1.4rem;
+        color: var(--primary-text-color);
+    }
+
+}
