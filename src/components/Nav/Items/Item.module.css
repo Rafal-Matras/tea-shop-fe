@@ -53,6 +53,18 @@
         width: 100%;
         cursor: pointer;
     }
+
+    .productItemDisable:nth-child(6),
+    .activeProductItem:nth-child(6),
+    .productItem:nth-child(6){
+        border-right: none;
+    }
+
+    .productItemDisable:nth-child(1),
+    .activeProductItem:nth-child(1),
+    .productItem:nth-child(1){
+        border-radius: 40px 0 0 4px;
+    }
     
     .activeProductItem{
         background-color: #fff;
@@ -61,7 +73,6 @@
     .productIcon{
         margin-right: 10px;
     }
-
 
     .productItemText,
     .activeProductItemText{
@@ -85,7 +96,6 @@
 
     .productItemText:hover {
         border-top: 2px solid var(--primary-color);
-        /*background-color: var(--grey-light);*/
     }
 
     .productTypeItem {
@@ -111,7 +121,6 @@
         border-radius: 50%;
         width: 8px;
         height: 8px;
-
         background-color: var(--primary-color);
     }
 

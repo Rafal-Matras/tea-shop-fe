@@ -1,10 +1,17 @@
-.container {
+.container{
+    width: 100vw;
+    background-color: var(--grey-light);
+}
+
+.containerBox {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    margin:0 auto;
     padding: 40px 0;
-    background-color: var(--grey-light);
+    width: 100vw;
+    max-width: 1440px;
 }
 
 .info,
@@ -45,7 +52,7 @@
 
 @media (min-width: 768px) {
 
-    .container{
+    .containerBox{
         flex-direction: row;
         align-items: start;
     }

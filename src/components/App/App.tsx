@@ -4,13 +4,13 @@ import { AppContext } from '../../context/AppContext';
 
 import { AdminHeader } from '../Admin/AdminHeader/AdminHeader';
 import { AdminMain } from '../Admin/AdminMain/AdminMain';
-import { Main } from '../Main/Main';
+import { TopBar } from '../TopBar/TopBar';
 import { Header } from '../Header/Header';
+import { Nav } from '../Nav/Nav';
+import { Main } from '../Main/Main';
 import { Footer } from '../Footer/Footer';
 
 import style from './App.module.css';
-import { TopBar } from '../TopBar/TopBar';
-import { Nav } from '../Nav/Nav';
 
 export const App = () => {
 
