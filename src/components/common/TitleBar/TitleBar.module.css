@@ -1,0 +1,58 @@
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 10px auto 20px;
+    width: 92%;
+    height: 80px;
+    background-color: var(--grey-light);
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--primary-color);
+}
+
+.leftSide,
+.rightSide {
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+.leftSide {
+    left: -18px;
+}
+
+.rightSide {
+    right: -18px;
+    rotate: 180deg;
+}
+
+@media (min-width: 576px) {
+
+    .container {
+        width: 94%;
+    }
+
+    .title {
+        padding-left:20px ;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .container {
+        width: 96%;
+    }
+
+}
+
+@media (min-width: 992px) {
+
+    .container {
+        width: 98%;
+    }
+}

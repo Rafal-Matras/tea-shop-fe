@@ -1,0 +1,168 @@
+.container {
+    margin: 10px auto 50px;
+    width: 96%;
+}
+
+.leftButton,
+.rightButton {
+    position: absolute;
+    top: 24px;
+    right: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: #c8c8c8;
+    box-shadow: 0 0 1px 2px #e1e1e1;
+    cursor: pointer;
+    transition: background-color .4s;
+}
+
+.leftButton:hover,
+.rightButton:hover {
+    background-color: var(--primary-color);
+}
+
+.rightButton {
+    right: 26px;
+}
+
+.arrowIcon {
+    fill: #fff;
+}
+
+.teaTypeBox {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin: 0 auto;
+    width: 225px;
+    overflow: hidden;
+}
+
+.teaType {
+    position: relative;
+    min-width: 225px;
+    height: 340px;
+}
+
+.teaTypeImage {
+    width: 100%;
+    cursor: pointer;
+    filter: opacity(100%);
+    transition: filter .3s;
+}
+
+.teaTypeImage:hover{
+    filter: opacity(70%);
+}
+
+.teaTypeTitle {
+    margin: 10px 0 10px 7px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+    filter: grayscale(0);
+    transition: filter .3s;
+}
+
+.teaTypeTitle:hover{
+    filter: grayscale(100%);
+}
+
+.teaTypeText {
+    padding: 0 7px;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.8rem;
+}
+
+.teaTypeButton {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 15px;
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--primary-color);
+    cursor: pointer;
+    filter: grayscale(0);
+    transition: filter .3s;
+}
+
+.teaTypeButton:hover{
+    filter: grayscale(100%);
+}
+
+
+@media (min-width: 480px) {
+
+    .teaTypeBox {
+        width: 460px;
+    }
+
+    .teaType {
+        margin-right: 10px;
+    }
+}
+
+@media (min-width: 576px) {
+
+    .teaType {
+        height: 360px;
+    }
+}
+
+
+@media (min-width: 720px) {
+
+    .teaTypeBox {
+        width: 695px;
+    }
+
+    .teaType {
+        height: 380px;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .container {
+        padding: 0 20px;
+    }
+
+    .leftButton,
+    .rightButton {
+        right: 100px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .rightButton {
+        right: 40px;
+    }
+
+    .arrowIcon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .teaTypeBox {
+        width: 930px;
+    }
+
+    .teaType {
+        height: 400px;
+    }
+
+    .teaTypeText {
+        font-size: 1.1rem;
+    }
+}

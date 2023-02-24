@@ -1,12 +1,14 @@
 .container{
     position: relative;
+    margin:10px auto 50px;
+    width: 96%;
 }
 
 .slider {
     display: flex;
     justify-content: center;
     margin: 20px auto;
-    width: 96vw;
+    width: 100%;
 }
 
 .slider img {
@@ -15,12 +17,13 @@
 
 .sliderNav {
     position: absolute;
-    left: 10px;
+    left: 40px;
     bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 30%;
+    max-width: 300px;
 }
 
 .sliderNavButton {
@@ -36,15 +39,26 @@
     background-color: var(--primary-color);
 }
 
+@media (min-width: 768px){
+
+    .sliderNav{
+        left:60px;
+    }
+}
+
 @media (min-width: 992px) {
 
+    .container{
+        padding: 0 20px;
+    }
+
     .slider {
-        width: 100vw;
+        width: 100%;
         max-width: 1200px;
     }
 
     .sliderNav {
-        left: 80px;
+        left: 100px;
         bottom: 20px;
     }
 
@@ -52,4 +66,12 @@
         border: 2px solid var(--primary-color);
         cursor: pointer;
     }
+}
+
+@media (min-width: 1200px) {
+
+    .sliderNav {
+        left: 160px;
+    }
+
 }

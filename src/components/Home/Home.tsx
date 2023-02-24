@@ -1,7 +1,7 @@
 import { Slider } from './Slider/Slider';
 import { ProductsOnFirstPage } from './ProductsOnFirstPage/ProductsOnFirstPage';
 import { TypesOfTeas } from './TypesOfTeas/TypesOfTeas';
-import { TeaShopDescryption } from './TeaShopDescription/TeaShopDescryption';
+import { TeaShopDescription } from './TeaShopDescription/TeaShopDescription';
 
 import style from './Home.module.css';
 
@@ -12,7 +12,7 @@ export const Home = () => {
       <Slider/>
       <ProductsOnFirstPage/>
       <TypesOfTeas/>
-      <TeaShopDescryption/>
+      <TeaShopDescription/>
     </main>
   );
 };

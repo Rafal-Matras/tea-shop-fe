@@ -31,11 +31,11 @@ export const ProductsOnFirstPage = () => {
     setProducts(productDefault)
   }, []);
 
-  const listItems = products.map(item => <OneProductInList key={item.id} item={item}/>)
-  
   return (
     <section className={style.container}>
-      {listItems}
+      {products.map(item => (
+        <OneProductInList key={item.id} item={item}/>
+      ))}
     </section>
   );
 };

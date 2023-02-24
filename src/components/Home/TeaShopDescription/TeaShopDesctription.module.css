@@ -1,0 +1,32 @@
+.container {
+    margin: 10px auto 60px;
+    width: 96%;
+}
+
+.image {
+    display: block;
+    margin: 10px auto 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.text {
+    margin-bottom: 24px;
+    font-size: 1.2rem;
+    font-weight: 300;
+    text-align: justify;
+}
+
+@media (min-width: 768px) {
+
+    .image {
+        float: right;
+        margin: 0 0 20px 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        padding: 0 20px;
+    }
+}
