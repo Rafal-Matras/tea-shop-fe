@@ -19,10 +19,15 @@ interface Props {
 
 export const Header = ({setActiveMenu}: Props) => {
 
-  const {userRole, setUserRole, fullPrice} = useContext(AppContext);
+  const {userRole, fullPrice, setActiveProductType} = useContext(AppContext);
+
+  const clearProduct = () => {
+    setActiveProductType('');
+  };
 
   const search = () => {
 
+    clearProduct();
   };
 
   return (
@@ -30,7 +35,7 @@ export const Header = ({setActiveMenu}: Props) => {
       <div className={style.hamburgerMenu} onClick={() => setActiveMenu(true)}>
         <MenuIcon className={style.menuIcon}/>
       </div>
-      <Link className={style.logo} to="/">
+      <Link className={style.logo} to="/" onClick={clearProduct}>
         <Logo/>
       </Link>
       <Link className={style.basket} to="/basket">
@@ -46,7 +51,7 @@ export const Header = ({setActiveMenu}: Props) => {
         </form>
       </div>
       <div className={style.basketBox}>
-        <Link className={style.basketTop} to="/basket">
+        <Link className={style.basketTop} to="/basket" onClick={clearProduct}>
           <BasketIcon className={style.basketIcon}/>
           <p className={style.basketTopText}>Koszyk</p>
           <p className={style.basketTopText}>{useConvertPriceToString(fullPrice)} zł</p>
@@ -57,11 +62,13 @@ export const Header = ({setActiveMenu}: Props) => {
               ? <Link
                 className={style.basketBottomText}
                 to="/user/profile/data"
+                onClick={clearProduct}
               >panel klienta
               </Link>
               : <Link
                 className={style.basketBottomText}
                 to="/user/login"
+                onClick={clearProduct}
               >logowanie
               </Link>
             }
@@ -71,12 +78,13 @@ export const Header = ({setActiveMenu}: Props) => {
               ? <Link
                 className={style.basketBottomText}
                 to="/user/logout"
-                onClick={() => setUserRole('')}
+                onClick={clearProduct}
               >wyloguj
               </Link>
               : <Link
                 className={style.basketBottomText}
                 to="/user/register"
+                onClick={clearProduct}
               >rejestracja
               </Link>
             }
