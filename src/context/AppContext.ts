@@ -1,10 +1,6 @@
 import { createContext } from 'react';
-import { ProductsListInterface } from '../types';
 
 export const AppContext = createContext({
-  allProducts: [] as ProductsListInterface[],
-  setAllProducts: (products: ProductsListInterface[]) => {
-  },
   userRole: '',
   setUserRole: (role: '' | 'user' | 'admin') => {
   },
