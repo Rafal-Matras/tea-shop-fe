@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { ProductsListInterface } from '../../types';
 
 import { AppContext } from '../../context/AppContext';
 
@@ -10,18 +12,40 @@ import { Nav } from '../Nav/Nav';
 import { Main } from '../Main/Main';
 import { Footer } from '../Footer/Footer';
 
+import { allProductsDefault } from '../../assets/allProducts';
+
 import style from './App.module.css';
 
 export const App = () => {
 
+  const [allProducts, setAllProducts] = useState<ProductsListInterface[]>([]);
   const [userRole, setUserRole] = useState<string>('user');
   const [productName, setProductName] = useState<string>('');
   const [productType, setProductType] = useState<string>('');
-  const [fullPrice, setFullPrice] = useState<number>(0);
+  const [fullPrice, setFullPrice] = useState<number>(20);
+  const [numberOfProducts, setNumberOfProducts] = useState<number>(0);
+  const [activeProductType, setActiveProductType] = useState<string>('');
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
+
+  useEffect(() => {
+    // (async () => {
+    //   const response = await fetch(URL);
+    //   const data  = await response.json();
+    //   if (data) {
+    //     setProducts(data);
+    //   }
+    // })();
+    setAllProducts(allProductsDefault);
+  }, []);
+
+  // console.log('userRole',userRole);
+  // console.log('pName',productName);
+  // console.log('pType',productType);
 
   return (
     <AppContext.Provider value={{
+      allProducts,
+      setAllProducts,
       userRole,
       setUserRole,
       productName,
@@ -30,6 +54,10 @@ export const App = () => {
       setProductType,
       fullPrice,
       setFullPrice,
+      numberOfProducts,
+      setNumberOfProducts,
+      activeProductType,
+      setActiveProductType,
     }}>
       <div className={style.container}>
         {userRole === 'admin'
