@@ -1,6 +1,7 @@
 export interface TypesOfProductsInterface {
   id: string;
   name: string;
+  category: Category;
   types: string[];
   icon: string;
 }
@@ -12,21 +13,54 @@ export interface TeaTypeInterface {
   description: string;
 }
 
+export enum Category {
+  tea = 'herbata',
+  coffee = 'kawa',
+  herbs = 'zioła',
+  accessories = 'akcesoria',
+  gift = 'na prezent',
+  promotion = 'promocje',
+}
+
 export interface ProductsListInterface {
   id: string;
+  category: Category;
+  type: string[] | null;
   name: string;
   price: number;
   image: string;
+  forGift: 1 | null,
   promo: number | null;
   unit: 'g' | 'szt';
-  numberOfUnits: '1' | '50' | '100';
-  state: number;
+  numberOfUnits: number;
+  new: 1 | null;
 }
 
-export interface SliderInterface{
-  id:number;
-  image:string;
-  page:string;
-  product:string;
-  productType:string;
+export interface ProductInterface extends ProductsListInterface {
+  state: number;
+  onHomePage: 1 | null;
+  description: string;
+  ingredients: string | null;
+  countryOrigin: string | null;
+  amountBrew: string | null;
+  temperatureBrew: string | null;
+  timeBrew: string | null;
+  numberBrews: string | null;
+  wayStore: string | null;
+  coffeeSpecies: string | null;
+  howToBrew: string | null;
+  size: string | null;
+}
+
+export interface SliderInterface {
+  id: number;
+  image: string;
+  product: string;
+  productType: string | null;
+}
+
+export interface AddToBasket {
+  productId: string;
+  quantityOfProduct: number;
+  packSize: number;
 }
