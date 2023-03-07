@@ -12,16 +12,18 @@ interface Props {
 
 export const ItemType = ({name, closeMenu}: Props) => {
 
-  const {setProductType} = useContext(AppContext)
+  const {productType, setProductType} = useContext(AppContext);
 
   const selectType = () => {
-    setProductType(name)
-    closeMenu()
-  }
+    setProductType(name);
+    if (window.screen.width < 992) {
+      closeMenu();
+    }
+  };
 
   return (
     <li
-      className={style.productTypeItem}
+      className={`${style.productTypeItem} ${productType === name ? style.active : ''}`}
       onClick={selectType}
     ><Link className={style.productTypeText} to="/shop">{name}</Link>
     </li>

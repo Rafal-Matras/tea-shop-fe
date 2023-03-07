@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-import { TypesOfProductsInterface } from '../../types';
+import {  TypesOfProductsInterface } from '../../types';
+
+import { AppContext } from '../../context/AppContext';
 
 import { Item } from './Items/Item';
 import { MobileRestItems } from './Items/MobileRestItems';
@@ -9,6 +11,7 @@ import { ItemType } from './Items/ItemType';
 import { CloseIcon } from '../common/SvgIcons/CloseIcon';
 
 import style from './Nav.module.css';
+import {productType} from '../../assets/productsType';
 
 interface Props {
   activeMenu: boolean;
@@ -17,39 +20,15 @@ interface Props {
 
 export const Nav = ({activeMenu, setActiveMenu}: Props) => {
 
-  const productTypeDefault: TypesOfProductsInterface[] = [
-    {
-      id: '123',
-      name: 'herbaty',
-      types: ['czarna', 'zielona', 'czerwona', 'biała', 'żułta', 'niebieska', 'specialna', 'earl grey', 'owocowe', 'japońska', 'oolong', 'rooibos', 'yerba mate', 'kwitnąca'],
-      icon: 'herbata',
-    },
-    {id: '234', name: 'kawy', types: ['klasyczne', 'smakowe', 'świąteczne', 'naturalne eko'], icon: 'kawa'},
-    {
-      id: '345',
-      name: 'zioła',
-      types: ['adaptogeny', 'afrodyzjaki', 'relaks i sen', 'trawienie', 'odchudzanie', 'odporność', 'wzmocnienie', 'zdrowie'],
-      icon: 'ziola',
-    },
-    {
-      id: '456',
-      name: 'akcesoria',
-      types: ['kubki', 'filiżanki', 'puszki', 'czajniki', 'zaparzaczei filtry do herbaty', 'zaparzacze i filtry do kawy', 'yerba mate', 'inne'],
-      icon: 'akcesoria',
-    },
-    {id: '567', name: 'na prezent', types: [], icon: 'prezenty'},
-    {id: '678', name: 'promocje', types: [], icon: 'promocja'},
-  ];
-
+  const {activeProductType, setActiveProductType} = useContext(AppContext);
   const [typesOfProducts, setTypesOfProducts] = useState<TypesOfProductsInterface[]>([]);
-  const [activeProductType, setActiveProductType] = useState<string>('');
   const [productTypes, setProductTypes] = useState<string[]>([]);
   const [onlyProductType, setOnlyProductType] = useState<boolean>(false);
 
   useEffect(() => {
     if (typesOfProducts.length === 0) {
 
-      setTypesOfProducts(productTypeDefault);
+      setTypesOfProducts(productType);
     }
   }, []);
 
@@ -94,7 +73,6 @@ export const Nav = ({activeMenu, setActiveMenu}: Props) => {
             key={item.id}
             item={item}
             onlyProductType={onlyProductType}
-            activeProductType={activeProductType}
             selectProductType={selectProductType}
           />
         ))}

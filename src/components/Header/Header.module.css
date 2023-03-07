@@ -1,4 +1,4 @@
-.basketBox{
+.basketBox {
     display: none;
 }
 
@@ -13,18 +13,18 @@
 }
 
 .hamburgerMenu,
-.basket{
+.basket {
     margin: 0 10px 0 5px
 }
 
-.basket{
+.basket {
     position: relative;
     text-decoration: none;
 }
 
-.productsInBasket{
+.productsInBasket {
     position: absolute;
-    top:-5px;
+    top: -5px;
     left: 13px;
     display: flex;
     justify-content: center;
@@ -39,7 +39,7 @@
 }
 
 .menuIcon,
-.cartIcon{
+.cartIcon {
     width: 40px;
     height: 40px;
 }
@@ -52,6 +52,7 @@
 }
 
 .searchBox {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,17 +90,39 @@
     background-color: transparent;
 }
 
-.searchIcon{
+.searchIcon {
     fill: var(--primary-color);
+}
+
+.searchList {
+    position: absolute;
+    top: 45px;
+    left: 25px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    border: 1px solid var(--grey);
+    width: 86%;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.searchListNone {
+    display: none;
+}
+
+.searchListItem {
+    padding: 4px 10px;
+    text-decoration: none;
 }
 
 @media (min-width: 576px) {
 
-    .basket{
+    .basket {
         order: 4;
     }
 
-    .searchBox{
+    .searchBox {
         order: 3;
         width: 50%;
         background-color: transparent;
@@ -115,7 +138,7 @@
 @media (min-width: 992px) {
 
     .hamburgerMenu,
-    .basket{
+    .basket {
         display: none;
     }
 
@@ -128,7 +151,7 @@
     }
 
     .searchBox {
-        order:0;
+        order: 0;
         position: relative;
         margin: 0 auto;
         width: 40%;
@@ -228,7 +251,15 @@
         transition: color .6s;
     }
 
-    .basketBottomBox:hover .basketBottomText{
+    .basketBottomBox:hover .basketBottomText {
         color: var(--primary-text-color);
+    }
+
+    .searchListItem {
+        cursor: pointer;
+    }
+
+    .searchListItem:hover {
+        background-color: var(--primary-color);
     }
 }
