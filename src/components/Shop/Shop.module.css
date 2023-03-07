@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px auto 50px;
+    padding: 10px;
+
+}
+
+.productList {
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .container {
+        padding: 10px 20px;
+    }
+}
