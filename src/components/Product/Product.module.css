@@ -1,0 +1,490 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 5px;
+}
+
+.titleBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 2.6rem;
+    font-weight: 600;
+}
+
+.categoryTypeBox {
+    display: flex;
+    gap: 10px;
+}
+
+.categoryType {
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.image {
+    width: 90%;
+    max-width: 450px;
+}
+
+.productDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.priceAndOrderBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.priceBox {
+    display: flex;
+    align-items: end;
+}
+
+.price {
+    font-size: 3.4rem;
+    font-weight: 600;
+    line-height: 3.4rem;
+    color: var(--primary-color)
+}
+
+.numberOfUnits {
+    font-size: 1.6rem;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.orderDetailsBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px
+}
+
+.packSizeDropdownMenu {
+    position: relative;
+    width: 180px;
+}
+
+.packSize {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    font-size: 1.4rem;
+    font-weight: 300;
+}
+
+.packSize span {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.packSizeMenu {
+    display: none;
+}
+
+.packSizeMenuActive {
+    position: absolute;
+    border: 1px solid var(--grey-light);
+    width: 100%;
+    background-color: #fff;
+}
+
+.packSizeItem {
+    display: flex;
+    justify-content: end;
+    padding: 4px 27px;
+    width: 100%;
+    font-size: 1.4rem;
+}
+
+.arrowDownIcon {
+    fill: var(--primary-color);
+}
+
+.changeQuantity {
+    display: flex;
+    align-items: center;
+}
+
+.changeQuantityButton {
+    border: none;
+    padding: 0 5px;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--primary-color);
+    background-color: #fff;
+}
+
+.changeQuantityInputBox {
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    font-size: 1.4rem;
+    font-weight: 300;
+}
+
+.changeQuantityInput {
+    margin-right: 2px;
+    padding-right: 3px;
+    border: none;
+    border-radius: 5px;
+    width: 80%;
+    height: 100%;
+    text-align: end;
+    font-size: 1.8rem;
+    font-weight: 300;
+    outline: none;
+}
+
+.changeQuantityInput:active,
+.changeQuantityInput:focus {
+    border: 1px solid var(--grey);
+    border-right-width: 2px;
+}
+
+.orderDetailButton {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin: 15px 0 30px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    color: #fff;
+    background-color: var(--secondary-color);
+}
+
+.productDetailTitle {
+    margin-bottom: 4px;
+    width: 100%;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.productDetailDescription {
+    font-size: 1.2rem;
+}
+
+.none {
+    display: none;
+}
+
+.productDetailInfo {
+    margin: 15px 0;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+.brewBox {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    width: 100%;
+
+}
+
+.brew {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+    width: 40%;
+}
+
+.brewImage {
+    margin-bottom: 10px;
+}
+
+.brewTitle {
+    font-size: 1.6rem;
+    color: var(--primary-color)
+}
+
+.brewText {
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.addedToBasket {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.addedToBasketTitle {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+.addedToBasketClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    fill: #FFF;
+    width: 40px;
+    height: 40px;
+}
+
+.addedToBasketDelivery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    font-size: 1.4rem;
+    background-color: var(--grey-light);
+}
+
+.addedToBasketProduct {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin-bottom: -1px;
+    padding: 30px 0 5px;
+    background-color: #fff;
+}
+
+.addedToBasketImage {
+    width: 40%;
+    max-width: 160px;
+}
+
+.addedToBasketInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+}
+
+.addedToBasketName {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.addedToBasketCategoryType {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.addedToBasketCategoryTypeName {
+    font-size: 1.2rem;
+}
+
+.addedToBasketPrice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -1px;
+    padding: 10px 0;
+    width: 100%;
+    font-size: 2.6rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    background-color: #fff;
+}
+
+.addedToBasketPrice span {
+    padding-left: 4px;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.addedToBasketButtonBox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+}
+
+.addedToBasketButton{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    border: none;
+    width: 50%;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color:#fff;
+    background-color: #717171;
+}
+
+.addedToBasketIcon{
+    position: absolute;
+    left:10px;
+    fill: #fff;
+}
+
+.addedToBasketButton:nth-child(2){
+    background-color: var(--secondary-color);
+}
+
+@media (min-width: 576px) {
+
+    .priceAndOrderBox {
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
+    }
+
+    .priceBox,
+    .orderDetailsBox {
+        width: 50%;
+    }
+
+    .price {
+        padding-left: 60px;
+        font-size: 4.6rem;
+        line-height: 4.6rem;
+    }
+
+    .packSizeDropdownMenu {
+        width: 200px;
+    }
+
+    .packSize,
+    .packSize span,
+    .packSizeItem,
+    .changeQuantityInput,
+    .orderDetailButton {
+        font-size: 1.4rem;
+    }
+
+    .changeQuantityButton {
+        font-size: 3rem;
+        cursor: pointer;
+    }
+
+    .changeQuantityInputBox {
+        font-size: 1rem;
+    }
+
+    .brew {
+        width: 25%;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: start;
+        padding: 40px 10px;
+    }
+
+    .titleBox {
+        position: relative;
+        width: 100%;
+    }
+
+    .title {
+        padding: 0 40px;
+        text-align: center;
+        background-color: #fff;
+    }
+
+    .title::after {
+        position: absolute;
+        top: 24px;
+        left: -10px;
+        display: block;
+        content: '';
+        width: 100vw;
+        max-width: 1440px;
+        height: 2px;
+        z-index: -1;
+        background-color: var(--grey-light);
+    }
+
+    .image {
+        padding-right: 20px;
+        width: 40%;
+    }
+
+    .productDetail {
+        width: 60%;
+    }
+
+    .priceBox,
+    .orderDetailsBox {
+        width: 50%;
+    }
+
+    .price {
+        padding-left: 10px;
+        font-size: 2.8rem;
+        line-height: 2.8rem;
+    }
+
+    .numberOfUnits {
+        font-size: 1.3rem;
+    }
+
+    .packSizeDropdownMenu {
+        width: 200px;
+    }
+
+    .packSize,
+    .packSize span,
+    .packSizeItem,
+    .changeQuantityInput,
+    .orderDetailButton {
+        font-size: 1.2rem;
+    }
+
+    .changeQuantityButton {
+        font-size: 3rem;
+        cursor: pointer;
+    }
+
+    .changeQuantityInputBox {
+        font-size: 1rem;
+    }
+
+    .orderDetailButton {
+        cursor: pointer;
+    }
+
+}

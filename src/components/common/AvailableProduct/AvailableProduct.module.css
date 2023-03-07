@@ -1,0 +1,22 @@
+.state{
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+
+}
+.checkIcon,
+.errorIcon,
+.closeIcon{
+    margin-right: 10px;
+    fill: var(--primary-color);
+}
+
+.errorIcon{
+    fill: var(--secondary-color);
+}
+
+.closeIcon{
+    width: 24px;
+    height: 24px;
+    fill: #d10101;
+}
