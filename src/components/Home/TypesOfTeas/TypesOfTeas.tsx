@@ -1,6 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 
+import { AppContext } from '../../../context/AppContext';
+
 import { TitleBar } from '../../common/TitleBar/TitleBar';
+
+import { OneTypeOfTea } from './OneTypeOfTea';
 
 import { ArrowLeftIcon } from '../../common/SvgIcons/ArrowLeftIcon';
 import { ArrowRightIcon } from '../../common/SvgIcons/ArrowRightIcon';
@@ -8,8 +12,6 @@ import { ArrowRightIcon } from '../../common/SvgIcons/ArrowRightIcon';
 import { teaTypes } from '../../../assets/teaTypes';
 
 import style from './TypesOfTeas.module.css';
-import { AppContext } from '../../../context/AppContext';
-import { Link } from 'react-router-dom';
 
 export const TypesOfTeas = () => {
 
@@ -50,11 +52,6 @@ export const TypesOfTeas = () => {
     }
   };
 
-  const transformToPage = (name: string) => {
-    setProductType('herbaty');
-    setProductName(name);
-  };
-
   const positionNumberDown = () => {
     if (window.screen.width < 480) {
       if (positionNumber === 0) {
@@ -75,6 +72,11 @@ export const TypesOfTeas = () => {
     }
   };
 
+  const transformToPage = (name: string) => {
+    setProductName('herbaty');
+    setProductType(name);
+  };
+
   return (
     <section className={style.container}>
       <TitleBar title="rodzaje herbat">
@@ -85,29 +87,12 @@ export const TypesOfTeas = () => {
       </TitleBar>
       <div className={style.teaTypeBox}>
         {teaTypes.map(item => (
-          <div
-            className={style.teaType}
-            style={{left: `-${value}px`}}
-            key={item.name}>
-            <Link to="/shop">
-              <img
-                className={style.teaTypeImage}
-                src={`/images/tea-types/${item.image}`}
-                alt="zdjęcie herbaty"
-                onClick={() => transformToPage(item.name)}
-              />
-            </Link>
-            <Link to="/shop"
-                  className={style.teaTypeTitle}
-                  onClick={() => transformToPage(item.name)}
-            >{item.name}
-            </Link>
-            <p className={style.teaTypeText}>{item.description}</p>
-            <Link to="/shop"
-                  className={style.teaTypeButton}
-                  onClick={() => transformToPage(item.name)}
-            >{item.name}</Link>
-          </div>
+          <OneTypeOfTea
+            key={item.name}
+            item={item}
+            value={value}
+            transformToPage={transformToPage}
+          />
         ))}
       </div>
     </section>

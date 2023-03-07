@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import { ProductsListInterface } from '../../types';
 
 import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
-
-import { CheckIcon } from '../common/SvgIcons/CheckIcon';
-import { ErrorIcon } from '../common/SvgIcons/ErrorIcon';
-import { CloseIcon } from '../common/SvgIcons/CloseIcon';
+import { useFirstLetterBig } from '../../hooks/useFirstLetterBig';
 
 import style from './OneProductInList.module.css';
+import { useContext } from 'react';
+import { AppContext } from '../../context/AppContext';
 
 interface Props {
   item: ProductsListInterface;
@@ -16,30 +15,40 @@ interface Props {
 
 export const OneProductInList = ({item}: Props) => {
 
-  const {id, name, price, image, numberOfUnits, unit, state, promo} = item;
+  const {setActiveProductType} = useContext(AppContext);
+  const {id, name, category, type, price, image, numberOfUnits, unit, promo} = item;
 
-  let viewState;
+  const categoryType = type
+    ? type.map(item => (
+      <p
+        className={style.category}
+        key={item}
+      >{useFirstLetterBig(category)} {useFirstLetterBig(item)}
+      </p>
+    ))
+    : <p className={style.category}>{useFirstLetterBig(category)}</p>;
 
-  if (state > 10) {
-    viewState = <p className={style.state}><CheckIcon className={style.checkIcon}/> W magazynie</p>;
-  } else if (state > 0) {
-    viewState = <p className={style.state}><ErrorIcon className={style.errorIcon}/> Ostatnie sztuki</p>;
-  } else {
-    viewState = <p className={style.state}><CloseIcon className={style.closeIcon}/> brak w magazynie</p>;
-  }
+  const clear = () => {
+    setActiveProductType('');
+    window.scrollTo(0, 0);
+  };
 
   return (
-    <Link className={style.productBox} to={`/product/:${id}`} onClick={() => window.scrollTo(0, 0)}>
-      {promo
-        ? <img className={style.promo} src="/images/icons/promoIcon.png" alt="ikonka promocji"/>
-        : null
-      }
+    <Link
+      className={style.productBox}
+      to={`/product/:${id}`}
+      onClick={clear}
+    >{promo
+      ? <img className={style.promo} src="/images/icons/promoIcon.png" alt="ikonka promocji"/>
+      : null
+    }
       <img
         className={style.image}
-        src={`/images/products/${image}.webp`}
+        src={`/images/products/${image}`}
         alt={`obrazek produktu ${name}`}
       />
       <h1 className={style.name}>{name}</h1>
+      {categoryType}
       <div className={style.priceBox}>
         {promo
           ? <div className={style.pricePromoBox}>
@@ -50,7 +59,6 @@ export const OneProductInList = ({item}: Props) => {
         }
         <p className={style.unit}>&nbsp;/ {numberOfUnits} {unit}</p>
       </div>
-      {viewState}
     </Link>
   );
 };

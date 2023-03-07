@@ -6,7 +6,7 @@
     align-items: center;
     margin-bottom: 20px;
     text-decoration: none;
-    width: 49%;
+    width: 50%;
 }
 
 .promo{
@@ -26,6 +26,10 @@
     text-align: center;
     font-size: 1.4rem;
     font-weight: 600;
+}
+
+.category{
+    font-weight: 300;
 }
 
 .priceBox{
@@ -64,38 +68,15 @@
     font-size: 1.3rem;
 }
 
-.state{
-    display: flex;
-    align-items: center;
-    font-size: 1.1rem;
-
-}
-.checkIcon,
-.errorIcon,
-.closeIcon{
-    margin-right: 10px;
-    fill: var(--primary-color);
-}
-
-.errorIcon{
-    fill: var(--secondary-color);
-}
-
-.closeIcon{
-    width: 24px;
-    height: 24px;
-    fill: #d10101;
-}
-
 @media (min-width: 578px) {
     .productBox{
-        width: 32%;
+        width: 33.3%;
     }
 }
 
 @media (min-width: 992px) {
 
     .productBox{
-        width: 24%;
+        width: 25%;
     }
 }
