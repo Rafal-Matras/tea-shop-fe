@@ -1,6 +1,7 @@
+import { Login } from '../components/Login/Login';
+
 export const LoginViews = () => {
 
-  return (
-    <h1>Login</h1>
-  );
+  return <Login/>;
+
 };

@@ -13,7 +13,6 @@ export const Logout = () => {
     setUserRole('');
   }, []);
 
-
   return (
     <div className={style.container}>
       <h1 className={style.title}>Zostałeś pomyślnie wylogowany<br/>
