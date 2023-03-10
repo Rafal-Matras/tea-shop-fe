@@ -1,6 +1,7 @@
+import { Register } from '../components/Register/Register';
+
 export const RegisterViews = () => {
 
-  return (
-    <h1>Register</h1>
-  );
+  return <Register/>;
+
 };

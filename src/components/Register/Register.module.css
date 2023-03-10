@@ -1,0 +1,130 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px 40px;
+}
+
+.titleRegistration {
+    width: 100%;
+    padding: 20px 0 0;
+    text-align: center;
+    font-size: 2.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--grey-dark);
+}
+
+.dataLoginBox,
+.dataAccountBox,
+.dataDeliveryBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    background-color: #fff;
+}
+
+.title {
+    padding: 10px 15px;
+    width: 100%;
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+.errorMassage {
+    font-size: 1.4rem;
+    color: #d10101;
+}
+
+.errorMassageNone {
+    color: transparent;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+}
+
+.inputBox {
+    margin: 16px 0;
+    width: 94%;
+    max-width: 340px;
+    height: 46px;
+}
+
+.forgetPassword {
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.buttonBox {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.buttonLogin,
+.buttonRegister {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    width: 45%;
+    max-width: 200px;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--grey-dark);
+}
+
+.buttonRegister {
+    background-color: var(--secondary-color);
+}
+
+@media (min-width: 768px) {
+
+    .dataLoginBox {
+        height: 340px;
+    }
+
+    .inputBox {
+        height: 44px;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .buttonRegister {
+        cursor: pointer;
+    }
+
+    .buttonRegister,
+    .buttonLogin {
+        box-shadow: none;
+        transition: all .3s;
+    }
+
+    .buttonRegister:hover {
+        box-shadow: 0 0 8px 2px var(--secondary-color);
+    }
+
+    .buttonLogin:hover {
+        box-shadow: 0 0 8px 2px var(--grey-dark);
+    }
+}
