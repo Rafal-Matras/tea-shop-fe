@@ -12,7 +12,7 @@
     font-size: 1.6rem;
     line-height: 1.6rem;
     transition: top .2s linear;
-    color: var(--primary-text-color);
+    color: var(--grey-dark);
     background-color: #fff;
 }
 

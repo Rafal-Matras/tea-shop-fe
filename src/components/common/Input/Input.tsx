@@ -14,15 +14,15 @@ interface Props {
   value: string;
   change: (name: string, value: string) => void;
   required: boolean;
-  correct?: boolean;
+  samePassword?: () => boolean;
 }
 
-export const Input = ({type, name, displayedName, value, change, required, correct,}: Props) => {
+export const Input = ({type, name, displayedName, value, change, required, samePassword}: Props) => {
 
   const [errorText, setErrorText] = useState<string>('');
   const [active, setActive] = useState<boolean>(false);
 
-  const checkReg = (reg: any) => {
+  const checkReg = (reg: RegExp) => {
     return value.match(reg);
   };
 
@@ -31,12 +31,17 @@ export const Input = ({type, name, displayedName, value, change, required, corre
       setErrorText('To pole jest wymagane.');
     } else if (name === 'email' && !checkReg(REGEX_EMAIL)) {
       setErrorText('Niepoprawny email');
-    } else if (name === 'password' && !checkReg(REGEX_PASSWORD)) {
+    } else if ((name === 'password' || name === 'confirmPassword') && !checkReg(REGEX_PASSWORD)) {
       setErrorText('niepoprawne hasło ');
     } else if (name === 'postCode' && !checkReg(REGEX_POSTCODE)) {
       setErrorText('niepoprawny kod pocztowy');
-    } else if (name === 'repeatPassword' && !correct) {
-      setErrorText('hasła muszą być takie same');
+    } else if (name === 'confirmPassword') {
+      if (samePassword) {
+        console.log('sp---',samePassword());
+        if (!samePassword()) {
+          setErrorText('Hasła muszą być takie same');
+        } else setErrorText('');
+      }
     } else setErrorText('');
   };
 
