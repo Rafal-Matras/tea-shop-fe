@@ -1,13 +1,15 @@
-import style from './Register.module.css';
+import { UserRegistrationDataType } from '../../types';
+
 import { Input } from '../common/Input/Input';
-import { UserDeliveryDataInterface } from '../../types';
+
+import style from './Register.module.css';
 
 interface Props {
-  deliveryData: UserDeliveryDataInterface;
-  editDeliveryData: (name: string, value: string) => void;
+  registrationData: UserRegistrationDataType;
+  editRegistrationData: (name: string, value: string) => void;
 }
 
-export const DeliveryData = ({deliveryData, editDeliveryData}: Props) => {
+export const DeliveryData = ({registrationData, editRegistrationData}: Props) => {
 
   return (
     <div className={style.dataDeliveryBox}>
@@ -15,70 +17,70 @@ export const DeliveryData = ({deliveryData, editDeliveryData}: Props) => {
       <div className={style.inputBox}>
         <Input
           type="text"
-          name="name"
-          value={deliveryData.name}
+          name="deliveryName"
+          value={registrationData.delivery.deliveryName}
           displayedName="Imię"
-          change={editDeliveryData}
+          change={editRegistrationData}
           required={false}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
-          name="surName"
-          value={deliveryData.surName}
+          name="deliverySurName"
+          value={registrationData.delivery.deliverySurName}
           displayedName="Nazwisko"
-          change={editDeliveryData}
+          change={editRegistrationData}
           required={false}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
-          name="companyName"
-          value={deliveryData.companyName}
+          name="deliveryCompanyName"
+          value={registrationData.delivery.deliveryCompanyName}
           displayedName="Nazwa firmy"
-          change={editDeliveryData}
+          change={editRegistrationData}
           required={false}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
-          name="street"
-          value={deliveryData.street}
+          name="deliveryStreet"
+          value={registrationData.delivery.deliveryStreet}
           displayedName="Ulica"
-          change={editDeliveryData}
+          change={editRegistrationData}
           required={false}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
-          name="homeNumber"
-          value={deliveryData.homeNumber}
+          name="deliveryHomeNumber"
+          value={registrationData.delivery.deliveryHomeNumber}
           displayedName="Nr. domu"
-          change={editDeliveryData}
+          change={editRegistrationData}
           required={false}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
-          name="postCode"
-          value={deliveryData.postCode}
+          name="deliveryPostCode"
+          value={registrationData.delivery.deliveryPostCode}
           displayedName="Kod pocztowy"
-          change={editDeliveryData}
+          change={editRegistrationData}
           required={false}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
-          name="city"
-          value={deliveryData.city}
+          name="deliveryCity"
+          value={registrationData.delivery.deliveryCity}
           displayedName="Miejscowość"
-          change={editDeliveryData}
+          change={editRegistrationData}
           required={false}
         />
       </div>

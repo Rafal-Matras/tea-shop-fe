@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ProductsListInterface } from '../../types';
+import { ProductsListInterface, UserInterface } from '../../types';
 
 import { AppContext } from '../../context/AppContext';
 
@@ -12,14 +12,16 @@ import { Nav } from '../Nav/Nav';
 import { Main } from '../Main/Main';
 import { Footer } from '../Footer/Footer';
 
+import { defaultUser } from '../../assets/defaultData';
 import { allProductsDefault } from '../../assets/allProducts';
 
 import style from './App.module.css';
+import { UserContext } from '../../context/UserContext';
 
 export const App = () => {
 
+  const [user, setUser] = useState<UserInterface>(defaultUser);
   const [allProducts, setAllProducts] = useState<ProductsListInterface[]>([]);
-  const [userRole, setUserRole] = useState<string>('user');
   const [productName, setProductName] = useState<string>('');
   const [productType, setProductType] = useState<string>('');
   const [fullPrice, setFullPrice] = useState<number>(0);
@@ -35,41 +37,41 @@ export const App = () => {
     //     setAllProducts(data);
     // },500)
 
-    setAllProducts(allProductsDefault)
+    setAllProducts(allProductsDefault);
   }, []);
 
   return (
-    <AppContext.Provider value={{
-      allProducts,
-      setAllProducts,
-      userRole,
-      setUserRole,
-      productName,
-      setProductName,
-      productType,
-      setProductType,
-      fullPrice,
-      setFullPrice,
-      numberOfProducts,
-      setNumberOfProducts,
-      activeProductType,
-      setActiveProductType,
-    }}>
-      <div className={style.container}>
-        {userRole === 'admin'
-          ? <>
-            <AdminHeader/>
-            <AdminMain/>
-          </>
-          : <>
-            <TopBar/>
-            <Header setActiveMenu={setActiveMenu}/>
-            <Nav activeMenu={activeMenu} setActiveMenu={setActiveMenu}/>
-            <Main/>
-            <Footer/>
-          </>
-        }
-      </div>
-    </AppContext.Provider>
+    <UserContext.Provider value={{user, setUser}}>
+      <AppContext.Provider value={{
+        allProducts,
+        setAllProducts,
+        productName,
+        setProductName,
+        productType,
+        setProductType,
+        fullPrice,
+        setFullPrice,
+        numberOfProducts,
+        setNumberOfProducts,
+        activeProductType,
+        setActiveProductType,
+      }}>
+        <div className={style.container}>
+          {user.role === 'admin'
+            ? <>
+              <AdminHeader/>
+              <AdminMain/>
+            </>
+            : <>
+              <TopBar/>
+              <Header setActiveMenu={setActiveMenu}/>
+              <Nav activeMenu={activeMenu} setActiveMenu={setActiveMenu}/>
+              <Main/>
+              <Footer/>
+            </>
+          }
+        </div>
+      </AppContext.Provider>
+    </UserContext.Provider>
   );
 };

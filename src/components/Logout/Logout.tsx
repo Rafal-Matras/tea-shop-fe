@@ -1,16 +1,18 @@
 import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AppContext } from '../../context/AppContext';
+import { UserContext } from '../../context/UserContext';
 
 import style from './Logout.module.css';
 
+import {defaultUser} from '../../assets/defaultData'
+
 export const Logout = () => {
 
-  const {setUserRole} = useContext(AppContext);
+  const {setUser} = useContext(UserContext);
 
   useEffect(() => {
-    setUserRole('');
+    setUser(defaultUser);
   }, []);
 
   return (

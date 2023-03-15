@@ -1,12 +1,15 @@
-import style from './Register.module.css';
-import { UserRegistrationDataInterface } from '../../types';
+import { useState } from 'react';
+
+import { UserRegistrationDataType } from '../../types';
+
 import { Input } from '../common/Input/Input';
 import { Radio } from '../common/Radio/Radio';
-import { useState } from 'react';
 import { Checkbox } from '../common/Checkbox/Checkbox';
 
+import style from './Register.module.css';
+
 interface Props {
-  registrationData: UserRegistrationDataInterface;
+  registrationData: UserRegistrationDataType;
   editRegistrationData: (name: string, value: string) => void;
   deliveryActive: boolean;
   setDeliveryActive: (name: boolean) => void;

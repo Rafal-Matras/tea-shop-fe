@@ -1,37 +1,39 @@
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { UserLoginInterface } from '../../types';
+import { UserLoginDataInterface } from '../../types';
 
 import { Input } from '../common/Input/Input';
 import { config } from '../../config/config';
 import { REGEX_EMAIL, REGEX_PASSWORD } from '../../assets/regexFiles';
 
 import style from './Login.module.css';
+import { UserContext } from '../../context/UserContext';
 
 export const Login = () => {
 
   const navigate = useNavigate();
+  const {setUser} = useContext(UserContext)
   const [errorLogin, setErrorLogin] = useState<boolean>(false);
-  const [data, setData] = useState<UserLoginInterface>({
+  const [loginDetails, setLoginDetails] = useState<UserLoginDataInterface>({
     email: '',
     password: '',
   });
 
-  const editData = (name: string, value: string) => {
-    setData(data => ({
-      ...data,
+  const editLoginDetails = (name: string, value: string) => {
+    setLoginDetails(loginDetails => ({
+      ...loginDetails,
       [name]: value,
     }));
   };
 
   const validation = () => {
-    if (data.email === '' || !data.email.match(REGEX_EMAIL)) {
+    if (loginDetails.email === '' || !loginDetails.email.match(REGEX_EMAIL)) {
       setErrorLogin(true);
       console.log('email');
       return true;
     }
-    if (data.password === '' || !data.password.match(REGEX_PASSWORD)) {
+    if (loginDetails.password === '' || !loginDetails.password.match(REGEX_PASSWORD)) {
       setErrorLogin(true);
       console.log('password');
       return true;
@@ -43,9 +45,10 @@ export const Login = () => {
     e.preventDefault();
     if (validation()) return;
 
-    // const response = await fetch(`${config.URL}login/${encodeURIComponent(data.email)}/${encodeURIComponent(data.password)}`);
-    // const dataResponse = await response.json();
-    // if (dataResponse) {
+    // const response = await fetch(`${config.URL}login/${encodeURIComponent(loginDetails.email)}/${encodeURIComponent(loginDetails.password)}`);
+    // const data = await response.json();
+    // if (data) {
+    //   setUser(data)
     //   setErrorLogin(true);
     //   return;
     // }
@@ -62,9 +65,9 @@ export const Login = () => {
           <Input
             type="email"
             name="email"
-            value={data.email}
+            value={loginDetails.email}
             displayedName="Email"
-            change={editData}
+            change={editLoginDetails}
             required={true}
           />
         </div>
@@ -72,9 +75,9 @@ export const Login = () => {
           <Input
             type="password"
             name="password"
-            value={data.password}
+            value={loginDetails.password}
             displayedName="Hasło"
-            change={editData}
+            change={editLoginDetails}
             required={true}
           />
         </div>

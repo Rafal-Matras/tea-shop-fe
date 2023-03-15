@@ -1,14 +1,21 @@
-import style from './Register.module.css';
+import { UserRegistrationDataType } from '../../types';
+
 import { Input } from '../common/Input/Input';
-import { UserRegistrationDataInterface } from '../../types';
+
+import style from './Register.module.css';
 
 interface Props {
-  registrationData: UserRegistrationDataInterface;
+  registrationData: UserRegistrationDataType;
   editRegistrationData: (name: string, value: string) => void;
-  samePassword: () => boolean;
+  confirmPassword: string;
+  editConfirmPassword: (name: string, value: string) => void;
 }
 
-export const LoginData = ({registrationData, editRegistrationData,samePassword}: Props) => {
+export const LoginData = ({registrationData, editRegistrationData, confirmPassword, editConfirmPassword}: Props) => {
+
+  const samePassword = () => {
+    return registrationData.password === confirmPassword;
+  };
 
   return (
     <div className={style.dataLoginBox}>
@@ -37,9 +44,9 @@ export const LoginData = ({registrationData, editRegistrationData,samePassword}:
         <Input
           type="password"
           name="confirmPassword"
-          value={registrationData.confirmPassword}
+          value={confirmPassword}
           displayedName="Powtórz hasło"
-          change={editRegistrationData}
+          change={editConfirmPassword}
           required={true}
           samePassword={samePassword}
         />

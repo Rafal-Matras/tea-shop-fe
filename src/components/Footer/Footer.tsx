@@ -1,19 +1,21 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AppContext } from '../../context/AppContext';
+import { UserContext } from '../../context/UserContext';
 
 import style from './Footer.module.css';
 
+import { defaultUser } from '../../assets/defaultData';
+
 export const Footer = () => {
 
-  const {userRole, setUserRole} = useContext(AppContext);
+  const {user, setUser} = useContext(UserContext);
 
   const scrollUp = () => {
     window.scrollTo(0, 0);
   };
   const logout = () => {
-    setUserRole('');
+    setUser(defaultUser);
     scrollUp();
   };
 
@@ -53,7 +55,7 @@ export const Footer = () => {
         </div>
         <div className={style.profile}>
           <h1 className={style.title}>Panel klienta</h1>
-          {userRole
+          {user.role
             ? <>
               <p className={style.text}>
                 <Link

@@ -8,10 +8,12 @@ import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
 import { BasketIcon } from '../common/SvgIcons/BasketIcon';
 
 import style from './Header.module.css';
+import { UserContext } from '../../context/UserContext';
 
 export const BasketBox = () => {
 
-  const {userRole, fullPrice, setActiveProductType} = useContext(AppContext);
+  const {user} = useContext(UserContext)
+  const { fullPrice, setActiveProductType} = useContext(AppContext);
 
   return (
     <div className={style.basketBox}>
@@ -22,10 +24,10 @@ export const BasketBox = () => {
       </Link>
       <div className={style.basketBottom}>
         <div className={style.basketBottomBox}>
-          {userRole === 'user'
+          {user.role === 'user'
             ? <Link
               className={style.basketBottomText}
-              to="/user/profile/data"
+              to="/user/profile"
               onClick={() => setActiveProductType('')}
             >panel klienta
             </Link>
@@ -38,7 +40,7 @@ export const BasketBox = () => {
           }
         </div>
         <div className={style.basketBottomBox}>
-          {userRole === 'user'
+          {user.role === 'user'
             ? <Link
               className={style.basketBottomText}
               to="/user/logout"
