@@ -37,7 +37,6 @@ export const Input = ({type, name, displayedName, value, change, required, sameP
       setErrorText('niepoprawny kod pocztowy');
     } else if (name === 'confirmPassword') {
       if (samePassword) {
-        console.log('sp---',samePassword());
         if (!samePassword()) {
           setErrorText('Hasła muszą być takie same');
         } else setErrorText('');

@@ -7,9 +7,7 @@ import { ProductsViews } from '../../views/ProductsViews';
 import { LoginViews } from '../../views/LoginViews';
 import { LogoutViews } from '../../views/LogoutViews';
 import { RegisterViews } from '../../views/RegisterViews';
-import { ProfileDataViews } from '../../views/ProfileDataViews';
-import { ProfileChangePasswordViews } from '../../views/ProfileChangePasswordViews';
-import { ProfileOrdersViews } from '../../views/ProfileOrdersViews';
+import { UserProfileViews } from '../../views/UserProfileViews';
 import { BasketViews } from '../../views/BasketViews';
 import { BasketDataViews } from '../../views/BasketDataViews';
 import { BasketSummaryViews } from '../../views/BasketSummaryViews';
@@ -47,9 +45,7 @@ export const Main = () => {
         <Route path="/user/login" element={<LoginViews/>}/>
         <Route path="/user/logout" element={<LogoutViews/>}/>
         <Route path="/user/register" element={<RegisterViews/>}/>
-        <Route path="/user/profile/data" element={<ProfileDataViews/>}/>
-        <Route path="/user/profile/change-password" element={<ProfileChangePasswordViews/>}/>
-        <Route path="/user/profile/orders" element={<ProfileOrdersViews/>}/>
+        <Route path="/user/profile" element={<UserProfileViews/>}/>
 
         <Route path="/basket" element={<BasketViews/>}/>
         <Route path="/basket/data" element={<BasketDataViews/>}/>

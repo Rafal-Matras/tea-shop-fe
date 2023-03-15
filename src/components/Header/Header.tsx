@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
 
 import { Search } from './Search';
+import { BasketBox } from './BasketBox';
 
 import { Logo } from '../../assets/Logo';
 import { MenuIcon } from '../common/SvgIcons/MenuIcon';
 import { CartIcon } from '../common/SvgIcons/CartIcon';
 
 import style from './Header.module.css';
-import { BasketBox } from './BasketBox';
 
 interface Props {
   setActiveMenu: (name: boolean) => void;

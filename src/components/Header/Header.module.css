@@ -79,7 +79,7 @@
 
 .searchInput:focus,
 .searchInput:active {
-    border-color: #1c8e27;
+    border-color: var(--primary-dark-color);
 }
 
 .searchButton {
@@ -212,7 +212,7 @@
     }
 
     .basketTop:hover {
-        background-color: #55a211;
+        background-color: var(--primary-dark-color);
     }
 
     .basketIcon {
