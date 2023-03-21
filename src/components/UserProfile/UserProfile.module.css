@@ -1,0 +1,238 @@
+.container {
+    padding: 0 5px 80px;
+}
+
+.pageTitle {
+    margin: 15px auto;
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+.navList {
+    position: relative;
+    display: flex;
+    padding: 42px 5px 8px;
+    width: 100%;
+    list-style: none;
+}
+
+.navItem {
+    margin-right: 10px;
+    padding: 5px;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+.active {
+    background-color: var(--primary-dark-color);
+}
+
+.logout {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    text-decoration: none;
+    background-color: var(--secondary-color);
+}
+
+.profileDataBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.title {
+    padding: 5px;
+    width: 100%;
+    font-size: 1.8rem;
+    font-weight: 500;
+    background-color: var(--grey-light);
+}
+
+.inputBox {
+    margin: 16px 0;
+    width: 94%;
+    max-width: 340px;
+    height: 40px;
+}
+
+.button {
+    position: relative;
+    left: 60vw;
+    top: 40px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    color: #fff;
+    background-color: var(--secondary-color);
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+.tableHead tr {
+    border-bottom: 1px solid var(--grey-dark);
+}
+
+th, td {
+    padding: 5px 0;
+}
+
+.tableBody tr:nth-child(even) {
+    background-color: var(--grey-light);
+}
+
+.historyOrderBoxData {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: 10px 0;
+    width: 120px;
+}
+
+.text {
+    position: relative;
+    padding: 4px 0;
+    font-size: 1.2rem;
+}
+
+.text span {
+    position: absolute;
+    padding-left: 10px;
+    width: 200px;
+}
+
+.historyOrderBoxProducts {
+    font-size: 1.2rem;
+}
+
+.orderItemBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom:1px solid var(--grey-light);
+}
+
+.orderItemBoxLinkImage {
+    width: 20%;
+    max-width: 100px;
+}
+
+.orderItemBox img {
+    width: 100%;
+}
+
+.orderItemBoxLinkName {
+    width: 50%;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: var(--primary-dark-color)
+}
+
+.orderItemBoxTextSum,
+.orderItemBoxTextDelivery {
+    display: flex;
+    justify-content: end;
+    padding: 5px 15px;
+}
+
+.orderItemBoxTextSum {
+    font-weight: 500;
+}
+
+.orderItemBoxTextSum span,
+.orderItemBoxTextDelivery span {
+    padding-left: 15px;
+}
+
+.buttonBack {
+    display: flex;
+    align-items: center;
+    margin: 20px 0 0 20px;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: .1rem;
+    color: #fff;
+    background-color: var(--grey-dark);
+}
+
+.arrowIcon {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}
+
+@media (min-width: 576px) {
+
+    .navList {
+        padding: 10px 5px;
+    }
+
+    .navItem {
+        margin-right: 15px;
+        padding: 5px 20px;
+    }
+
+    .logout {
+        top: 10px;
+        right: 0;
+    }
+
+    .historyOrderBoxData {
+        width: 160px;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .navItem {
+        cursor: pointer;
+        box-shadow: 0 0 1px 1px transparent;
+        transition: .3s;
+    }
+
+    .navItem:hover {
+        box-shadow: 0 0 1px 1px var(--primary-color);
+    }
+
+    .active:hover {
+        box-shadow: 0 0 1px 1px var(--primary-dark-color);
+    }
+
+    .logout:hover {
+        box-shadow: 0 0 1px 1px var(--secondary-color);
+    }
+
+    .tableBody tr {
+        cursor: pointer;
+    }
+
+    .historyOrderBoxData {
+        width: 220px;
+    }
+
+    .buttonBack{
+        cursor: pointer;
+        box-shadow: 0 0 2px 2px transparent;
+        transition: .3s;
+    }
+
+    .buttonBack:hover{
+        box-shadow: 0 0 2px 2px var(--grey-dark);
+    }
+}

@@ -47,6 +47,7 @@ export interface HistoryOrdersInterface {
   orderNumber: string;
   data: string;
   price: string;
+  deliveryPrice: string;
   provider: string;
   trackingNumber: string;
   dataToAccount: DataToAccountType;

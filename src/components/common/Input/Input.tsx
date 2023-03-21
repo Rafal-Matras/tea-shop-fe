@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, CSSProperties, useState } from 'react';
 
 import { ShowIcon } from '../SvgIcons/ShowIcon';
 import { HideIcon } from '../SvgIcons/HideIcon';
@@ -8,6 +8,7 @@ import { REGEX_EMAIL, REGEX_PASSWORD, REGEX_POSTCODE } from '../../../assets/reg
 import style from './Input.module.css';
 
 interface Props {
+  styles?: CSSProperties;
   type: string;
   name: string;
   displayedName: string;
@@ -17,7 +18,7 @@ interface Props {
   samePassword?: () => boolean;
 }
 
-export const Input = ({type, name, displayedName, value, change, required, samePassword}: Props) => {
+export const Input = ({styles, type, name, displayedName, value, change, required, samePassword}: Props) => {
 
   const [errorText, setErrorText] = useState<string>('');
   const [active, setActive] = useState<boolean>(false);
@@ -50,6 +51,7 @@ export const Input = ({type, name, displayedName, value, change, required, sameP
         ? <>
           <input
             id={name}
+            style={styles}
             type={active ? 'text' : 'password'}
             name={name}
             className={style.inputPassword}
@@ -71,6 +73,7 @@ export const Input = ({type, name, displayedName, value, change, required, sameP
         : <>
           <input
             id={name}
+            style={styles}
             type={type}
             name={name}
             className={style.input}
