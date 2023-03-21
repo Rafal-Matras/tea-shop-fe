@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import {
   ActivePageType,
@@ -6,31 +7,37 @@ import {
   ProfileUserDataType,
 } from '../../types';
 
+import { useUserLoginData } from '../../hooks/UseUserLoginData';
+
 import { ProfileNavList } from './ProfileNavList';
 import { ProfileUserData } from './ProfileUserData';
 import { ProfileChangePassword } from './ProfileChangePassword';
 import { ProfileHistoryOrders } from './ProfileHistoryOrders';
 import { ProfileOrderDetails } from './ProfileOrderDetails';
+import { orderListDefault } from '../../assets/orderListDefault';
 
 import style from './UserProfile.module.css';
 
-import { orderListDefault } from '../../assets/orderListDefault';
-import {useUserLoginData} from '../../hooks/UseUserLoginData'
 
 export const UserProfile = () => {
 
-  const data = useUserLoginData()
+  const data = useUserLoginData();
+  const {state} = useLocation();
   const [userData, setUserData] = useState<ProfileUserDataType>(data);
   const [activePage, setActivePage] = useState<ActivePageType>('data');
   const [ordersList, setOrderList] = useState<HistoryOrdersInterface[]>([]);
   const [activeOrder, setActiveOrder] = useState<number>(0);
 
   useEffect(() => {
+    if (state) {
+      setActivePage(state);
+      console.log(state);
+    }
     (async () => {
 
     })();
     setOrderList(orderListDefault);
-  }, []);
+  }, [state]);
 
   const changeUserData = (name: string, value: string) => {
     console.log(name);

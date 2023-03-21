@@ -22,7 +22,6 @@ export const Footer = () => {
   return (
     <div className={style.container}>
       <div className={style.containerBox}>
-
         <div className={style.info}>
           <h1 className={style.title}>Informacje</h1>
           <p className={style.text}>
@@ -60,7 +59,8 @@ export const Footer = () => {
               <p className={style.text}>
                 <Link
                   className={style.link}
-                  to="/user/profile/orders"
+                  to="/user/profile"
+                  state={'history'}
                   onClick={scrollUp}
                 >Historia Zakupów
                 </Link>
@@ -68,7 +68,8 @@ export const Footer = () => {
               <p className={style.text}>
                 <Link
                   className={style.link}
-                  to="/user/profile/data"
+                  to="/user/profile"
+                  state={'data'}
                   onClick={scrollUp}
                 >Moje Dane
                 </Link>
@@ -76,7 +77,8 @@ export const Footer = () => {
               <p className={style.text}>
                 <Link
                   className={style.link}
-                  to="/user/profile/change-password"
+                  to="/user/profile"
+                  state={'password'}
                   onClick={scrollUp}
                 >
                   Zmień Hasło
