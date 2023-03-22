@@ -1,7 +1,9 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AppContext } from '../../../context/AppContext';
+import { UserContext } from '../../../context/UserContext';
+
+import { defaultUser } from '../../../assets/defaultData';
 
 import style from './Item.module.css';
 
@@ -12,10 +14,10 @@ interface Props {
 
 export const MobileRestItems = ({onlyProductType, closeMenu}: Props) => {
 
-  const {userRole, setUserRole} = useContext(AppContext);
+  const {user, setUser} = useContext(UserContext);
 
   const logOut = () => {
-    setUserRole('');
+    setUser(defaultUser);
     closeMenu();
   };
 
@@ -29,12 +31,12 @@ export const MobileRestItems = ({onlyProductType, closeMenu}: Props) => {
         >koszyk
         </Link>
       </li>
-      {userRole === 'user'
+      {user.role === 'user'
         ? <>
           <li className={onlyProductType ? style.productItemDisable : style.productItem}>
             <Link
               className={style.productItemText}
-              to="/user/profile/data"
+              to="/user/profile"
               onClick={closeMenu}
             >panel klienta
             </Link>

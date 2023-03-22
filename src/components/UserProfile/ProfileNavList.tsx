@@ -6,18 +6,18 @@ import { UserContext } from '../../context/UserContext';
 import style from './UserProfile.module.css';
 
 import { defaultUser } from '../../assets/defaultData';
-import { ActivePageInterface } from '../../types';
+import { ActivePageType } from '../../types';
 
 interface Props {
   activePage: string;
-  setActivePage: (name: ActivePageInterface) => void;
+  setActivePage: (name: ActivePageType) => void;
 }
 
 export const ProfileNavList = ({activePage, setActivePage}: Props) => {
 
   const {setUser} = useContext(UserContext);
 
-  const changeActivePage = (name: ActivePageInterface | null) => {
+  const changeActivePage = (name: ActivePageType | null) => {
     if (name) {
       setActivePage(name);
     } else {
