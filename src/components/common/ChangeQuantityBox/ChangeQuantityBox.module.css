@@ -1,0 +1,75 @@
+.changeQuantity {
+    display: flex;
+    align-items: center;
+}
+
+.changeQuantityButton {
+    border: none;
+    padding: 0 5px;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--primary-color);
+    background-color: #fff;
+}
+
+.changeQuantityInputBox {
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    font-size: 1.4rem;
+    font-weight: 300;
+}
+
+.changeQuantityInput {
+    margin-right: 2px;
+    padding-right: 3px;
+    border: none;
+    border-radius: 5px;
+    width: 80%;
+    height: 100%;
+    text-align: end;
+    font-size: 1.8rem;
+    font-weight: 300;
+    outline: none;
+}
+
+.changeQuantityInput:active,
+.changeQuantityInput:focus {
+    border: 1px solid var(--grey);
+    border-right-width: 2px;
+}
+
+@media (min-width: 576px) {
+
+    .changeQuantityInput,
+    .orderDetailButton {
+        font-size: 1.4rem;
+    }
+
+    .changeQuantityButton {
+        font-size: 3rem;
+        cursor: pointer;
+    }
+
+    .changeQuantityInputBox {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .changeQuantityInput,
+    .orderDetailButton {
+        font-size: 1.2rem;
+    }
+
+    .changeQuantityButton {
+        font-size: 3rem;
+        cursor: pointer;
+    }
+
+    .changeQuantityInputBox {
+        font-size: 1rem;
+    }
+}
