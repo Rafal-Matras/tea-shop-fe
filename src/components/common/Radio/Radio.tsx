@@ -5,16 +5,17 @@ interface Props {
   name: string;
   account: string;
   setAccount: (name: string) => void;
+  vertical?: boolean;
 }
 
-export const Radio = ({data, name, account, setAccount}: Props) => {
+export const Radio = ({data, name, account, setAccount, vertical}: Props) => {
 
   return (
     <div className={style.container}>
-      <p className={style.title}>{name}</p>
-      <div className={style.radioBox}>
+      <p className={vertical ? style.titleVertical : style.title}>{name}</p>
+      <div className={vertical ? style.radioBoxVertical : style.radioBox}>
         {data.map(item => (
-            <label className={style.label} key={item}>{item}
+          <label className={style.label} key={item}>{item}
             <input
               className={style.input}
               type="radio"
@@ -23,8 +24,8 @@ export const Radio = ({data, name, account, setAccount}: Props) => {
               checked={account === item}
               onChange={(e) => setAccount(e.currentTarget.value)}
             />
-              <span className={style.checkmark}></span>
-            </label>
+            <span className={style.checkmark}></span>
+          </label>
         ))}
       </div>
     </div>

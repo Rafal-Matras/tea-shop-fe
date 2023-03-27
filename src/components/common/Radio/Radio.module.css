@@ -8,14 +8,33 @@
 
 .title {
     font-size: 1.4rem;
+    font-weight: 400;
     margin-bottom: 10px;
     color: var(--grey-dark);
+}
+
+.titleVertical {
+    width: 100%;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--primary-text-color);
 }
 
 .radioBox {
     display: flex;
     justify-content: space-evenly;
     width: 300px;
+}
+
+.radioBoxVertical {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.radioBoxVertical .label {
+    margin-bottom: 5px;
 }
 
 .label {
