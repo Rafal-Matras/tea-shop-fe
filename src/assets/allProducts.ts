@@ -1,4 +1,4 @@
-import { Category, ProductsListInterface } from '../types';
+import { AddToBasket, BasketInterface, Category, ProductInterface, ProductsListInterface } from '../types';
 
 export const allProductsDefault: ProductsListInterface[] = [
   {
@@ -134,7 +134,7 @@ export const allProductsDefault: ProductsListInterface[] = [
   {
     id: '133',
     category: Category.accessories,
-    type: null,
+    type: ['zaparzaczei filtry do herbaty'],
     name: 'Zaparzacz do herbaty silikonowy SILICO TRUSKAWKA',
     image: 'zaparzaczdoherbatysilikonowysilicotruskawka.webp',
     price: 10.90,
@@ -158,3 +158,82 @@ export const allProductsDefault: ProductsListInterface[] = [
     new: null,
   },
 ];
+
+export const exemplaryProduct: ProductInterface = {
+  id: '123',
+  name: 'Earl Grey Rainbow',
+  category: Category.tea,
+  type: ['czarna', 'earl grey'],
+  image: 'eargreyrainbow.webp',
+  price: 10.99,
+  promo: null,
+  numberOfUnits: 50,
+  unit: 'g',
+  state: 8000,
+  forGift: null,
+  onHomePage: 1,
+  new: null,
+  description: 'Herbata Earl Grey Rainbow to barwna i smaczna czarna herbata o wyjątkowym, owocowym i przyjemnym smaku i aromacie. Niezwykłe walory smakowe i aromatyczne są zasługą bławatka, szafranu, płatków słonecznika i róży. Herbata wyjątkowa w smaku o nietuzinkowym wyglądzie. Polecana sympatykom Earl Grey’a.',
+  ingredients: 'Herbata czarna, bławatek, nagietek, dziki szafran, płatki róży, aromat',
+  countryOrigin: 'Sri Lanka',
+  amountBrew: 'pół łyżeczki / filiżanka',
+  temperatureBrew: '95',
+  timeBrew: '2-3 min',
+  numberBrews: 'raz',
+  wayStore: 'Przechowywać w zamkniętym opakowaniu, w suchym i chłodnym miejscu',
+  coffeeSpecies: null,
+  howToBrew: null,
+  size: null,
+};
+
+export const productDefault: ProductInterface = {
+  id: '',
+  name: '',
+  category: Category.tea,
+  type: [],
+  image: '',
+  price: 0,
+  promo: null,
+  numberOfUnits: 50,
+  unit: 'g',
+  state: 0,
+  forGift: null,
+  onHomePage: null,
+  new: null,
+  description: '',
+  ingredients: '',
+  countryOrigin: '',
+  amountBrew: '',
+  temperatureBrew: '',
+  timeBrew: '',
+  numberBrews: '',
+  wayStore: '',
+  coffeeSpecies: null,
+  howToBrew: null,
+  size: null,
+};
+
+export const exemplaryProductInBasket: BasketInterface = {
+  id: '123',
+  name: 'Earl Grey Rainbow',
+  type: ['czarna', 'earl grey',],
+  image: 'eargreyrainbow.webp',
+  price: 10.99,
+  promo: null,
+  numberOfUnits: 50,
+  unit: 'g',
+  state: 4000,
+};
+
+
+export const oneProductInBasketDefault: BasketInterface = {
+  id: '',
+  name: '',
+  type: [],
+  image: '',
+  price: 0,
+  promo: null,
+  numberOfUnits: 50,
+  unit: 'g',
+  state: 0,
+};
