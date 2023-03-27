@@ -1,6 +1,7 @@
+import { Basket } from '../components/Basket/Basket';
+
 export const BasketViews = () => {
 
-  return (
-    <h1>Basket</h1>
-  );
+  return <Basket/>;
+
 };

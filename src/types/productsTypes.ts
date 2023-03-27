@@ -25,7 +25,7 @@ export enum Category {
 export interface ProductsListInterface {
   id: string;
   category: Category;
-  type: string[] | null;
+  type: string[];
   name: string;
   price: number;
   image: string;
@@ -60,7 +60,13 @@ export interface SliderInterface {
 }
 
 export interface AddToBasket {
+  id:string;
+  userId?: string;
   productId: string;
   quantityOfProduct: number;
   packSize: number;
+}
+
+export interface BasketInterface extends Omit<ProductsListInterface, 'category' | 'forGift' | 'new'> {
+  state: number;
 }
