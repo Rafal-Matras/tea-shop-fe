@@ -73,92 +73,6 @@
     margin-top: 20px
 }
 
-.packSizeDropdownMenu {
-    position: relative;
-    width: 180px;
-}
-
-.packSize {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-    font-size: 1.4rem;
-    font-weight: 300;
-}
-
-.packSize span {
-    display: flex;
-    align-items: center;
-    font-size: 1.4rem;
-    font-weight: 500;
-}
-
-.packSizeMenu {
-    display: none;
-}
-
-.packSizeMenuActive {
-    position: absolute;
-    border: 1px solid var(--grey-light);
-    width: 100%;
-    background-color: #fff;
-}
-
-.packSizeItem {
-    display: flex;
-    justify-content: end;
-    padding: 4px 27px;
-    width: 100%;
-    font-size: 1.4rem;
-}
-
-.arrowDownIcon {
-    fill: var(--primary-color);
-}
-
-.changeQuantity {
-    display: flex;
-    align-items: center;
-}
-
-.changeQuantityButton {
-    border: none;
-    padding: 0 5px;
-    font-size: 4rem;
-    font-weight: 300;
-    color: var(--primary-color);
-    background-color: #fff;
-}
-
-.changeQuantityInputBox {
-    border: 1px solid var(--grey);
-    border-radius: 5px;
-    width: 100px;
-    height: 40px;
-    font-size: 1.4rem;
-    font-weight: 300;
-}
-
-.changeQuantityInput {
-    margin-right: 2px;
-    padding-right: 3px;
-    border: none;
-    border-radius: 5px;
-    width: 80%;
-    height: 100%;
-    text-align: end;
-    font-size: 1.8rem;
-    font-weight: 300;
-    outline: none;
-}
-
-.changeQuantityInput:active,
-.changeQuantityInput:focus {
-    border: 1px solid var(--grey);
-    border-right-width: 2px;
-}
-
 .orderDetailButton {
     display: flex;
     gap: 5px;
@@ -378,27 +292,6 @@
         line-height: 4.6rem;
     }
 
-    .packSizeDropdownMenu {
-        width: 200px;
-    }
-
-    .packSize,
-    .packSize span,
-    .packSizeItem,
-    .changeQuantityInput,
-    .orderDetailButton {
-        font-size: 1.4rem;
-    }
-
-    .changeQuantityButton {
-        font-size: 3rem;
-        cursor: pointer;
-    }
-
-    .changeQuantityInputBox {
-        font-size: 1rem;
-    }
-
     .brew {
         width: 25%;
     }
@@ -460,27 +353,6 @@
 
     .numberOfUnits {
         font-size: 1.3rem;
-    }
-
-    .packSizeDropdownMenu {
-        width: 200px;
-    }
-
-    .packSize,
-    .packSize span,
-    .packSizeItem,
-    .changeQuantityInput,
-    .orderDetailButton {
-        font-size: 1.2rem;
-    }
-
-    .changeQuantityButton {
-        font-size: 3rem;
-        cursor: pointer;
-    }
-
-    .changeQuantityInputBox {
-        font-size: 1rem;
     }
 
     .orderDetailButton {

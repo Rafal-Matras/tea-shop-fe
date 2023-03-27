@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Category, ProductInterface } from '../../types';
+import { ProductInterface } from '../../types';
 
 import { AppContext } from '../../context/AppContext';
 
@@ -13,182 +13,126 @@ import { AddedToBasket } from './AddedToBasket';
 
 import style from './Product.module.css';
 
+import { productDefault, exemplaryProduct } from '../../assets/allProducts';
+
 export const Product = () => {
 
-  const {setProductType, setProductName} = useContext(AppContext);
-  const [product, setProduct] = useState<ProductInterface>({
-    id: '123',
-    name: 'Earl Grey Rainbow',
-    category: Category.tea,
-    type: ['czarna', 'ear grey'],
-    image: 'eargreyrainbow.webp',
-    price: 10.99,
-    promo: null,
-    numberOfUnits: 50,
-    unit: 'g',
-    state: 8000,
-    forGift: null,
-    onHomePage: 1,
-    new: null,
-    description: 'Herbata Earl Grey Rainbow to barwna i smaczna czarna herbata o wyjątkowym, owocowym i przyjemnym smaku i aromacie. Niezwykłe walory smakowe i aromatyczne są zasługą bławatka, szafranu, płatków słonecznika i róży. Herbata wyjątkowa w smaku o nietuzinkowym wyglądzie. Polecana sympatykom Earl Grey’a.',
-    ingredients: 'Herbata czarna, bławatek, nagietek, dziki szafran, płatki róży, aromat',
-    countryOrigin: 'Sri Lanka',
-    amountBrew: 'pół łyżeczki / filiżanka',
-    temperatureBrew: '95',
-    timeBrew: '2-3 min',
-    numberBrews: 'raz',
-    wayStore: 'Przechowywać w zamkniętym opakowaniu, w suchym i chłodnym miejscu',
-    coffeeSpecies: null,
-    howToBrew: null,
-    size: null,
-  });
-
-  const {
-    id,
-    name,
-    category,
-    type,
-    image,
-    price,
-    promo,
-    numberOfUnits,
-    unit,
-    state,
-    description,
-    ingredients,
-    countryOrigin,
-    amountBrew,
-    temperatureBrew,
-    timeBrew,
-    numberBrews,
-    wayStore,
-    coffeeSpecies,
-    howToBrew,
-    size,
-  } = product;
-
+  const {setProductType} = useContext(AppContext);
+  const [product, setProduct] = useState<ProductInterface>(productDefault);
   const [packSize, setPackSize] = useState<number>(1);
   const [quantityOfProduct, setQuantityOfProducts] = useState<number>(1);
   const [addToBasket, setAddToBasket] = useState<boolean>(false);
 
-  // useEffect(()=>{
-  //
-  //
-  //   setProduct()
-  // },[])
+  useEffect(() => {
 
-  const categoryType = type?.map((item, index) => (
-    <Link
-      className={style.categoryType}
-      key={item}
-      to="/shop"
-      onClick={() => setProductType(item)}
-    >
-      {useFirstLetterBig(category)}&nbsp;{useFirstLetterBig(item)}
-      {index < type?.length - 1 ? <span> ,</span> : null}
-    </Link>
-  ));
+    setProduct(exemplaryProduct);
+
+  }, []);
 
   return (
     <div className={style.container}>
       <div className={style.titleBox}>
-        <h1 className={style.title}>{name}</h1>
+        <h1 className={style.title}>{product.name}</h1>
         <div className={style.categoryTypeBox}>
-          {type
-            ? categoryType
-            : <Link
-              className={style.categoryType}
-              to="/shop"
-              onClick={() => setProductName(category)}
-            >{useFirstLetterBig(category)}
-            </Link>
+          {product.type?.length !== 0
+            ? product.type?.map(item => (
+              <Link
+                className={style.categoryType}
+                key={item}
+                to="/shop"
+                onClick={() => setProductType(item)}
+              >
+                {useFirstLetterBig(product.category)}&nbsp;{useFirstLetterBig(item)}
+              </Link>
+            ))
+            : ''
           }
         </div>
       </div>
-      <img className={style.image} src={`/images/products/${image}`} alt=""/>
+      <img className={style.image} src={`/images/products/${product.image}`} alt=""/>
       <div className={style.productDetail}>
         <div className={style.priceAndOrderBox}>
           <div className={style.priceBox}>
-            <p className={style.price}>{promo
-              ? useConvertPriceToString(Math.ceil(promo * packSize * quantityOfProduct * 100) / 100)
-              : useConvertPriceToString(Math.ceil(price * packSize * quantityOfProduct * 100) / 100)
+            <p className={style.price}>{product.promo
+              ? useConvertPriceToString(Math.ceil(product.promo * packSize * quantityOfProduct * 100) / 100)
+              : useConvertPriceToString(Math.ceil(product.price * packSize * quantityOfProduct * 100) / 100)
             } zł&nbsp;
             </p>
             <p
               className={style.numberOfUnits}
-            >/ {numberOfUnits * packSize * quantityOfProduct} {unit}
+            >/ {product.numberOfUnits * packSize * quantityOfProduct} {product.unit}
             </p>
           </div>
           <OrderDetails
-            numberOfUnits={numberOfUnits}
-            price={price}
+            numberOfUnits={product.numberOfUnits}
+            price={product.price}
             packSize={packSize}
             setPackSize={setPackSize}
             quantityOfProduct={quantityOfProduct}
             setQuantityOfProducts={setQuantityOfProducts}
-            unit={unit}
-            state={state}
-            id={id}
+            unit={product.unit}
+            state={product.state}
+            id={product.id}
             setAddToBasket={setAddToBasket}
           />
         </div>
-        <p className={style.productDetailTitle}>{name}</p>
-        <p className={style.productDetailDescription}>{description}</p>
+        <p className={style.productDetailTitle}>{product.name}</p>
+        <p className={style.productDetailDescription}>{product.description}</p>
         <p
-          className={`${ingredients ? style.productDetailInfo : style.none}`}
-        ><strong>Składniki: </strong>{ingredients}
+          className={`${product.ingredients ? style.productDetailInfo : style.none}`}
+        ><strong>Składniki: </strong>{product.ingredients}
         </p>
         <p
-          className={`${countryOrigin ? style.productDetailInfo : style.none}`}
-        ><strong>Kraj pochodzenia: </strong>{countryOrigin}
+          className={`${product.countryOrigin ? style.productDetailInfo : style.none}`}
+        ><strong>Kraj pochodzenia: </strong>{product.countryOrigin}
         </p>
-        <div className={`${amountBrew ? style.brewBox : style.none}`}>
+        <div className={`${product.amountBrew ? style.brewBox : style.none}`}>
           <div className={style.brew}>
             <img className={style.brewImage} src="/images/icons/icoAmount.png" alt=""/>
             <p className={style.brewTitle}>Ilość herbaty</p>
-            <p className={style.brewText}>{amountBrew}</p>
+            <p className={style.brewText}>{product.amountBrew}</p>
           </div>
           <div className={style.brew}>
             <img className={style.brewImage} src="/images/icons/icoTemp.png" alt=""/>
             <p className={style.brewTitle}>Temperatura</p>
-            <p className={style.brewText}>{temperatureBrew} ºC</p>
+            <p className={style.brewText}>{product.temperatureBrew} ºC</p>
           </div>
           <div className={style.brew}>
             <img className={style.brewImage} src="/images/icons/icoTime.png" alt=""/>
             <p className={style.brewTitle}>Czas</p>
-            <p className={style.brewText}>{timeBrew}</p>
+            <p className={style.brewText}>{product.timeBrew}</p>
           </div>
           <div className={style.brew}>
             <img className={style.brewImage} src="/images/icons/icoTimes.png" alt=""/>
             <p className={style.brewTitle}>Ilość zaparzeń</p>
-            <p className={style.brewText}>{numberBrews}</p>
+            <p className={style.brewText}>{product.numberBrews}</p>
           </div>
         </div>
         <p
-          className={`${howToBrew ? style.productDetailInfo : style.none}`}
-        ><strong>Jak zaparzać </strong><br/>{howToBrew}
+          className={`${product.howToBrew ? style.productDetailInfo : style.none}`}
+        ><strong>Jak zaparzać </strong><br/>{product.howToBrew}
         </p>
         <p
-          className={`${coffeeSpecies ? style.productDetailInfo : style.none}`}
-        ><strong>Gatunek: </strong>{coffeeSpecies}
+          className={`${product.coffeeSpecies ? style.productDetailInfo : style.none}`}
+        ><strong>Gatunek: </strong>{product.coffeeSpecies}
         </p>
         <p
-          className={`${size ? style.productDetailInfo : style.none}`}
-        ><strong>Wymiary: </strong>{size}
+          className={`${product.size ? style.productDetailInfo : style.none}`}
+        ><strong>Wymiary: </strong>{product.size}
         </p>
         <p
-          className={`${wayStore ? style.productDetailInfo : style.none}`}
-        ><strong>Sposób przehowywania </strong><br/>{wayStore}
+          className={`${product.wayStore ? style.productDetailInfo : style.none}`}
+        ><strong>Sposób przehowywania </strong><br/>{product.wayStore}
         </p>
       </div>
       {addToBasket
         ? <AddedToBasket
-          image={image}
-          name={name}
-          category={category}
-          type={type}
-          price={price * packSize * quantityOfProduct}
-          unit={numberOfUnits * packSize * quantityOfProduct + unit}
+          image={product.image}
+          name={product.name}
+          category={product.category}
+          type={product.type}
+          price={product.price * packSize * quantityOfProduct}
+          unit={product.numberOfUnits * packSize * quantityOfProduct + product.unit}
           setAddToBasket={setAddToBasket}
         />
         : null
