@@ -1,9 +1,12 @@
 import { createContext } from 'react';
-import { ProductsListInterface } from '../types';
+import { AddToBasket, ProductsListInterface } from '../types';
 
 export const AppContext = createContext({
   allProducts: [] as ProductsListInterface[],
   setAllProducts: (products: ProductsListInterface[]) => {
+  },
+  basket: [] as AddToBasket[],
+  setBasket: (basket: AddToBasket[]) => {
   },
   productName: '',
   setProductName: (name: string) => {
