@@ -1,6 +1,6 @@
+import { BasketData } from '../components/BasketData/BasketData';
+
 export const BasketDataViews = () => {
 
-  return (
-    <h1>BasketData</h1>
-  );
+  return <BasketData/>;
 };
