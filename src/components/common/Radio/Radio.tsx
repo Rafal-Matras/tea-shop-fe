@@ -4,7 +4,7 @@ interface Props {
   data: string[];
   name: string;
   account: string;
-  setAccount: (name: string) => void;
+  setAccount: (name: string, value:string) => void;
   vertical?: boolean;
 }
 
@@ -22,7 +22,7 @@ export const Radio = ({data, name, account, setAccount, vertical}: Props) => {
               name={name}
               value={item}
               checked={account === item}
-              onChange={(e) => setAccount(e.currentTarget.value)}
+              onChange={(e) => setAccount('accountType',e.currentTarget.value)}
             />
             <span className={style.checkmark}></span>
           </label>
