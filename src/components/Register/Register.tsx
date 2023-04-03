@@ -1,11 +1,12 @@
 import { SyntheticEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { UserRegistrationDataType } from '../../types';
+import { UserProfileType } from '../../types';
 
-import { LoginData } from './LoginData';
-import { AccountData } from './AccountData';
-import { DeliveryData } from './DeliveryData';
+import { RegisterForm } from '../common/Forms/RegisterForm/RegisterForm';
+import { DataForm } from '../common/Forms/DataForm/DataForm';
+import { DeliveryForm } from '../common/Forms/DeliveryForm/DeliveryForm';
+import { Checkbox } from '../common/Checkbox/Checkbox';
 
 import { REGEX_EMAIL, REGEX_PASSWORD } from '../../assets/regexFiles';
 
@@ -17,8 +18,8 @@ export const Register = () => {
 
   const navigate = useNavigate();
   const [deliveryActive, setDeliveryActive] = useState<boolean>(false);
-  const [registrationData, setRegistrationData] = useState<UserRegistrationDataType>(defaultUserRegister);
-  const [confirmPassword, setConfirmPassword] =useState<string>('')
+  const [registrationData, setRegistrationData] = useState<UserProfileType>(defaultUserRegister);
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const editRegistrationData = (name: string, value: string) => {
     setRegistrationData(registrationData => ({
@@ -27,9 +28,16 @@ export const Register = () => {
     }));
   };
 
-  const editConfirmPassword = (name:string,value:string) => {
-    setConfirmPassword(value)
-  }
+  const editRegistrationDataDelivery = (name: string, value: string) => {
+    setRegistrationData(registrationData => ({
+      ...registrationData,
+      delivery: {...registrationData.delivery, [name]: value},
+    }));
+  };
+
+  const editConfirmPassword = (name: string, value: string) => {
+    setConfirmPassword(value);
+  };
 
   const validation = () => {
     if (registrationData.email === '' || !registrationData.email.match(REGEX_EMAIL)) return true;
@@ -53,23 +61,31 @@ export const Register = () => {
   return (
     <div className={style.container}>
       <h1 className={style.titleRegistration}>Rejestracja</h1>
-      <LoginData
+      <h2 className={style.title}>Dane logowania</h2>
+      <RegisterForm
         registrationData={registrationData}
         editRegistrationData={editRegistrationData}
         confirmPassword={confirmPassword}
         editConfirmPassword={editConfirmPassword}
       />
-      <AccountData
+      <h2 className={style.title}>Dane do rachunku</h2>
+      <DataForm
         registrationData={registrationData}
         editRegistrationData={editRegistrationData}
-        deliveryActive={deliveryActive}
-        setDeliveryActive={setDeliveryActive}
+      />
+      <Checkbox
+        children="Inne dane do wysyłki"
+        active={deliveryActive}
+        change={setDeliveryActive}
       />
       {deliveryActive
-        ? <DeliveryData
-          registrationData={registrationData}
-          editRegistrationData={editRegistrationData}
-        />
+        ? <>
+          <h2 className={style.title}>Dane do wysyłki</h2>
+          <DeliveryForm
+            registrationData={registrationData}
+            editRegistrationDataDelivery={editRegistrationDataDelivery}
+          />
+        </>
         : null}
       <div className={style.buttonBox}>
         <Link className={style.buttonLogin}

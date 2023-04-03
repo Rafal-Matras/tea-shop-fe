@@ -1,26 +1,25 @@
-import { UserRegistrationDataType } from '../../types';
+import { UserProfileType } from '../../../../types';
 
-import { Input } from '../common/Input/Input';
+import { Input } from '../../Input/Input';
 
-import style from './Register.module.css';
+import style from './DeliveryForm.module.css';
 
 interface Props {
-  registrationData: UserRegistrationDataType;
-  editRegistrationData: (name: string, value: string) => void;
+  registrationData: UserProfileType;
+  editRegistrationDataDelivery: (name: string, value: string) => void;
 }
 
-export const DeliveryData = ({registrationData, editRegistrationData}: Props) => {
+export const DeliveryForm = ({registrationData, editRegistrationDataDelivery}: Props) => {
 
   return (
-    <div className={style.dataDeliveryBox}>
-      <h2 className={style.title}>Dane do wysyłki</h2>
+    <div className={style.form}>
       <div className={style.inputBox}>
         <Input
           type="text"
           name="deliveryName"
           value={registrationData.delivery.deliveryName}
           displayedName="Imię"
-          change={editRegistrationData}
+          change={editRegistrationDataDelivery}
           required={false}
         />
       </div>
@@ -30,7 +29,7 @@ export const DeliveryData = ({registrationData, editRegistrationData}: Props) =>
           name="deliverySurName"
           value={registrationData.delivery.deliverySurName}
           displayedName="Nazwisko"
-          change={editRegistrationData}
+          change={editRegistrationDataDelivery}
           required={false}
         />
       </div>
@@ -40,7 +39,7 @@ export const DeliveryData = ({registrationData, editRegistrationData}: Props) =>
           name="deliveryCompanyName"
           value={registrationData.delivery.deliveryCompanyName}
           displayedName="Nazwa firmy"
-          change={editRegistrationData}
+          change={editRegistrationDataDelivery}
           required={false}
         />
       </div>
@@ -50,7 +49,7 @@ export const DeliveryData = ({registrationData, editRegistrationData}: Props) =>
           name="deliveryStreet"
           value={registrationData.delivery.deliveryStreet}
           displayedName="Ulica"
-          change={editRegistrationData}
+          change={editRegistrationDataDelivery}
           required={false}
         />
       </div>
@@ -60,7 +59,7 @@ export const DeliveryData = ({registrationData, editRegistrationData}: Props) =>
           name="deliveryHomeNumber"
           value={registrationData.delivery.deliveryHomeNumber}
           displayedName="Nr. domu"
-          change={editRegistrationData}
+          change={editRegistrationDataDelivery}
           required={false}
         />
       </div>
@@ -70,7 +69,7 @@ export const DeliveryData = ({registrationData, editRegistrationData}: Props) =>
           name="deliveryPostCode"
           value={registrationData.delivery.deliveryPostCode}
           displayedName="Kod pocztowy"
-          change={editRegistrationData}
+          change={editRegistrationDataDelivery}
           required={false}
         />
       </div>
@@ -80,7 +79,7 @@ export const DeliveryData = ({registrationData, editRegistrationData}: Props) =>
           name="deliveryCity"
           value={registrationData.delivery.deliveryCity}
           displayedName="Miejscowość"
-          change={editRegistrationData}
+          change={editRegistrationDataDelivery}
           required={false}
         />
       </div>

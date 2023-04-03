@@ -1,32 +1,25 @@
 import { useState } from 'react';
 
-import { UserRegistrationDataType } from '../../types';
+import { UserProfileType } from '../../../../types';
 
-import { Input } from '../common/Input/Input';
-import { Radio } from '../common/Radio/Radio';
-import { Checkbox } from '../common/Checkbox/Checkbox';
+import { Radio } from '../../Radio/Radio';
+import { Input } from '../../Input/Input';
 
-import style from './Register.module.css';
-
+import style from './DataForm.module.css';
 interface Props {
-  registrationData: UserRegistrationDataType;
+  registrationData: UserProfileType;
   editRegistrationData: (name: string, value: string) => void;
-  deliveryActive: boolean;
-  setDeliveryActive: (name: boolean) => void;
 }
 
-export const AccountData = ({registrationData, editRegistrationData, deliveryActive, setDeliveryActive}: Props) => {
-
-  const [account, setAccount] = useState<string>('Paragon');
+export const DataForm = ({registrationData, editRegistrationData}: Props) => {
 
   return (
-    <div className={style.dataAccountBox}>
-      <h2 className={style.title}>Dane do rachunku</h2>
+    <form className={style.form}>
       <Radio
         data={['Paragon', 'Faktura VAT']}
         name="Rachunek"
-        account={account}
-        setAccount={setAccount}
+        account={registrationData.accountType}
+        setAccount={editRegistrationData}
       />
       <div className={style.inputBox}>
         <Input
@@ -58,7 +51,7 @@ export const AccountData = ({registrationData, editRegistrationData, deliveryAct
           required={false}
         />
       </div>
-      {account === 'Faktura VAT'
+      {registrationData.accountType === 'Faktura VAT'
         ? <div className={style.inputBox}>
           <Input
             type="text"
@@ -121,11 +114,6 @@ export const AccountData = ({registrationData, editRegistrationData, deliveryAct
           required={false}
         />
       </div>
-      <Checkbox
-        name="Inne dane do wysyłki"
-        active={deliveryActive}
-        change={setDeliveryActive}
-      />
-    </div>
+    </form>
   );
 };

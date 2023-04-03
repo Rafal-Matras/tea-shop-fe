@@ -1,25 +1,24 @@
-import { UserRegistrationDataType } from '../../types';
+import { UserProfileType } from '../../../../types';
 
-import { Input } from '../common/Input/Input';
+import { Input } from '../../Input/Input';
 
-import style from './Register.module.css';
+import style from './RegisterForm.module.css';
 
 interface Props {
-  registrationData: UserRegistrationDataType;
+  registrationData: UserProfileType;
   editRegistrationData: (name: string, value: string) => void;
   confirmPassword: string;
   editConfirmPassword: (name: string, value: string) => void;
 }
 
-export const LoginData = ({registrationData, editRegistrationData, confirmPassword, editConfirmPassword}: Props) => {
+export const RegisterForm = ({registrationData, editRegistrationData, confirmPassword, editConfirmPassword}: Props) => {
 
   const samePassword = () => {
     return registrationData.password === confirmPassword;
   };
 
   return (
-    <div className={style.dataLoginBox}>
-      <h2 className={style.title}>Dane logowania</h2>
+    <form className={style.form} >
       <div className={style.inputBox}>
         <Input
           type="email"
@@ -51,6 +50,6 @@ export const LoginData = ({registrationData, editRegistrationData, confirmPasswo
           samePassword={samePassword}
         />
       </div>
-    </div>
+    </form>
   );
 };

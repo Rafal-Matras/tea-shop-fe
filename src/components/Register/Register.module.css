@@ -38,14 +38,14 @@
     background-color: var(--primary-color);
 }
 
-.errorMassage {
-    font-size: 1.4rem;
-    color: #d10101;
-}
+/*.errorMassage {*/
+/*    font-size: 1.4rem;*/
+/*    color: #d10101;*/
+/*}*/
 
-.errorMassageNone {
-    color: transparent;
-}
+/*.errorMassageNone {*/
+/*    color: transparent;*/
+/*}*/
 
 .form {
     display: flex;
