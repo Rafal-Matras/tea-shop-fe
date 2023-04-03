@@ -40,7 +40,7 @@ export const OrderDetails = ({
                                setAddToBasket,
                              }: Props) => {
 
-  const {fullPrice, setFullPrice} = useContext(AppContext);
+  const {basket, setBasket, fullPrice, setFullPrice} = useContext(AppContext);
   const {user} = useContext(UserContext);
 
   const [value, setValue] = useState<string>('');
@@ -55,39 +55,33 @@ export const OrderDetails = ({
   };
 
   const addToBasket = async () => {
+    const newProductInBasket: AddToBasket = {
+      id: uuid.v4(),
+      userId: user.id,
+      productId: id,
+      quantityOfProduct: quantityOfProduct,
+      packSize: packSize,
+    };
+    const newBasket = basket.length === 0 ? [newProductInBasket] : [...basket, newProductInBasket];
     //server
     if (user.role === 'user') {
-      const basket: AddToBasket = {
-        id: uuid.v4(),
-        userId: user.id,
-        productId: id,
-        quantityOfProduct: quantityOfProduct,
-        packSize: packSize,
-      };
       // const response = await fetch(URL, {
       //   method: 'POST',
       //   headers: {
       //     'Content-Type': 'application/json',
       //   },
-      //   body: JSON.stringify(basket),
+      //   body: JSON.stringify(newBasket),
       // });
 
-    } else {
-      //localStore
-      const data: AddToBasket = {
-        id: uuid.v4(),
-        productId: id,
-        quantityOfProduct: quantityOfProduct,
-        packSize: packSize,
-      };
-      if (localStorage.getItem('basket')) {
-        const basket = JSON.parse(localStorage.getItem('basket') || '');
-        basket.push(data);
-        localStorage.setItem('basket', JSON.stringify(basket));
-      } else {
-        localStorage.setItem('basket', JSON.stringify([data]));
-      }
     }
+    //localStore
+    if (localStorage.getItem('basket')) {
+      const newBasket = JSON.parse(localStorage.getItem('basket') || '');
+      localStorage.setItem('basket', JSON.stringify(newBasket));
+    } else {
+      localStorage.setItem('basket', JSON.stringify(newBasket));
+    }
+    setBasket(newBasket);
     const newFullPrice = +(fullPrice + Math.ceil((price * packSize * quantityOfProduct) * 100) / 100).toFixed(2);
     setFullPrice(newFullPrice);
     setAddToBasket(true);
