@@ -3,17 +3,17 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { UserLoginDataInterface } from '../../types';
 
-import { Input } from '../common/Input/Input';
-import { config } from '../../config/config';
+import { UserContext } from '../../context/UserContext';
+
 import { REGEX_EMAIL, REGEX_PASSWORD } from '../../assets/regexFiles';
 
 import style from './Login.module.css';
-import { UserContext } from '../../context/UserContext';
+import { LoginForm } from '../common/Forms/LoginForm/LoginForm';
 
 export const Login = () => {
 
   const navigate = useNavigate();
-  const {setUser} = useContext(UserContext)
+  const {setUser} = useContext(UserContext);
   const [errorLogin, setErrorLogin] = useState<boolean>(false);
   const [loginDetails, setLoginDetails] = useState<UserLoginDataInterface>({
     email: '',
@@ -41,7 +41,7 @@ export const Login = () => {
     setErrorLogin(false);
   };
 
-  const login = async (e: SyntheticEvent) => {
+  const handleLogin = async (e: SyntheticEvent) => {
     e.preventDefault();
     if (validation()) return;
 
@@ -58,41 +58,22 @@ export const Login = () => {
 
   return (
     <div className={style.container}>
-      <form className={style.form} onSubmit={login}>
-        <h1 className={style.title}>Logowanie</h1>
-        <p className={errorLogin ? style.errorMassage : style.errorMassageNone}>Niepoprawne logowanie</p>
-        <div className={style.inputBox}>
-          <Input
-            type="email"
-            name="email"
-            value={loginDetails.email}
-            displayedName="Email"
-            change={editLoginDetails}
-            required={true}
-          />
-        </div>
-        <div className={style.inputBox}>
-          <Input
-            type="password"
-            name="password"
-            value={loginDetails.password}
-            displayedName="Hasło"
-            change={editLoginDetails}
-            required={true}
-          />
-        </div>
-        <Link className={style.forgetPassword} to="/">nie pamiętasz hasła?</Link>
-      </form>
+      <h1 className={style.title}>Logowanie</h1>
+      <LoginForm
+        loginDetails={loginDetails}
+        editLoginDetails={editLoginDetails}
+        handleLogin={handleLogin}
+        errorLogin={errorLogin}
+      />
       <div className={style.buttonBox}>
         <Link className={style.buttonRegister}
               to="/user/register"
         >{window.screen.width > 450 ? 'zarejestruj się' : 'zarejestruj'}
         </Link>
-        <button className={style.buttonLogin} onClick={login}
+        <button className={style.buttonLogin} onClick={handleLogin}
         >{window.screen.width > 450 ? 'zaloguj się' : 'zaloguj'}
         </button>
       </div>
     </div>
-
   );
 };
