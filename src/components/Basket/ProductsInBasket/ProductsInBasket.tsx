@@ -1,6 +1,4 @@
-import { useContext, useState } from 'react';
-
-import { AddToBasket } from '../../../types';
+import { useContext } from 'react';
 
 import { AppContext } from '../../../context/AppContext';
 
@@ -11,14 +9,13 @@ import { OneProductInBasket } from './OneProductInBasket';
 import style from './ProductsInBasket.module.css';
 
 interface Props {
-  basket: AddToBasket[];
   flag:boolean;
   setFlag:(flag:boolean)=>void;
 }
 
-export const ProductsInBasket = ({basket,flag,setFlag}: Props) => {
+export const ProductsInBasket = ({flag,setFlag}: Props) => {
 
-  const {fullPrice} = useContext(AppContext);
+  const {basket,fullPrice} = useContext(AppContext);
 
   return (
     <div className={style.container}>

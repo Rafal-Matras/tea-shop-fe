@@ -17,7 +17,6 @@ import style from './ProductsInBasket.module.css';
 
 import { oneProductInBasketDefault, exemplaryProductInBasket } from '../../../assets/allProducts';
 
-
 interface Props {
   index: number;
   basketItem: AddToBasket;
@@ -28,7 +27,7 @@ interface Props {
 export const OneProductInBasket = ({basketItem, index, flag, setFlag}: Props) => {
 
   const {user} = useContext(UserContext);
-  const {setProductType} = useContext(AppContext);
+  const {basket, setBasket, setProductType} = useContext(AppContext);
   const [product, setProduct] = useState<BasketInterface>(oneProductInBasketDefault);
   const [value, setValue] = useState<string>('');
 
@@ -56,11 +55,11 @@ export const OneProductInBasket = ({basketItem, index, flag, setFlag}: Props) =>
       //   body: JSON.stringify(basket),
       // });
 
-    } else {
-      const basket = JSON.parse(localStorage.getItem('basket') || '');
-      basket[index].quantityOfProduct = value;
-      localStorage.setItem('basket', JSON.stringify(basket));
     }
+    const newBasket = basket;
+    newBasket[index].quantityOfProduct = value;
+    localStorage.setItem('basket', JSON.stringify(newBasket));
+    setBasket(newBasket);
     setFlag(!flag);
   };
 
@@ -68,12 +67,12 @@ export const OneProductInBasket = ({basketItem, index, flag, setFlag}: Props) =>
     if (user.role === 'user') {
 
 
-    } else {
-      const basket = JSON.parse(localStorage.getItem('basket') || '');
-      basket[index].packSize = value;
-      basket[index].quantityOfProduct = 1;
-      localStorage.setItem('basket', JSON.stringify(basket));
     }
+    const newBasket = basket;
+    newBasket[index].packSize = value;
+    newBasket[index].quantityOfProduct = 1;
+    localStorage.setItem('basket', JSON.stringify(newBasket));
+    setBasket(newBasket);
     setFlag(!flag);
   };
 
@@ -81,11 +80,10 @@ export const OneProductInBasket = ({basketItem, index, flag, setFlag}: Props) =>
     if (user.role === 'user') {
 
 
-    } else {
-      const basket = JSON.parse(localStorage.getItem('basket') || '');
-      const newBasket = basket.filter((item: AddToBasket) => item.id !== basketItem.id);
-      localStorage.setItem('basket', JSON.stringify(newBasket));
     }
+    const newBasket = basket.filter((item: AddToBasket) => item.id !== basketItem.id);
+    localStorage.setItem('basket', JSON.stringify(newBasket));
+    setBasket(newBasket);
     setFlag(!flag);
   };
 
