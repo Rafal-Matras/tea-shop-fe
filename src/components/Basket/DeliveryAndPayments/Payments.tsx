@@ -4,7 +4,7 @@ import style from './DeliveryAndPayments.module.css';
 
 interface Props {
   formOfPayments: string;
-  setFormOfPayments: (name: string) => void;
+  setFormOfPayments: (name: string,value:string) => void;
 }
 
 export const Payments = ({formOfPayments, setFormOfPayments}: Props) => {

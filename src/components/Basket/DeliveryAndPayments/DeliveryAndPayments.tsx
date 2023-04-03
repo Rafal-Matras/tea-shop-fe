@@ -1,15 +1,15 @@
 import { useConvertPriceToString } from '../../../hooks/useConvertPriceToString';
 
 import { Delivery } from './Delivery';
+import { Payments } from './Payments';
 
 import style from './DeliveryAndPayments.module.css';
-import { Payments } from './Payments';
 
 interface Props {
   formOfDelivery: string;
-  setFormOfDelivery: (name: string) => void;
+  setFormOfDelivery: (name: string,value:string) => void;
   formOfPayments: string;
-  setFormOfPayments: (name: string) => void;
+  setFormOfPayments: (name: string,value:string) => void;
   deliveryCost: number;
 }
 
