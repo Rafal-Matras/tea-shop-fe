@@ -1,16 +1,18 @@
+import { ReactNode } from 'react';
+
 import style from './Checkbox.module.css';
 
 interface Props {
-  name: string;
+  children: ReactNode;
   active: boolean;
   change: (name: boolean) => void;
 }
 
-export const Checkbox = ({name, active, change}: Props) => {
+export const Checkbox = ({children, active, change}: Props) => {
 
   return (
     <div className={style.container}>
-      <label className={style.label}>{name}
+      <label className={style.label}>{children}
         <input
           className={style.input}
           type="checkbox"
