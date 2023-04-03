@@ -26,7 +26,7 @@ export interface DeliveryUserInterface {
   deliveryCity: string;
 }
 
-export type UserRegistrationDataType = Omit<UserInterface, 'role'>
+export type UserProfileType = Omit<UserInterface, 'role'>
 
 export interface UserLoginDataInterface {
   email: string;
@@ -38,8 +38,6 @@ export interface ChangePasswordInterface {
   newPassword: string;
   confirmNewPassword: string;
 }
-
-export type ProfileUserDataType = Omit<UserInterface, 'role' | 'password'>
 
 export type DataToAccountType = Omit<UserInterface, 'id' | 'role' | 'email' | 'password' | 'delivery'>
 
