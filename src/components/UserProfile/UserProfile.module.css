@@ -1,5 +1,5 @@
 .container {
-    padding: 0 5px 80px;
+    padding: 0 5px 30px;
 }
 
 .pageTitle {
@@ -7,6 +7,31 @@
     text-align: center;
     font-size: 2.4rem;
     font-weight: 600;
+}
+
+.pageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileDataBox {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    color: #fff;
+    background-color: var(--secondary-color);
+    text-transform: uppercase;
+    letter-spacing: .1rem;
 }
 
 .navList {
@@ -38,13 +63,6 @@
     background-color: var(--secondary-color);
 }
 
-.profileDataBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-}
-
 .title {
     padding: 5px;
     width: 100%;
@@ -58,20 +76,6 @@
     width: 94%;
     max-width: 340px;
     height: 40px;
-}
-
-.button {
-    position: relative;
-    left: 60vw;
-    top: 40px;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.4rem;
-    color: #fff;
-    background-color: var(--secondary-color);
-    text-transform: uppercase;
-    letter-spacing: .1rem;
 }
 
 .table {

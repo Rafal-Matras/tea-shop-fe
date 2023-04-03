@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import {
   ActivePageType,
   HistoryOrdersInterface,
-  ProfileUserDataType,
+  UserProfileType,
 } from '../../types';
 
 import { useUserLoginData } from '../../hooks/UseUserLoginData';
@@ -23,7 +23,7 @@ export const UserProfile = () => {
 
   const data = useUserLoginData();
   const {state} = useLocation();
-  const [userData, setUserData] = useState<ProfileUserDataType>(data);
+  const [userData, setUserData] = useState<UserProfileType>(data);
   const [activePage, setActivePage] = useState<ActivePageType>('data');
   const [ordersList, setOrderList] = useState<HistoryOrdersInterface[]>([]);
   const [activeOrder, setActiveOrder] = useState<number>(0);
@@ -40,7 +40,6 @@ export const UserProfile = () => {
   }, [state]);
 
   const changeUserData = (name: string, value: string) => {
-    console.log(name);
     setUserData(userData => ({
       ...userData,
       [name]: value,
