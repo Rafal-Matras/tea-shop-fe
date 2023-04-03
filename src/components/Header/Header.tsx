@@ -18,13 +18,7 @@ interface Props {
 
 export const Header = ({setActiveMenu}: Props) => {
 
-  const {setActiveProductType} = useContext(AppContext);
-
-  const productInBasket = () => {
-    if (localStorage.getItem('basket')) {
-      return JSON.parse(localStorage.getItem('basket') || '').length;
-    } else return 0;
-  };
+  const {basket,setActiveProductType} = useContext(AppContext);
 
   return (
     <header className={style.header}>
@@ -35,7 +29,7 @@ export const Header = ({setActiveMenu}: Props) => {
         <Logo/>
       </Link>
       <Link className={style.basket} to="/basket">
-        <p className={style.productsInBasket}>{productInBasket()}</p>
+        <p className={style.productsInBasket}>{basket.length}</p>
         <CartIcon className={style.cartIcon}/>
       </Link>
       <Search/>
