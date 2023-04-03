@@ -47,14 +47,13 @@
 
 .progressCircle p {
     position: absolute;
-    top: 14px;
-    left: 14px;
+    left: 11px;
     rotate: -45deg;
 }
 
 .progressCircle span {
     position: absolute;
-    top: 12px;
+    /*top: 12px;*/
     left: 28px;
     rotate: -45deg;
 }

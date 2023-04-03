@@ -4,7 +4,7 @@ import { AppContext } from '../../../context/AppContext';
 
 import { useConvertPriceToString } from '../../../hooks/useConvertPriceToString';
 
-import style from './Progres.module.css';
+import style from './Progress.module.css';
 
 interface Props {
   name: string;
