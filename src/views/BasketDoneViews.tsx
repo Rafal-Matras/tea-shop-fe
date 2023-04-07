@@ -1,6 +1,7 @@
+import { BasketDone } from '../components/BasketDone/BasketDone';
+
 export const BasketDoneViews = () => {
 
-  return (
-    <h1>BasketDone</h1>
-  );
+  return <BasketDone/>;
+
 };
