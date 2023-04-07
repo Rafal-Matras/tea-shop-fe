@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { OrderBasketInterface } from '../../types';
+
 import { useSetNewFullPrice } from '../../hooks/useSetNewFullPrice';
 
 import { UserContext } from '../../context/UserContext';
@@ -17,7 +19,8 @@ import style from './Basket.module.css';
 export const Basket = () => {
 
   const {user} = useContext(UserContext);
-  const {basket,fullPrice, setFullPrice} = useContext(AppContext);
+  const {basket,fullPrice, setFullPrice,allProducts} = useContext(AppContext);
+  const [orderBasketData,setOrderBasketData] = useState<OrderBasketInterface[]>([])
   const [formOfDelivery, setFormOfDelivery] = useState('Kurier GLS');
   const [formOfPayments, setFormOfPayments] = useState('Przelewy24.pl');
   const [deliveryCost, setDeliveryCost] = useState(8.99);
@@ -26,8 +29,8 @@ export const Basket = () => {
   useEffect(() => {
     setFullPrice(useSetNewFullPrice(basket));
   }, [flag]);
+  console.log('allProducts---',allProducts);
 
-  console.log('basket',basket);
   useEffect(() => {
     formOfDelivery !== 'Paczkomaty 24/7' ? setDeliveryCost(8.99) : setDeliveryCost(9.99);
     formOfPayments === 'Za pobraniem' ? setDeliveryCost(12.99) : setDeliveryCost(deliveryCost => deliveryCost);
@@ -35,10 +38,12 @@ export const Basket = () => {
   }, [formOfDelivery, formOfPayments, fullPrice]);
 
   const handleFormOfDelivery = (name: string, value: string) => setFormOfDelivery(value);
+
   const handleFormOfPayments = (name: string, value: string) => setFormOfPayments(value);
 
   const handleNext = () => {
-    if (deliveryCost !== 0) setFullPrice(fullPrice + deliveryCost);
+
+
   };
 
   return (

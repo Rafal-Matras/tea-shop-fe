@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AddToBasket, BasketInterface } from '../../../types';
+import { AddToBasket, BasketInterface} from '../../../types';
 
 import { UserContext } from '../../../context/UserContext';
 import { AppContext } from '../../../context/AppContext';
@@ -18,16 +18,17 @@ import style from './ProductsInBasket.module.css';
 import { oneProductInBasketDefault, exemplaryProductInBasket } from '../../../assets/allProducts';
 
 interface Props {
+
   index: number;
   basketItem: AddToBasket;
   flag: boolean;
   setFlag: (flag: boolean) => void;
 }
 
-export const OneProductInBasket = ({basketItem, index, flag, setFlag}: Props) => {
+export const OneProductInBasket = ({ basketItem, index, flag, setFlag}: Props) => {
 
   const {user} = useContext(UserContext);
-  const {basket, setBasket, setProductType} = useContext(AppContext);
+  const {allProducts, basket, setBasket, setProductType} = useContext(AppContext);
   const [product, setProduct] = useState<BasketInterface>(oneProductInBasketDefault);
   const [value, setValue] = useState<string>('');
 
@@ -36,52 +37,53 @@ export const OneProductInBasket = ({basketItem, index, flag, setFlag}: Props) =>
   }, [basketItem.quantityOfProduct, basketItem.packSize]);
 
   useEffect(() => {
-    // (async ()=>{
-    //   const response = await fetch(URL)
-    //   const data = await response.json()
-    //   setProduct(data)
-    // })()
-    setProduct(exemplaryProductInBasket);
-
+    const data = allProducts.find(item => item.id === basketItem.productId);
+    if (!data) return;
+    const newProduct: BasketInterface = {
+      id: data.id,
+      name: data.name,
+      image: data.image,
+      category:data.category,
+      type: data.type,
+      price: data.price,
+      state: data.state,
+      numberOfUnits: data.numberOfUnits,
+      unit: data.unit,
+    };
+    setProduct(newProduct);
   }, []);
 
   const changeBasketQuantityOfProduct = async (value: number) => {
-    if (user.role === 'user') {
-      // const response = await fetch(URL, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(basket),
-      // });
-
-    }
     const newBasket = basket;
     newBasket[index].quantityOfProduct = value;
+    if (user.role === 'user') {
+
+
+    }
     localStorage.setItem('basket', JSON.stringify(newBasket));
     setBasket(newBasket);
     setFlag(!flag);
   };
 
   const changePackSize = (value: number) => {
+    const newBasket = basket;
+    newBasket[index].packSize = value;
+    newBasket[index].quantityOfProduct = 1;
     if (user.role === 'user') {
 
 
     }
-    const newBasket = basket;
-    newBasket[index].packSize = value;
-    newBasket[index].quantityOfProduct = 1;
     localStorage.setItem('basket', JSON.stringify(newBasket));
     setBasket(newBasket);
     setFlag(!flag);
   };
 
   const removeProduct = () => {
+    const newBasket = basket.filter((item: AddToBasket) => item.id !== basketItem.id);
     if (user.role === 'user') {
 
 
     }
-    const newBasket = basket.filter((item: AddToBasket) => item.id !== basketItem.id);
     localStorage.setItem('basket', JSON.stringify(newBasket));
     setBasket(newBasket);
     setFlag(!flag);
@@ -96,9 +98,9 @@ export const OneProductInBasket = ({basketItem, index, flag, setFlag}: Props) =>
           alt="zdjęcie produktu"
         />
         <div className={style.productInfoNameBox}>
-          <p className={style.productInfoName}>{product?.name}</p>
+          <p className={style.productInfoName}>{product.name}</p>
           <div className={style.productInfoTypeList}>
-            {product?.type.map((item, index) => (
+            {product.type.map((item, index) => (
               <Link
                 className={style.productInfoType}
                 to="/shop"

@@ -1,0 +1,285 @@
+.title {
+    padding: 10px;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px 10px;
+    width: 120px;
+}
+
+.sectionTitle {
+    padding: 10px 20px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    background-color: var(--grey-light);
+}
+
+.sectionText {
+    position: relative;
+    padding: 4px 0;
+    font-size: 1.3rem;
+}
+
+.sectionText span {
+    position: absolute;
+    padding-left: 10px;
+    width: 200px;
+    font-weight: 500;
+}
+
+.table {
+    width: 100%;
+}
+
+.titleProductSummaryContainer {
+    display: none;
+}
+
+.oneProductSummaryContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--grey);
+    width: 100%;
+}
+
+.oneProductSummaryContainer:nth-child(2) {
+    border-top: 1px solid var(--grey);
+}
+
+.tdImageAndName {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.image {
+    margin-left: 10%;
+    width: 30%;
+    max-width: 140px;
+}
+
+.productInfoNameBox {
+    text-align: center;
+    width: 55%;
+}
+
+.productInfoName,
+.oneProductSummaryQuantity,
+.oneProductSummaryUnitPrice,
+.oneProductSummaryPrice {
+    padding-top: 10px;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.productInfoType {
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.tdProductSummaryQuantity {
+    margin-left: 10%;
+    width: 30%;
+    max-width: 140px;
+}
+
+.tdProductSummaryUnitPrice {
+    width: 60%;
+}
+
+.oneProductSummaryUnitPrice span {
+    font-weight: 500;
+}
+
+.tdProductSummaryPrice {
+    width: 100%;
+    font-weight: 500;
+}
+
+.oneProductSummaryPrice span {
+    font-weight: 400;
+}
+
+.summaryBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--grey);
+}
+
+.textBox {
+    display: flex;
+    align-items: center;
+}
+
+.timeDelivery {
+    padding-bottom: 20px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.productsValue {
+    font-size: 1.4rem;
+}
+
+.productsValue span {
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.deliveryAndPayment {
+    font-size: 1.3rem;
+}
+
+.deliveryAndPaymentSpan {
+    font-size: 1.3rem;
+    margin-left: 5px;
+    font-weight: 500;
+}
+
+.fullPrice {
+    font-size: 1.4rem;
+}
+
+.fullPrice span {
+    font-weight: 500;
+}
+
+.buttonBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px 40px;
+    width: 100%;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 5%;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: var(--grey-dark);
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}
+
+.buttonNext {
+    background-color: var(--secondary-color);
+}
+
+@media (min-width: 576px) {
+
+    .section {
+        width: 160px;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .table {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .titleProductSummaryContainer,
+    .oneProductSummaryContainer {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--grey);
+    }
+
+    .titleProductSummaryContainer{
+        background-color: var(--grey-light);
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+
+    .thImageAndName,
+    .tdImageAndName {
+        width: 40%;
+    }
+
+    .thProductSummaryQuantity,
+    .tdProductSummaryQuantity,
+    .thProductSummaryUnitPrice,
+    .tdProductSummaryUnitPrice,
+    .thProductSummaryPrice,
+    .tdProductSummaryPrice {
+        width: 20%;
+    }
+
+    .tdImageAndName {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .productInfoNameBox {
+        text-align: left;
+    }
+
+    .productInfoName,
+    .oneProductSummaryQuantity,
+    .oneProductSummaryUnitPrice,
+    .oneProductSummaryPrice {
+        padding-top: 0;
+        text-align: center;
+        font-size: 1.3rem;
+    }
+
+    .tdProductSummaryQuantity {
+        margin-left: 0;
+    }
+
+    .summaryBox {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .textBox {
+        flex-direction: column;
+    }
+
+    .deliveryAndPayment {
+        padding-bottom: 5px;
+    }
+
+    .timeDelivery {
+        padding-bottom: 0;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .section {
+        width: 220px;
+    }
+}

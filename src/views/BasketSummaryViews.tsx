@@ -1,6 +1,7 @@
+import { BasketSummary } from '../components/BasketSummary/BasketSummary';
+
 export const BasketSummaryViews = () => {
 
-  return (
-    <h1>BasketSummary</h1>
-  );
+  return <BasketSummary/>;
+
 };
