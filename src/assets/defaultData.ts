@@ -1,8 +1,4 @@
-import {
-  ProfileUserDataType,
-  UserInterface,
-  UserRegistrationDataType,
-} from '../types';
+import { UserInterface, UserLoginDataInterface, UserProfileType } from '../types';
 
 export const defaultUser: UserInterface = {
   id: '',
@@ -22,7 +18,6 @@ export const defaultUser: UserInterface = {
   delivery: {
     deliveryName: '',
     deliverySurName: '',
-    deliveryCompanyName: '',
     deliveryStreet: '',
     deliveryHomeNumber: '',
     deliveryPostCode: '',
@@ -30,9 +25,10 @@ export const defaultUser: UserInterface = {
   },
 };
 
-export const defaultUserProfile: ProfileUserDataType = {
+export const defaultUserRegister: UserProfileType = {
   id: '',
   email: '',
+  password: '',
   accountType: 'Paragon',
   name: '',
   surName: '',
@@ -46,7 +42,6 @@ export const defaultUserProfile: ProfileUserDataType = {
   delivery: {
     deliveryName: '',
     deliverySurName: '',
-    deliveryCompanyName: '',
     deliveryStreet: '',
     deliveryHomeNumber: '',
     deliveryPostCode: '',
@@ -54,29 +49,9 @@ export const defaultUserProfile: ProfileUserDataType = {
   },
 };
 
-export const defaultUserRegister: UserRegistrationDataType = {
-  id: '',
+export const defaultUserLogin: UserLoginDataInterface = {
   email: '',
-  password:'',
-  accountType:'Paragon',
-  name: '',
-  surName: '',
-  companyName: '',
-  nip: '',
-  street: '',
-  homeNumber: '',
-  postCode: '',
-  city: '',
-  phone: '',
-  delivery: {
-    deliveryName: '',
-    deliverySurName: '',
-    deliveryCompanyName: '',
-    deliveryStreet: '',
-    deliveryHomeNumber: '',
-    deliveryPostCode: '',
-    deliveryCity: '',
-  },
+  password: '',
 };
 
 export const defaultUserActive: UserInterface = {
@@ -87,20 +62,19 @@ export const defaultUserActive: UserInterface = {
   accountType: 'Paragon',
   name: 'Rafał',
   surName: 'Matraś',
-  companyName: '',
-  nip: '',
+  companyName: 'APB S.A.',
+  nip: '123-123-85-85',
   street: 'Nowodworska 29b',
   homeNumber: '103',
   postCode: '03-140',
   city: 'Warszawa',
   phone: '606 455 202',
   delivery: {
-    deliveryName: '',
-    deliverySurName: '',
-    deliveryCompanyName: '',
-    deliveryStreet: '',
-    deliveryHomeNumber: '',
-    deliveryPostCode: '',
-    deliveryCity: '',
+    deliveryName: 'Rafał ',
+    deliverySurName: 'Matraś',
+    deliveryStreet: 'Nowa',
+    deliveryHomeNumber: '12 m 1',
+    deliveryPostCode: '03-123',
+    deliveryCity: 'Warszawa',
   },
 };

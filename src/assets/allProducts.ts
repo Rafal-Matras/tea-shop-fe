@@ -1,4 +1,4 @@
-import { AddToBasket, BasketInterface, Category, ProductInterface, ProductsListInterface } from '../types';
+import { BasketInterface, Category, ProductInterface, ProductsListInterface } from '../types';
 
 export const allProductsDefault: ProductsListInterface[] = [
   {
@@ -13,6 +13,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: null,
     promo: null,
     new: null,
+    state:8000,
   },
   {
     id: '124',
@@ -26,6 +27,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: null,
     promo: 9.45,
     new: null,
+    state:8000,
   },
   {
     id: '125',
@@ -39,6 +41,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: null,
     promo: null,
     new: null,
+    state:8000,
   },
   {
     id: '126',
@@ -52,6 +55,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: null,
     promo: null,
     new: null,
+    state:8000,
   },
   {
     id: '127',
@@ -65,6 +69,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: null,
     promo: null,
     new: null,
+    state:8000,
   },
   {
     id: '128',
@@ -78,6 +83,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: null,
     promo: null,
     new: null,
+    state:8000,
   },
   {
     id: '129',
@@ -91,6 +97,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: null,
     promo: null,
     new: null,
+    state:8000,
   },
   {
     id: '130',
@@ -104,6 +111,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: null,
     promo: null,
     new: 1,
+    state:8000,
   },
   {
     id: '131',
@@ -117,6 +125,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: null,
     promo: 9.99,
     new: null,
+    state:8000,
   },
   {
     id: '132',
@@ -130,6 +139,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: null,
     promo: null,
     new: null,
+    state:8000,
   },
   {
     id: '133',
@@ -143,6 +153,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: null,
     promo: null,
     new: null,
+    state:8000,
   },
   {
     id: '134',
@@ -156,6 +167,7 @@ export const allProductsDefault: ProductsListInterface[] = [
     forGift: 1,
     promo: null,
     new: null,
+    state:15,
   },
 ];
 
@@ -216,10 +228,10 @@ export const productDefault: ProductInterface = {
 export const exemplaryProductInBasket: BasketInterface = {
   id: '123',
   name: 'Earl Grey Rainbow',
+  category:Category.tea,
   type: ['czarna', 'earl grey',],
   image: 'eargreyrainbow.webp',
   price: 10.99,
-  promo: null,
   numberOfUnits: 50,
   unit: 'g',
   state: 4000,
@@ -229,11 +241,11 @@ export const exemplaryProductInBasket: BasketInterface = {
 export const oneProductInBasketDefault: BasketInterface = {
   id: '',
   name: '',
+  category:Category.tea,
   type: [],
   image: '',
   price: 0,
-  promo: null,
-  numberOfUnits: 50,
+  numberOfUnits: 0,
   unit: 'g',
   state: 0,
 };

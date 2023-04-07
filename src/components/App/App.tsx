@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { ProductsListInterface, UserInterface } from '../../types';
+import { AddToBasket, ProductsListInterface, UserInterface } from '../../types';
 
+import { UserContext } from '../../context/UserContext';
 import { AppContext } from '../../context/AppContext';
 
 import { AdminHeader } from '../Admin/AdminHeader/AdminHeader';
@@ -12,16 +13,17 @@ import { Nav } from '../Nav/Nav';
 import { Main } from '../Main/Main';
 import { Footer } from '../Footer/Footer';
 
-import { defaultUser } from '../../assets/defaultData';
+import { defaultUser, defaultUserActive } from '../../assets/defaultData';
 import { allProductsDefault } from '../../assets/allProducts';
 
 import style from './App.module.css';
-import { UserContext } from '../../context/UserContext';
 
 export const App = () => {
 
+
   const [user, setUser] = useState<UserInterface>(defaultUser);
   const [allProducts, setAllProducts] = useState<ProductsListInterface[]>([]);
+  const [basket, setBasket] = useState<AddToBasket[]>([]);
   const [productName, setProductName] = useState<string>('');
   const [productType, setProductType] = useState<string>('');
   const [fullPrice, setFullPrice] = useState<number>(0);
@@ -30,21 +32,39 @@ export const App = () => {
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
 
   useEffect(() => {
-
-    // setTimeout(async ()=>{
-    //     const response = await fetch(URL - all);
-    //     const data = await response.json();
-    //     setAllProducts(data);
-    // },500)
+    // (async ()=>{
+    //   const response = await fetch(URL);
+    //   const data = await response.json();
+    //   setAllProducts(data)
+    // })()
 
     setAllProducts(allProductsDefault);
+    console.log('useEff allPro');
   }, []);
 
+  useEffect(() => {
+    if (user.role === 'user') {
+      // (async ()=>{
+      //   const response = await fetch(URL)
+      //   const data = await response.json()
+      //   setBasket(data)
+      // })()
+    } else {
+      if (localStorage.getItem('basket')) {
+        const data = JSON.parse(localStorage.getItem('basket') || '');
+        setBasket(data);
+      }
+    }
+    console.log('ussEff user');
+  }, [user]);
+  console.log('App render');
   return (
     <UserContext.Provider value={{user, setUser}}>
       <AppContext.Provider value={{
         allProducts,
         setAllProducts,
+        basket,
+        setBasket,
         productName,
         setProductName,
         productType,

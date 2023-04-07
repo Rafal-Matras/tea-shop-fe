@@ -27,22 +27,10 @@ interface Props {
   setAddToBasket: (name: boolean) => void;
 }
 
-export const OrderDetails = ({
-                               id,
-                               numberOfUnits,
-                               price,
-                               packSize,
-                               setPackSize,
-                               quantityOfProduct,
-                               setQuantityOfProducts,
-                               unit,
-                               state,
-                               setAddToBasket,
-                             }: Props) => {
+export const OrderDetails = ({id, numberOfUnits, price, packSize, setPackSize, quantityOfProduct, setQuantityOfProducts, unit, state, setAddToBasket,}: Props) => {
 
   const {basket, setBasket, fullPrice, setFullPrice} = useContext(AppContext);
   const {user} = useContext(UserContext);
-
   const [value, setValue] = useState<string>('');
 
   useEffect(() => {
@@ -76,7 +64,6 @@ export const OrderDetails = ({
     }
     //localStore
     if (localStorage.getItem('basket')) {
-      const newBasket = JSON.parse(localStorage.getItem('basket') || '');
       localStorage.setItem('basket', JSON.stringify(newBasket));
     } else {
       localStorage.setItem('basket', JSON.stringify(newBasket));

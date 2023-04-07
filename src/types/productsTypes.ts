@@ -34,10 +34,10 @@ export interface ProductsListInterface {
   unit: 'g' | 'szt';
   numberOfUnits: number;
   new: 1 | null;
+  state: number;
 }
 
 export interface ProductInterface extends ProductsListInterface {
-  state: number;
   onHomePage: 1 | null;
   description: string;
   ingredients: string | null;
@@ -61,12 +61,15 @@ export interface SliderInterface {
 
 export interface AddToBasket {
   id:string;
-  userId?: string;
+  userId: string;
   productId: string;
   quantityOfProduct: number;
   packSize: number;
 }
 
-export interface BasketInterface extends Omit<ProductsListInterface, 'category' | 'forGift' | 'new'> {
-  state: number;
+export interface BasketInterface extends Omit<ProductsListInterface, 'forGift' |'promo' | 'new'> {}
+
+export interface OrderBasketInterface extends Omit<ProductsListInterface, 'category' | 'forGift' |'promo' | 'new'>{
+  quantityOfProduct: number;
+  packSize: number;
 }

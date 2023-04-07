@@ -6,13 +6,13 @@ import { ArrowDownIcon } from '../SvgIcons/ArrowDownIcon';
 
 import style from './PackSizeDropdownMenu.module.css';
 
-interface Props{
-  numberOfUnits:number;
-  packSize:number;
-  changePackSize:(number:number)=>void;
+interface Props {
+  numberOfUnits: number;
+  packSize: number;
+  changePackSize: (number: number) => void;
 }
 
-export const PackSizeDropdownMenu = ({numberOfUnits,packSize,changePackSize}:Props) => {
+export const PackSizeDropdownMenu = ({numberOfUnits, packSize, changePackSize}: Props) => {
 
   const ref = useRef<HTMLParagraphElement | null>(null);
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
@@ -47,5 +47,5 @@ export const PackSizeDropdownMenu = ({numberOfUnits,packSize,changePackSize}:Pro
         </p>
       </div>
     </div>
-  )
-}
+  );
+};

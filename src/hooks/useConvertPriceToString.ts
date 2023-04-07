@@ -1,6 +1,6 @@
 export const useConvertPriceToString = (price: number): string => {
 
-  let priceToString = price.toString();
+  let priceToString = price.toFixed(2).toString();
 
   if (!priceToString.includes('.')) {
     priceToString += '.00';

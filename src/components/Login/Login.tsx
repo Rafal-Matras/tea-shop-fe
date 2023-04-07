@@ -5,20 +5,19 @@ import { UserLoginDataInterface } from '../../types';
 
 import { UserContext } from '../../context/UserContext';
 
+import { LoginForm } from '../common/Forms/LoginForm/LoginForm';
+
 import { REGEX_EMAIL, REGEX_PASSWORD } from '../../assets/regexFiles';
+import { defaultUserLogin } from '../../assets/defaultData';
 
 import style from './Login.module.css';
-import { LoginForm } from '../common/Forms/LoginForm/LoginForm';
 
 export const Login = () => {
 
   const navigate = useNavigate();
   const {setUser} = useContext(UserContext);
   const [errorLogin, setErrorLogin] = useState<boolean>(false);
-  const [loginDetails, setLoginDetails] = useState<UserLoginDataInterface>({
-    email: '',
-    password: '',
-  });
+  const [loginDetails, setLoginDetails] = useState<UserLoginDataInterface>(defaultUserLogin);
 
   const editLoginDetails = (name: string, value: string) => {
     setLoginDetails(loginDetails => ({

@@ -19,7 +19,6 @@ export interface UserInterface {
 export interface DeliveryUserInterface {
   deliveryName: string;
   deliverySurName: string;
-  deliveryCompanyName: string;
   deliveryStreet: string;
   deliveryHomeNumber: string;
   deliveryPostCode: string;

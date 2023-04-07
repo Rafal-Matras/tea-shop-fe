@@ -1,18 +1,20 @@
 import { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { AppContext } from '../../../context/AppContext';
+import { UserContext } from '../../../context/UserContext';
 
 import { MenuIcon } from '../../common/SvgIcons/MenuIcon';
 import { CloseIcon } from '../../common/SvgIcons/CloseIcon';
 
-import style from './AdminHeader.module.css';
 import { Logo } from '../../../assets/Logo';
+import { defaultUser } from '../../../assets/defaultData';
+
+import style from './AdminHeader.module.css';
 
 export const AdminHeader = () => {
 
   const location = useLocation();
-  const {setUserRole} = useContext(AppContext);
+  const {setUser} = useContext(UserContext);
   const [hamburgerMenuActive, setHamburgerMenuActive] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('konfiguracja');
 
@@ -23,7 +25,7 @@ export const AdminHeader = () => {
 
   const logOut = () => {
     setHamburgerMenuActive(false);
-    setUserRole('');
+    setUser(defaultUser);
   };
 
   return (
