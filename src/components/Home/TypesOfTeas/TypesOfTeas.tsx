@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { AppContext } from '../../../context/AppContext';
+import { UseProductContext } from '../../../context/ProductContext';
 
 import { TitleBar } from '../../common/TitleBar/TitleBar';
 
@@ -15,7 +15,7 @@ import style from './TypesOfTeas.module.css';
 
 export const TypesOfTeas = () => {
 
-  const {setProductType, setProductName} = useContext(AppContext);
+  const {setProductType, setProductName} = UseProductContext();
   const [positionNumber, setPositionNumber] = useState<number>(0);
   const [value, setValue] = useState<number>(0);
   let multiplier = 1;

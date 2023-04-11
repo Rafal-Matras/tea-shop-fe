@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import {
-  ActivePageType,
-  HistoryOrdersInterface,
-  UserProfileType,
-} from '../../types';
+import { ActivePageType, HistoryOrdersInterface, UserProfileType } from '../../types';
 
 import { useUserLoginData } from '../../hooks/UseUserLoginData';
 
@@ -14,6 +10,7 @@ import { ProfileUserData } from './ProfileUserData';
 import { ProfileChangePassword } from './ProfileChangePassword';
 import { ProfileHistoryOrders } from './ProfileHistoryOrders';
 import { ProfileOrderDetails } from './ProfileOrderDetails';
+
 import { orderListDefault } from '../../assets/orderListDefault';
 
 import style from './UserProfile.module.css';
@@ -31,7 +28,6 @@ export const UserProfile = () => {
   useEffect(() => {
     if (state) {
       setActivePage(state);
-      console.log(state);
     }
     (async () => {
 

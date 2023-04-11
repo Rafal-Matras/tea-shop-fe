@@ -1,7 +1,9 @@
-import { useContext } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AppContext } from '../../context/AppContext';
+import { UseUserContext } from '../../context/UserContext';
+import { UseProductContext } from '../../context/ProductContext';
+import { UseBasketContext } from '../../context/BasketContext';
 
 import { Search } from './Search';
 import { BasketBox } from './BasketBox';
@@ -9,6 +11,8 @@ import { BasketBox } from './BasketBox';
 import { Logo } from '../../assets/Logo';
 import { MenuIcon } from '../common/SvgIcons/MenuIcon';
 import { CartIcon } from '../common/SvgIcons/CartIcon';
+
+import { allProductsDefault } from '../../assets/allProducts';
 
 import style from './Header.module.css';
 
@@ -18,8 +22,27 @@ interface Props {
 
 export const Header = ({setActiveMenu}: Props) => {
 
-  const {basket,setActiveProductType} = useContext(AppContext);
+  const {user} = UseUserContext();
+  const {allProducts, setAllProducts, setActiveProductType} = UseProductContext();
+  const {basket, setBasket} = UseBasketContext();
 
+  useEffect(() => {
+    if (allProducts.length === 0) {
+      // (async () => {
+      //   const response = await fetch(URL);
+      //   const data = await response.json();
+      //   setAllProducts(data);
+      // })();
+      setAllProducts(allProductsDefault)
+    }
+  }, []);
+
+  useEffect(() => {
+    if (basket.length === 0 && !user.role && localStorage.getItem('basket')) {
+      setBasket(JSON.parse(localStorage.getItem('basket') || ''));
+    }
+  }, []);
+  console.log('Header render');
   return (
     <header className={style.header}>
       <div className={style.hamburgerMenu} onClick={() => setActiveMenu(true)}>

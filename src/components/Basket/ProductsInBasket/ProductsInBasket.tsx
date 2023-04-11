@@ -1,6 +1,4 @@
-import { useContext } from 'react';
-
-import { AppContext } from '../../../context/AppContext';
+import { UseBasketContext } from '../../../context/BasketContext';
 
 import { useConvertPriceToString } from '../../../hooks/useConvertPriceToString';
 
@@ -15,7 +13,7 @@ interface Props {
 
 export const ProductsInBasket = ({flag,setFlag}: Props) => {
 
-  const {basket,fullPrice} = useContext(AppContext);
+  const {basket,fullPrice} = UseBasketContext();
 
   return (
     <div className={style.container}>

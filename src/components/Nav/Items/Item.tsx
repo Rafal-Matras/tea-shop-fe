@@ -1,30 +1,28 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-
-import { AppContext } from '../../../context/AppContext';
 
 import { TypesOfProductsInterface } from '../../../types';
 
 import { ArrowDownIcon } from '../../common/SvgIcons/ArrowDownIcon';
 
 import style from './Item.module.css';
+import { UseProductContext } from '../../../context/ProductContext';
 
 interface Props {
   item: TypesOfProductsInterface;
-  onlyProductType?: boolean;
+  onlyProductType: boolean;
   selectProductType: (name: string) => void;
 }
 
 export const Item = ({item, onlyProductType, selectProductType}: Props) => {
 
-  const {setProductName,setProductType,activeProductType} = useContext(AppContext);
+  const {productName,setProductName,setProductType,activeProductType} = UseProductContext();
 
   const setProduct = () => {
     setProductName(item.category);
     setProductType('')
     selectProductType(item.name);
+  // console.log(item);
   };
-
   return (
       <li
         className={onlyProductType && activeProductType !== item.name

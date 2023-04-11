@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ProductsListInterface } from '../../types';
 
-import { AppContext } from '../../context/AppContext';
+import { UseProductContext } from '../../context/ProductContext';
 
 import { OneProductInList } from '../OneProductInList/OneProductInList';
 
@@ -10,9 +10,9 @@ import style from './Shop.module.css';
 
 export const Shop = () => {
 
-  const {allProducts, productType, productName} = useContext(AppContext);
+  const {allProducts, productType, productName} = UseProductContext();
   const [products, setProducts] = useState<ProductsListInterface[]>([]);
-
+  console.log(productType);
   useEffect(() => {
     // (async () => {
     //   const response = await fetch(URL);

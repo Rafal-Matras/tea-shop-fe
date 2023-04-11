@@ -1,8 +1,8 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AppContext } from '../../context/AppContext';
-import { UserContext } from '../../context/UserContext';
+import { UseUserContext } from '../../context/UserContext';
+import { UseBasketContext } from '../../context/BasketContext';
+import { UseProductContext } from '../../context/ProductContext';
 
 import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
 import { useSetNewFullPrice } from '../../hooks/useSetNewFullPrice';
@@ -10,18 +10,24 @@ import { useSetNewFullPrice } from '../../hooks/useSetNewFullPrice';
 import { BasketIcon } from '../common/SvgIcons/BasketIcon';
 
 import style from './Header.module.css';
+import { useEffect } from 'react';
 
 export const BasketBox = () => {
 
-  const {user} = useContext(UserContext);
-  const {basket, setActiveProductType} = useContext(AppContext);
+  const {user} = UseUserContext();
+  const {allProducts, setActiveProductType} = UseProductContext();
+  const {fullPrice, setFullPrice, basket} = UseBasketContext();
+
+  useEffect(() => {
+    setFullPrice(useSetNewFullPrice(basket, allProducts));
+  }, [basket]);
 
   return (
     <div className={style.basketBox}>
       <Link className={style.basketTop} to="/basket" onClick={() => setActiveProductType('')}>
         <BasketIcon className={style.basketIcon}/>
         <p className={style.basketTopText}>Koszyk</p>
-        <p className={style.basketTopText}>{useConvertPriceToString(useSetNewFullPrice(basket))} zł</p>
+        <p className={style.basketTopText}>{useConvertPriceToString(fullPrice)} zł</p>
       </Link>
       <div className={style.basketBottom}>
         <div className={style.basketBottomBox}>

@@ -1,9 +1,6 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { UserContext } from '../../../context/UserContext';
-
-import { defaultUser } from '../../../assets/defaultData';
+import { UseUserContext } from '../../../context/UserContext';
 
 import style from './Item.module.css';
 
@@ -14,10 +11,9 @@ interface Props {
 
 export const MobileRestItems = ({onlyProductType, closeMenu}: Props) => {
 
-  const {user, setUser} = useContext(UserContext);
+  const {user, setUser} = UseUserContext();
 
   const logOut = () => {
-    setUser(defaultUser);
     closeMenu();
   };
 

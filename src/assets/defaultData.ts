@@ -1,4 +1,11 @@
-import { UserInterface, UserLoginDataInterface, UserProfileType } from '../types';
+import {
+  BasketOneProductInterface,
+  Category,
+  ProductInterface,
+  UserInterface,
+  UserLoginDataInterface,
+  UserRegisterInterface,
+} from '../types';
 
 export const defaultUser: UserInterface = {
   id: '',
@@ -25,7 +32,12 @@ export const defaultUser: UserInterface = {
   },
 };
 
-export const defaultUserRegister: UserProfileType = {
+export const defaultUserLogin: UserLoginDataInterface = {
+  email: '',
+  password: '',
+};
+
+export const defaultUserRegister: UserRegisterInterface = {
   id: '',
   email: '',
   password: '',
@@ -49,10 +61,60 @@ export const defaultUserRegister: UserProfileType = {
   },
 };
 
-export const defaultUserLogin: UserLoginDataInterface = {
-  email: '',
-  password: '',
+export const productDefault: ProductInterface = {
+  id: '',
+  name: '',
+  category: Category.tea,
+  type: [],
+  image: '',
+  price: 0,
+  promo: null,
+  numberOfUnits: 50,
+  unit: 'g',
+  state: 0,
+  forGift: null,
+  onHomePage: null,
+  new: null,
+  description: '',
+  ingredients: '',
+  countryOrigin: '',
+  amountBrew: '',
+  temperatureBrew: '',
+  timeBrew: '',
+  numberBrews: '',
+  wayStore: '',
+  coffeeSpecies: null,
+  howToBrew: null,
+  size: null,
 };
+
+export const oneProductInBasketDefault: BasketOneProductInterface = {
+  id: '',
+  name: '',
+  category:Category.tea,
+  type: [],
+  image: '',
+  price: 0,
+  numberOfUnits: 0,
+  unit: 'g',
+  state: 0,
+};
+
+// export const defaultBasket: BasketInterface = {
+//   id: '',
+//   userId: '',
+//   productId: '',
+//   packSize: 0,
+//   quantityOfProduct: 0,
+// };
+
+
+
+
+
+
+
+
 
 export const defaultUserActive: UserInterface = {
   id: '123',

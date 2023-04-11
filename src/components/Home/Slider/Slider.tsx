@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { SliderInterface } from '../../../types';
 
-import { AppContext } from '../../../context/AppContext';
+import { UseProductContext } from '../../../context/ProductContext';
 
 import style from './Slider.module.css';
 
@@ -11,7 +11,7 @@ import { sliderData } from '../../../assets/sliderList';
 
 export const Slider = () => {
 
-  const {setProductName, setProductType} = useContext(AppContext);
+  const {setProductName, setProductType} = UseProductContext();
   const [slidersList, setSlidersList] = useState<SliderInterface[]>([]);
   const [activeSlide, setActiveSlide] = useState<SliderInterface | null>(null);
 

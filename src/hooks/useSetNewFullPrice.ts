@@ -1,15 +1,15 @@
-import { AddToBasket } from '../types';
-import { exemplaryProductInBasket } from '../assets/allProducts';
+import {  BasketInterface, ProductsListInterface } from '../types';
 
-export const useSetNewFullPrice = (basket: AddToBasket[]) => {
+export const useSetNewFullPrice = (basket: BasketInterface[], allProducts: ProductsListInterface[]) => {
   if (basket.length === 0) return 0;
 
+
   let fullPrice: number = 0;
-  basket.forEach(async (item: AddToBasket) => {
-      // const response = await fetch(URL);
-      // const price = await response.json();
-      const price = exemplaryProductInBasket.price
-      fullPrice = fullPrice + +(Math.ceil((price * item.packSize * item.quantityOfProduct) * 100) / 100).toFixed(2);
+  basket.forEach(async (item: BasketInterface) => {
+    const price = allProducts.find(price => price.id === item.productId);
+    if (price) {
+      fullPrice = fullPrice + price.price * item.packSize * item.quantityOfProduct;
+    }
   });
-  return fullPrice
+  return fullPrice;
 };

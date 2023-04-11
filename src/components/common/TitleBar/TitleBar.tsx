@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 interface Props {
   title:string
-  children:ReactNode
+  children?:ReactNode
 }
 
 export const TitleBar = ({title,children}:Props) => {

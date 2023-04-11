@@ -34,11 +34,11 @@ export interface ProductsListInterface {
   unit: 'g' | 'szt';
   numberOfUnits: number;
   new: 1 | null;
+  onHomePage: 1 | null;
   state: number;
 }
 
 export interface ProductInterface extends ProductsListInterface {
-  onHomePage: 1 | null;
   description: string;
   ingredients: string | null;
   countryOrigin: string | null;
@@ -59,7 +59,7 @@ export interface SliderInterface {
   productType: string | null;
 }
 
-export interface AddToBasket {
+export interface BasketInterface {
   id:string;
   userId: string;
   productId: string;
@@ -67,7 +67,7 @@ export interface AddToBasket {
   packSize: number;
 }
 
-export interface BasketInterface extends Omit<ProductsListInterface, 'forGift' |'promo' | 'new'> {}
+export interface BasketOneProductInterface extends Omit<ProductsListInterface, 'forGift' |'promo' | 'new' | 'onHomePage'> {}
 
 export interface OrderBasketInterface extends Omit<ProductsListInterface, 'category' | 'forGift' |'promo' | 'new'>{
   quantityOfProduct: number;

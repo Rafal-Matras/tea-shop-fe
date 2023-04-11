@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
 
-import { AppContext } from '../../../context/AppContext';
+import { UseProductContext } from '../../../context/ProductContext';
 
 import style from './Item.module.css';
 
@@ -12,7 +11,7 @@ interface Props {
 
 export const ItemType = ({name, closeMenu}: Props) => {
 
-  const {productType, setProductType} = useContext(AppContext);
+  const {productType, setProductType} = UseProductContext();
 
   const selectType = () => {
     setProductType(name);

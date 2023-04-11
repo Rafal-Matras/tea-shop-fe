@@ -1,7 +1,7 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { UserContext } from '../../context/UserContext';
+import { UseUserContext } from '../../context/UserContext';
 
 import style from './Logout.module.css';
 
@@ -9,7 +9,7 @@ import {defaultUser} from '../../assets/defaultData'
 
 export const Logout = () => {
 
-  const {setUser} = useContext(UserContext);
+  const {setUser} = UseUserContext();
 
   useEffect(() => {
     setUser(defaultUser);

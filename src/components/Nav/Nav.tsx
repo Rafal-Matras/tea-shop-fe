@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {  TypesOfProductsInterface } from '../../types';
 
-import { AppContext } from '../../context/AppContext';
+import { UseProductContext } from '../../context/ProductContext';
 
 import { Item } from './Items/Item';
 import { MobileRestItems } from './Items/MobileRestItems';
@@ -10,8 +10,9 @@ import { ItemType } from './Items/ItemType';
 
 import { CloseIcon } from '../common/SvgIcons/CloseIcon';
 
-import style from './Nav.module.css';
 import {productType} from '../../assets/productsType';
+
+import style from './Nav.module.css';
 
 interface Props {
   activeMenu: boolean;
@@ -20,13 +21,13 @@ interface Props {
 
 export const Nav = ({activeMenu, setActiveMenu}: Props) => {
 
-  const {activeProductType, setActiveProductType} = useContext(AppContext);
+  const {activeProductType, setActiveProductType} = UseProductContext();
   const [typesOfProducts, setTypesOfProducts] = useState<TypesOfProductsInterface[]>([]);
   const [productTypes, setProductTypes] = useState<string[]>([]);
   const [onlyProductType, setOnlyProductType] = useState<boolean>(false);
 
   useEffect(() => {
-    if (typesOfProducts.length === 0) {
+    if (typesOfProducts.length < 1) {
 
       setTypesOfProducts(productType);
     }

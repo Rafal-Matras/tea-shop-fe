@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 
-import { AppContext } from '../../../context/AppContext';
 
 import { useConvertPriceToString } from '../../../hooks/useConvertPriceToString';
 
 import style from './Progress.module.css';
+import { UseBasketContext } from '../../../context/BasketContext';
 
 interface Props {
   name: string;
@@ -13,7 +13,7 @@ interface Props {
 
 export const Progress = ({name, progressNumber}: Props) => {
 
-  const {fullPrice} = useContext(AppContext);
+  const {fullPrice} = UseBasketContext();
   const progress = () => {
     switch (progressNumber) {
       case 1:

@@ -13,13 +13,7 @@ interface Props {
   deliveryCost: number;
 }
 
-export const DeliveryAndPayments = ({
-                                      formOfDelivery,
-                                      setFormOfDelivery,
-                                      formOfPayments,
-                                      setFormOfPayments,
-                                      deliveryCost,
-                                    }: Props) => {
+export const DeliveryAndPayments = ({formOfDelivery, setFormOfDelivery, formOfPayments, setFormOfPayments, deliveryCost,}: Props) => {
 
   return (
     <div className={style.container}>

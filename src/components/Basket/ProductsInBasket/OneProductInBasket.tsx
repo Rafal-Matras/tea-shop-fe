@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AddToBasket, BasketInterface} from '../../../types';
+import { BasketInterface, BasketOneProductInterface } from '../../../types';
 
-import { UserContext } from '../../../context/UserContext';
-import { AppContext } from '../../../context/AppContext';
+import { UseUserContext } from '../../../context/UserContext';
+import { UseProductContext } from '../../../context/ProductContext';
+import { UseBasketContext } from '../../../context/BasketContext';
 
 import { useFirstLetterBig } from '../../../hooks/useFirstLetterBig';
 import { useConvertPriceToString } from '../../../hooks/useConvertPriceToString';
@@ -13,33 +14,34 @@ import { ChangeQuantityBox } from '../../common/ChangeQuantityBox/ChangeQuantity
 import { PackSizeDropdownMenu } from '../../common/PackSizeDropdownMenu/PackSizeDropdownMenu';
 import { CloseIcon } from '../../common/SvgIcons/CloseIcon';
 
-import style from './ProductsInBasket.module.css';
+import { oneProductInBasketDefault } from '../../../assets/defaultData';
 
-import { oneProductInBasketDefault, exemplaryProductInBasket } from '../../../assets/allProducts';
+import style from './ProductsInBasket.module.css';
 
 interface Props {
 
   index: number;
-  basketItem: AddToBasket;
+  basketItem: BasketInterface;
   flag: boolean;
   setFlag: (flag: boolean) => void;
 }
 
 export const OneProductInBasket = ({ basketItem, index, flag, setFlag}: Props) => {
 
-  const {user} = useContext(UserContext);
-  const {allProducts, basket, setBasket, setProductType} = useContext(AppContext);
-  const [product, setProduct] = useState<BasketInterface>(oneProductInBasketDefault);
+  const {user} = UseUserContext();
+  const {allProducts,setProductType} = UseProductContext()
+  const {basket, setBasket} = UseBasketContext();
+  const [product, setProduct] = useState<BasketOneProductInterface>(oneProductInBasketDefault);
   const [value, setValue] = useState<string>('');
 
   useEffect(() => {
     setValue((product.numberOfUnits * basketItem.packSize * basketItem.quantityOfProduct).toString());
-  }, [basketItem.quantityOfProduct, basketItem.packSize]);
+  }, [basketItem.quantityOfProduct, basketItem.packSize,product]);
 
   useEffect(() => {
     const data = allProducts.find(item => item.id === basketItem.productId);
     if (!data) return;
-    const newProduct: BasketInterface = {
+    const newProduct: BasketOneProductInterface = {
       id: data.id,
       name: data.name,
       image: data.image,
@@ -79,7 +81,7 @@ export const OneProductInBasket = ({ basketItem, index, flag, setFlag}: Props) =
   };
 
   const removeProduct = () => {
-    const newBasket = basket.filter((item: AddToBasket) => item.id !== basketItem.id);
+    const newBasket = basket.filter((item: BasketInterface) => item.id !== basketItem.id);
     if (user.role === 'user') {
 
 

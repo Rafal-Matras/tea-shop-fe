@@ -25,7 +25,9 @@ export interface DeliveryUserInterface {
   deliveryCity: string;
 }
 
-export type UserProfileType = Omit<UserInterface, 'role'>
+export type UserProfileType = Omit<UserInterface, 'role' | 'password'>
+
+export type UserRegisterInterface = Omit<UserInterface, 'role'>
 
 export interface UserLoginDataInterface {
   email: string;

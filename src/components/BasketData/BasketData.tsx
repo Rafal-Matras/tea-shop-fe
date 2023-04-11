@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
-import { UserContext } from '../../context/UserContext';
+import { UseUserContext } from '../../context/UserContext';
 
 import { BasketDataIsNotLogin } from './BasketDataIsNotLogin';
 import { BasketDataIsLogin } from './BasketDataIsLogin';
@@ -8,7 +8,7 @@ import { UserLoginDataInterface, UserProfileType } from '../../types';
 
 export const BasketData = () => {
 
-  const {user} = useContext(UserContext);
+  const {user} = UseUserContext();
   const [deliveryActive, setDeliveryActive] = useState<boolean>(false);
   const [userData, setUserData] = useState<UserProfileType>(user);
   const [accept, setAccept] = useState<boolean>(false);

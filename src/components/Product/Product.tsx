@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { ProductInterface } from '../../types';
 
-import { AppContext } from '../../context/AppContext';
+import { UseProductContext } from '../../context/ProductContext';
 
 import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
 import { useFirstLetterBig } from '../../hooks/useFirstLetterBig';
@@ -11,13 +11,14 @@ import { useFirstLetterBig } from '../../hooks/useFirstLetterBig';
 import { OrderDetails } from './OrderDetails';
 import { AddedToBasket } from './AddedToBasket';
 
-import style from './Product.module.css';
+import { productDefault } from '../../assets/defaultData';
 
-import { productDefault, exemplaryProduct } from '../../assets/allProducts';
+import style from './Product.module.css';
+import {  exemplaryProduct } from '../../assets/allProducts';
 
 export const Product = () => {
 
-  const {setProductType} = useContext(AppContext);
+  const {setProductType} = UseProductContext();
   const [product, setProduct] = useState<ProductInterface>(productDefault);
   const [packSize, setPackSize] = useState<number>(1);
   const [quantityOfProduct, setQuantityOfProducts] = useState<number>(1);
@@ -54,8 +55,8 @@ export const Product = () => {
         <div className={style.priceAndOrderBox}>
           <div className={style.priceBox}>
             <p className={style.price}>{product.promo
-              ? useConvertPriceToString(Math.ceil(product.promo * packSize * quantityOfProduct * 100) / 100)
-              : useConvertPriceToString(Math.ceil(product.price * packSize * quantityOfProduct * 100) / 100)
+              ? useConvertPriceToString(product.promo * packSize * quantityOfProduct )
+              : useConvertPriceToString(product.price * packSize * quantityOfProduct )
             } zł&nbsp;
             </p>
             <p

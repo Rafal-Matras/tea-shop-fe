@@ -20,15 +20,7 @@ interface Props {
   setAccept: (name: boolean) => void;
 }
 
-export const BasketDataNotLoginBuyAsGuest = ({
-                                               userData,
-                                               changeUserData,
-                                               changeUserDataDelivery,
-                                               deliveryActive,
-                                               setDeliveryActive,
-                                               accept,
-                                               setAccept,
-                                             }: Props) => {
+export const BasketDataNotLoginBuyAsGuest = ({userData, changeUserData, changeUserDataDelivery, deliveryActive, setDeliveryActive, accept, setAccept,}: Props) => {
 
   useEffect(() => {
     setDeliveryActive(false);

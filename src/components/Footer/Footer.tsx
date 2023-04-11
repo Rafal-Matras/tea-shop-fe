@@ -1,16 +1,16 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { UserContext } from '../../context/UserContext';
 
 import style from './Footer.module.css';
 
 import { defaultUser } from '../../assets/defaultData';
+import { UseUserContext } from '../../context/UserContext';
 
 export const Footer = () => {
 
-  const {user, setUser} = useContext(UserContext);
-
+  const {user, setUser} = UseUserContext();
+  console.log('Footer render');
   const scrollUp = () => {
     window.scrollTo(0, 0);
   };

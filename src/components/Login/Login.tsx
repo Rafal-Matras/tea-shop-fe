@@ -1,9 +1,9 @@
-import { SyntheticEvent, useContext, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { UserLoginDataInterface } from '../../types';
 
-import { UserContext } from '../../context/UserContext';
+import { UseUserContext } from '../../context/UserContext';
 
 import { LoginForm } from '../common/Forms/LoginForm/LoginForm';
 
@@ -15,7 +15,7 @@ import style from './Login.module.css';
 export const Login = () => {
 
   const navigate = useNavigate();
-  const {setUser} = useContext(UserContext);
+  const {setUser} = UseUserContext();
   const [errorLogin, setErrorLogin] = useState<boolean>(false);
   const [loginDetails, setLoginDetails] = useState<UserLoginDataInterface>(defaultUserLogin);
 

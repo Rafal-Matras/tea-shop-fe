@@ -2,12 +2,13 @@ import { useContext, useState } from 'react';
 
 import { UserLoginDataInterface } from '../../types';
 
-import { UserContext } from '../../context/UserContext';
+
 
 import { BasketDataAcceptanceAndButtons } from './BasketDataAcceptanceAndButtons';
 import { LoginForm } from '../common/Forms/LoginForm/LoginForm';
 
 import style from './BasketData.module.css';
+import { UseUserContext } from '../../context/UserContext';
 
 interface Props {
   loginDetails: UserLoginDataInterface;
@@ -18,7 +19,7 @@ interface Props {
 
 export const BasketDataIsNotLoginHaveAccount = ({loginDetails, changeLoginDetails,accept,setAccept}: Props) => {
 
-  const {setUser} = useContext(UserContext);
+  const {setUser} = UseUserContext();
   const [errorLogin, setErrorLogin] = useState<boolean>(false);
 
   const handleLogin = async () => {

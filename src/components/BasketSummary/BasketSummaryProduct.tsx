@@ -1,6 +1,4 @@
-import { useContext } from 'react';
-
-import { AppContext } from '../../context/AppContext';
+import { UseBasketContext } from '../../context/BasketContext';
 
 import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
 
@@ -10,7 +8,7 @@ import style from './BasketSummary.module.css';
 
 export const BasketSummaryProduct = () => {
 
-  const {basket, fullPrice} = useContext(AppContext);
+  const {basket, fullPrice} = UseBasketContext();
 
   return (
     <div className={style.sectionProducts}>

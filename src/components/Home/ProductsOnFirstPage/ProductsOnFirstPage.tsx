@@ -6,22 +6,17 @@ import { OneProductInList } from '../../OneProductInList/OneProductInList';
 
 import style from './ProductsOnFirstPage.module.css';
 
-import {allProductsDefault} from '../../../assets/allProducts';
+import { allProductsDefault } from '../../../assets/allProducts';
+import { UseProductContext } from '../../../context/ProductContext';
 
 export const ProductsOnFirstPage = () => {
 
-
+  const {allProducts} = UseProductContext();
   const [products, setProducts] = useState<ProductsListInterface[]>([]);
 
 
   useEffect(() => {
-    // (async ()=>{
-    //   const response = await fetch(URL- firstPage);
-    //   const data = await response.json();
-    // })()
-
-
-  const data = allProductsDefault;
+    const data = allProducts.filter(item => item.onHomePage === 1);
     setProducts(data);
   }, []);
 

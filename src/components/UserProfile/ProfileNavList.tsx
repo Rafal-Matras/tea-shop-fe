@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { UserContext } from '../../context/UserContext';
 
 import style from './UserProfile.module.css';
 
 import { defaultUser } from '../../assets/defaultData';
 import { ActivePageType } from '../../types';
+import { UseUserContext } from '../../context/UserContext';
 
 interface Props {
   activePage: string;
@@ -15,7 +15,7 @@ interface Props {
 
 export const ProfileNavList = ({activePage, setActivePage}: Props) => {
 
-  const {setUser} = useContext(UserContext);
+  const {setUser} = UseUserContext();
 
   const changeActivePage = (name: ActivePageType | null) => {
     if (name) {

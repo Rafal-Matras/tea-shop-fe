@@ -22,21 +22,11 @@ interface Props {
   setAccept: (name: boolean) => void;
 }
 
-export const BasketDataIsNotLogin = ({
-                                       userData,
-                                       changeUserData,
-                                       changeUserDataDelivery,
-                                       loginDetails,
-                                       changeLoginDetails,
-                                       deliveryActive,
-                                       setDeliveryActive,
-                                       accept,
-                                       setAccept,
-                                     }: Props) => {
+export const BasketDataIsNotLogin = ({userData, changeUserData, changeUserDataDelivery, loginDetails, changeLoginDetails, deliveryActive, setDeliveryActive, accept, setAccept,}: Props) => {
 
   const [account, setAccount] = useState<string>('Posiadam konto w sklepie');
   let buttonName: string = '';
-  const radioData = ['Posiadam konto w sklepie', 'Nie posiadam konta i chcę sie zarejestrować', 'Kontynuuj jako gość']
+  const radioData = ['Posiadam konto w sklepie', 'Nie posiadam konta i chcę sie zarejestrować', 'Kontynuuj jako gość'];
 
   const handleAccount = (name: string, value: string) => setAccount(value);
 

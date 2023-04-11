@@ -1,9 +1,8 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Category } from '../../types';
 
-import { AppContext } from '../../context/AppContext';
+import { UseBasketContext } from '../../context/BasketContext';
 
 import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
 import { useFirstLetterBig } from '../../hooks/useFirstLetterBig';
@@ -26,7 +25,7 @@ interface Props {
 
 export const AddedToBasket = ({image, name, type, category, price, unit, setAddToBasket}: Props) => {
 
-  const {fullPrice} = useContext(AppContext);
+  const {fullPrice} = UseBasketContext();
 
   const categoryType = type?.map((item, index) => (
     <p className={style.addedToBasketCategoryTypeName} key={item}>
@@ -47,7 +46,7 @@ export const AddedToBasket = ({image, name, type, category, price, unit, setAddT
       <p className={style.addedToBasketDelivery}>
         {fullPrice >= 80
           ? 'Darmowa dostawa'
-          : `Do darmowej dostawy brakuje ${useConvertPriceToString(Math.ceil((80 - fullPrice) * 100) / 100)} zł`
+          : `Do darmowej dostawy brakuje ${useConvertPriceToString(80 - fullPrice)} zł`
         }
       </p>
       <div className={style.addedToBasketProduct}>
@@ -58,7 +57,7 @@ export const AddedToBasket = ({image, name, type, category, price, unit, setAddT
         </div>
       </div>
       <p className={style.addedToBasketPrice}>
-        {useConvertPriceToString(Math.ceil(price * 100) / 100)}<span> / {unit}</span>
+        {useConvertPriceToString(price)}<span> / {unit}</span>
       </p>
       <div className={style.addedToBasketButtonBox}>
         <button

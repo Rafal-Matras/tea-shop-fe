@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { ProductsListInterface } from '../../types';
 
-import { AppContext } from '../../context/AppContext';
+import { UseProductContext } from '../../context/ProductContext';
 
 import { SearchIcon } from '../common/SvgIcons/SearchIcon';
 
@@ -11,8 +11,8 @@ import style from './Header.module.css';
 
 export const Search = () => {
 
-  const {allProducts, setProductName, setProductType} = useContext(AppContext);
   const navigate = useNavigate();
+  const {allProducts, setProductName, setProductType} = UseProductContext();
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchList, setSearchList] = useState<ProductsListInterface[]>([]);
 

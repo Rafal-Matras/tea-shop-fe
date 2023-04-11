@@ -1,35 +1,34 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { OrderBasketInterface } from '../../types';
+import { UseUserContext } from '../../context/UserContext';
+import { UseProductContext } from '../../context/ProductContext';
+import { UseBasketContext } from '../../context/BasketContext';
 
 import { useSetNewFullPrice } from '../../hooks/useSetNewFullPrice';
-
-import { UserContext } from '../../context/UserContext';
-import { AppContext } from '../../context/AppContext';
-
-import { Progress } from '../common/Progress/Progress';
-import { DeliveryAndPayments } from './DeliveryAndPayments/DeliveryAndPayments';
 import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
-import { ProductsInBasket } from './ProductsInBasket/ProductsInBasket';
+
 import { ArrowRightIcon } from '../common/SvgIcons/ArrowRightIcon';
+import { Progress } from '../common/Progress/Progress';
+
+import { DeliveryAndPayments } from './DeliveryAndPayments/DeliveryAndPayments';
+import { ProductsInBasket } from './ProductsInBasket/ProductsInBasket';
 
 import style from './Basket.module.css';
 
 export const Basket = () => {
 
-  const {user} = useContext(UserContext);
-  const {basket,fullPrice, setFullPrice,allProducts} = useContext(AppContext);
-  const [orderBasketData,setOrderBasketData] = useState<OrderBasketInterface[]>([])
+  const {user} = UseUserContext();
+  const {allProducts} = UseProductContext()
+  const {basket,fullPrice, setFullPrice} = UseBasketContext();
   const [formOfDelivery, setFormOfDelivery] = useState('Kurier GLS');
   const [formOfPayments, setFormOfPayments] = useState('Przelewy24.pl');
   const [deliveryCost, setDeliveryCost] = useState(8.99);
   const [flag, setFlag] = useState<boolean>(false);
 
   useEffect(() => {
-    setFullPrice(useSetNewFullPrice(basket));
+    setFullPrice(useSetNewFullPrice(basket,allProducts));
   }, [flag]);
-  console.log('allProducts---',allProducts);
 
   useEffect(() => {
     formOfDelivery !== 'Paczkomaty 24/7' ? setDeliveryCost(8.99) : setDeliveryCost(9.99);
@@ -42,7 +41,6 @@ export const Basket = () => {
   const handleFormOfPayments = (name: string, value: string) => setFormOfPayments(value);
 
   const handleNext = () => {
-
 
   };
 
@@ -68,7 +66,7 @@ export const Basket = () => {
       />
       <div className={style.endBox}>
         <p
-          className={style.fullPriceText}>razem: <span>{useConvertPriceToString(+(Math.ceil((fullPrice + deliveryCost) * 100) / 100).toFixed(2))} zł</span>
+          className={style.fullPriceText}>razem: <span>{useConvertPriceToString(fullPrice + deliveryCost)} zł</span>
         </p>
         {basket.length > 0
           ? <Link

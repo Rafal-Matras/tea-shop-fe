@@ -1,30 +1,30 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AddToBasket, BasketInterface } from '../../types';
+import { BasketInterface, BasketOneProductInterface } from '../../types';
 
-import { AppContext } from '../../context/AppContext';
+import { UseProductContext } from '../../context/ProductContext';
 
 import { useFirstLetterBig } from '../../hooks/useFirstLetterBig';
 import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
 
-import { oneProductInBasketDefault } from '../../assets/allProducts';
+import { oneProductInBasketDefault } from '../../assets/defaultData';
 
 import style from './BasketSummary.module.css';
 
 interface Props {
-  basketItem: AddToBasket;
+  basketItem: BasketInterface;
 }
 
 export const OneProductInSummary = ({basketItem}: Props) => {
 
-  const {allProducts, setProductType} = useContext(AppContext);
-  const [product, setProduct] = useState<BasketInterface>(oneProductInBasketDefault);
+  const {allProducts, setProductType} = UseProductContext();
+  const [product, setProduct] = useState<BasketOneProductInterface>(oneProductInBasketDefault);
 
   useEffect(() => {
     const data = allProducts.find(item => item.id === basketItem.productId);
     if (!data) return;
-    const newProduct: BasketInterface = {
+    const newProduct: BasketOneProductInterface = {
       id: data.id,
       name: data.name,
       image: data.image,
@@ -73,7 +73,8 @@ export const OneProductInSummary = ({basketItem}: Props) => {
       <td className={style.tdProductSummaryPrice}>
         <p className={style.oneProductSummaryPrice}
         >
-          <span>cena: </span>{useConvertPriceToString(product.price * basketItem.packSize * basketItem.quantityOfProduct)} zł
+          <span>cena: </span>
+          {useConvertPriceToString(product.price * basketItem.packSize * basketItem.quantityOfProduct)} zł
         </p>
       </td>
     </tr>

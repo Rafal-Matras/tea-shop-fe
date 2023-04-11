@@ -18,7 +18,11 @@ export const ChangeQuantityBox = ({numberOfUnits, packSize, unit, quantityOfProd
     const number = numberOfUnits * packSize;
     if (isNaN(valueNumber)) {
       setValue((number * quantityOfProduct).toString());
-    } else {
+    }
+    if(valueNumber > state){
+      setValue(state.toString())
+    } else
+    {
       if (valueNumber % (number) < (number / 2)) {
         setValue((valueNumber - (valueNumber % number)).toString());
         setQuantityOfProducts((valueNumber - (valueNumber % number)) / number);

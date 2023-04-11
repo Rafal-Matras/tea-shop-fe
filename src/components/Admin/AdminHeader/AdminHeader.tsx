@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { UserContext } from '../../../context/UserContext';
+
 
 import { MenuIcon } from '../../common/SvgIcons/MenuIcon';
 import { CloseIcon } from '../../common/SvgIcons/CloseIcon';
@@ -10,11 +10,12 @@ import { Logo } from '../../../assets/Logo';
 import { defaultUser } from '../../../assets/defaultData';
 
 import style from './AdminHeader.module.css';
+import { UseUserContext } from '../../../context/UserContext';
 
 export const AdminHeader = () => {
 
   const location = useLocation();
-  const {setUser} = useContext(UserContext);
+  const {setUser} = UseUserContext();
   const [hamburgerMenuActive, setHamburgerMenuActive] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('konfiguracja');
 

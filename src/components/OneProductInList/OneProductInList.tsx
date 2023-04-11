@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 
 import { ProductsListInterface } from '../../types';
 
+import { UseProductContext } from '../../context/ProductContext';
+
 import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
 import { useFirstLetterBig } from '../../hooks/useFirstLetterBig';
 
 import style from './OneProductInList.module.css';
-import { useContext } from 'react';
-import { AppContext } from '../../context/AppContext';
 
 interface Props {
   item: ProductsListInterface;
@@ -15,7 +15,7 @@ interface Props {
 
 export const OneProductInList = ({item}: Props) => {
 
-  const {setActiveProductType} = useContext(AppContext);
+  const {setActiveProductType} = UseProductContext();
   const {id, name, category, type, price, image, numberOfUnits, unit, promo} = item;
 
   const categoryType = type

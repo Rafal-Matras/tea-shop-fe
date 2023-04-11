@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 
 import { UserProfileType } from '../../types';
 
-import { UserContext } from '../../context/UserContext';
 
 import { BasketDataAcceptanceAndButtons } from './BasketDataAcceptanceAndButtons';
 import { DataForm } from '../common/Forms/DataForm/DataForm';

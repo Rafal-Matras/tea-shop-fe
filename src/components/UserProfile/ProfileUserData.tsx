@@ -4,10 +4,10 @@ import { UserProfileType } from '../../types';
 
 import { Input } from '../common/Input/Input';
 import { Checkbox } from '../common/Checkbox/Checkbox';
-
-import style from './UserProfile.module.css';
 import { DataForm } from '../common/Forms/DataForm/DataForm';
 import { DeliveryForm } from '../common/Forms/DeliveryForm/DeliveryForm';
+
+import style from './UserProfile.module.css';
 
 interface Props {
   userData: UserProfileType;
@@ -17,7 +17,6 @@ interface Props {
 
 export const ProfileUserData = ({userData, changeUserData, changeUserDataDelivery}: Props) => {
 
-  const [account, setAccount] = useState<string>(userData.accountType);
   const [deliveryActive, setDeliveryActive] = useState<boolean>(false);
 
   return (

@@ -1,7 +1,3 @@
-import { useContext } from 'react';
-
-import { UserContext } from '../../context/UserContext';
-
 import { defaultUserActive } from '../../assets/defaultData';
 
 import style from './BasketSummary.module.css';
