@@ -1,17 +1,23 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { UserProfileType } from '../../types';
+import { UserInterface } from '../../types';
+
+import { UseUserContext } from '../../context/UserContext';
 
 import { DeliveryForm } from '../common/Forms/DeliveryForm/DeliveryForm';
 import { DataForm } from '../common/Forms/DataForm/DataForm';
 import { Checkbox } from '../common/Checkbox/Checkbox';
-import { BasketDataAcceptanceAndButtons } from './BasketDataAcceptanceAndButtons';
 import { Input } from '../common/Input/Input';
+
+import { BasketDataAcceptanceAndButtons } from './BasketDataAcceptanceAndButtons';
+import { validation } from './validation';
+
 
 import style from './BasketData.module.css';
 
 interface Props {
-  userData: UserProfileType;
+  userData: UserInterface;
   changeUserData: (name: string, value: string) => void;
   changeUserDataDelivery: (name: string, value: string) => void;
   deliveryActive: boolean;
@@ -20,14 +26,26 @@ interface Props {
   setAccept: (name: boolean) => void;
 }
 
-export const BasketDataNotLoginBuyAsGuest = ({userData, changeUserData, changeUserDataDelivery, deliveryActive, setDeliveryActive, accept, setAccept,}: Props) => {
+export const BasketDataNotLoginBuyAsGuest = ({
+                                               userData,
+                                               changeUserData,
+                                               changeUserDataDelivery,
+                                               deliveryActive,
+                                               setDeliveryActive,
+                                               accept,
+                                               setAccept,
+                                             }: Props) => {
 
-  useEffect(() => {
-    setDeliveryActive(false);
-  }, []);
+  const navigate = useNavigate();
+  const {setUser} = UseUserContext();
+  const [isAccepted, setIsAccepted] = useState<boolean>(false);
+  const [isAllData, setIsAllData] = useState<boolean>(false);
 
   const handleNext = () => {
-
+    if (!validation({accept, setIsAccepted, userData, setIsAllData, deliveryActive})) return;
+    setUser(userData);
+    navigate('/basket/summary');
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -58,11 +76,14 @@ export const BasketDataNotLoginBuyAsGuest = ({userData, changeUserData, changeUs
           />
         </>
         : null}
+      <p className={isAllData ? style.errorMassageOn : style.errorMassageOff}>Proszę uzupełnić brakujące dane</p>
       <BasketDataAcceptanceAndButtons
         accept={accept}
         setAccept={setAccept}
+        isAccepted={isAccepted}
         handleNext={handleNext}
         buttonName="Kontynuuj"
+        showAccepted={true}
       />
     </div>
   );

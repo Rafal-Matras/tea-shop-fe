@@ -8,21 +8,30 @@ import { ArrowLeftIcon } from '../common/SvgIcons/ArrowLeftIcon';
 import { ArrowRightIcon } from '../common/SvgIcons/ArrowRightIcon';
 
 import style from './BasketSummary.module.css';
+import { UseUserContext } from '../../context/UserContext';
+import { UseBasketContext } from '../../context/BasketContext';
 
 export const BasketSummary = () => {
 
   const navigate = useNavigate();
-  const handleSentOrder = () => {
-
-    navigate('/basket/done');
-  };
+  const {user} = UseUserContext();
+  const {setBasket} = UseBasketContext();
 
   const handleBack = () => {
     navigate(-1);
+    window.scrollTo(0, 0);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
+    if (user.role === 'user') {
+      const response = await fetch('URL', {
+        method: 'delete',
+      });
+    }
+    setBasket([]);
+    localStorage.clear();
     navigate('/basket/done');
+    window.scrollTo(0, 0);
   };
 
   return (

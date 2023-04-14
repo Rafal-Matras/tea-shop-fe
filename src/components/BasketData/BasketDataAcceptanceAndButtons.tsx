@@ -2,43 +2,60 @@ import { Link } from 'react-router-dom';
 
 import { Checkbox } from '../common/Checkbox/Checkbox';
 import { ArrowRightIcon } from '../common/SvgIcons/ArrowRightIcon';
+import { ArrowLeftIcon } from '../common/SvgIcons/ArrowLeftIcon';
 
 import style from './BasketData.module.css';
-import { ArrowLeftIcon } from '../common/SvgIcons/ArrowLeftIcon';
 
 interface Props {
   accept: boolean;
   setAccept: (name: boolean) => void;
+  isAccepted?: boolean;
   handleNext: () => void;
-  buttonName:string;
+  buttonName: string;
+  showAccepted: boolean;
 }
 
-export const BasketDataAcceptanceAndButtons = ({accept, setAccept, handleNext,buttonName}: Props) => {
+export const BasketDataAcceptanceAndButtons = ({
+                                                 accept,
+                                                 setAccept,
+                                                 isAccepted = false,
+                                                 handleNext,
+                                                 buttonName,
+                                                 showAccepted,
+                                               }: Props) => {
 
   return (
     <>
-      <h2 className={style.sectionTitle}>Akceptacje</h2>
-      <div className={style.acceptanceCheckbox}>
-        <Checkbox
-          active={accept}
-          change={setAccept}
-        ><p
-        >Zapoznałem się i akceptuję &nbsp;
-          <Link
-            className={style.acceptanceLink}
-            to="/regulations"
-            target="_blank">
-            regulamin
-          </Link> oraz&nbsp;
-          <Link
-            className={style.acceptanceLink}
-            to="/privacy-policy"
-            target="_blank">
-            politykę prywatności
-          </Link>
-        </p>
-        </Checkbox>
-      </div>
+      {showAccepted
+        ? <>
+          <h2 className={style.sectionTitle}>Akceptacje</h2>
+          <div className={style.acceptanceCheckbox}>
+            <Checkbox
+              active={accept}
+              change={setAccept}
+            ><p
+            >Zapoznałem się i akceptuję &nbsp;
+              <Link
+                className={style.acceptanceLink}
+                to="/regulations"
+                target="_blank">
+                regulamin
+              </Link> oraz&nbsp;
+              <Link
+                className={style.acceptanceLink}
+                to="/privacy-policy"
+                target="_blank">
+                politykę prywatności
+              </Link>
+            </p>
+            </Checkbox>
+            <p className={isAccepted ? style.errorMassageOn : style.errorMassageOff}
+            >Potwierdz zapoznanie się z regulaminem i polityką prywatności.
+            </p>
+          </div>
+        </>
+        : null
+      }
       <div className={style.buttonBox}>
         <Link
           className={style.button}
@@ -50,6 +67,7 @@ export const BasketDataAcceptanceAndButtons = ({accept, setAccept, handleNext,bu
         >{buttonName} <ArrowRightIcon className={style.arrowIcon}/>
         </button>
       </div>
+      ;
     </>
   );
 };

@@ -1,14 +1,17 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { UserLoginDataInterface } from '../../types';
 
+import { UseUserContext } from '../../context/UserContext';
 
-
-import { BasketDataAcceptanceAndButtons } from './BasketDataAcceptanceAndButtons';
 import { LoginForm } from '../common/Forms/LoginForm/LoginForm';
 
+import { BasketDataAcceptanceAndButtons } from './BasketDataAcceptanceAndButtons';
+
+import { defaultUserActive } from '../../assets/defaultData';
+
 import style from './BasketData.module.css';
-import { UseUserContext } from '../../context/UserContext';
 
 interface Props {
   loginDetails: UserLoginDataInterface;
@@ -20,16 +23,17 @@ interface Props {
 export const BasketDataIsNotLoginHaveAccount = ({loginDetails, changeLoginDetails,accept,setAccept}: Props) => {
 
   const {setUser} = UseUserContext();
+  const navigate = useNavigate();
   const [errorLogin, setErrorLogin] = useState<boolean>(false);
 
   const handleLogin = async () => {
     // const response = await fetch(URL);
-    // const data = await response.json()
-    // if(!data){
-    //  return setErrorLogin(true)
-    // }
-    // setErrorLogin(false)
-    // setUser(data)
+    // const data = await response.json();
+    // if(!data) return setErrorLogin(true);
+    // setErrorLogin(false);
+     setUser(defaultUserActive);
+    navigate('/basket/data');
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -46,6 +50,7 @@ export const BasketDataIsNotLoginHaveAccount = ({loginDetails, changeLoginDetail
         setAccept={setAccept}
         handleNext={handleLogin}
         buttonName='Zaloguj'
+        showAccepted={false}
       />
     </div>
   );

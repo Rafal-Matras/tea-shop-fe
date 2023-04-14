@@ -22,4 +22,10 @@ export interface BasketContextInterface {
   setBasket: (basket: BasketInterface[]) => void;
   fullPrice: number;
   setFullPrice: (price: number) => void;
+  typeOfDelivery:string,
+  setTypeOfDelivery:(name:string) => void,
+  typeOfPayments: string,
+  setTypeOfPayments:(name:string) => void,
+  costOfDelivery:number,
+  setCostOfDelivery:(number:number) => void
 }

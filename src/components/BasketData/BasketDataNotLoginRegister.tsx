@@ -1,23 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { UserProfileType } from '../../types';
+import { UserInterface } from '../../types';
+
+import { UseUserContext } from '../../context/UserContext';
 
 import { RegisterForm } from '../common/Forms/RegisterForm/RegisterForm';
 import { DataForm } from '../common/Forms/DataForm/DataForm';
 import { DeliveryForm } from '../common/Forms/DeliveryForm/DeliveryForm';
 import { Checkbox } from '../common/Checkbox/Checkbox';
+
 import { BasketDataAcceptanceAndButtons } from './BasketDataAcceptanceAndButtons';
+import { validation } from './validation';
 
 import style from './BasketData.module.css';
 
 interface Props {
-  userData: UserProfileType;
+  userData: UserInterface;
   changeUserData: (name: string, value: string) => void;
   changeUserDataDelivery: (name: string, value: string) => void;
   deliveryActive: boolean;
   setDeliveryActive: (name: boolean) => void;
   accept: boolean;
   setAccept: (name: boolean) => void;
+  setAccount: (name: string) => void;
 }
 
 export const BasketDataNotLoginRegister = ({
@@ -28,19 +33,38 @@ export const BasketDataNotLoginRegister = ({
                                              setDeliveryActive,
                                              accept,
                                              setAccept,
+                                             setAccount,
                                            }: Props) => {
 
+  const {setUser} = UseUserContext();
   const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [isAccepted, setIsAccepted] = useState<boolean>(false);
+  const [isAllData, setIsAllData] = useState<boolean>(false);
+  const [popupActive, setPopupActive] = useState<boolean>(false);
 
-  useEffect(() => {
-    setDeliveryActive(false);
-  }, []);
   const editConfirmPassword = (name: string, value: string) => {
     setConfirmPassword(value);
   };
 
-  const handleNext = () => {
+  const handleRegister = async () => {
+    if (!validation({accept, setIsAccepted, userData, confirmPassword, setIsAllData, deliveryActive})) return;
+    // const response = await fetch('URL', {
+    //   method: 'post',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(userData),
+    // });
+    // const data = await response.json();
+    // if (!data) return;
+    setPopupActive(true);
+  };
 
+  const handleNext = () => {
+    setPopupActive(false);
+    setUser(userData);
+    setAccount('Posiadam konto w sklepie');
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -73,12 +97,24 @@ export const BasketDataNotLoginRegister = ({
           />
         </>
         : null}
+      <p className={isAllData ? style.errorMassageOn : style.errorMassageOff}>Proszę uzupełnić brakujące dane</p>
       <BasketDataAcceptanceAndButtons
         accept={accept}
         setAccept={setAccept}
-        handleNext={handleNext}
+        isAccepted={isAccepted}
+        handleNext={handleRegister}
         buttonName="Zarejestruj"
+        showAccepted={false}
       />
+      {popupActive
+        ? <div className={style.popup}>
+          <div className={style.popupBox}>
+            <p className={style.popupText}>Konto zostało utworzone, można się zalogować </p>
+            <button className={style.popupButton} onClick={handleNext}>Dalej</button>
+          </div>
+        </div>
+        : null
+      }
     </div>
   );
 };

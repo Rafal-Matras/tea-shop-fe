@@ -36,16 +36,6 @@ export const DeliveryForm = ({registrationData, editRegistrationDataDelivery}: P
       <div className={style.inputBox}>
         <Input
           type="text"
-          name="deliveryCompanyName"
-          value={registrationData.delivery.deliveryCompanyName}
-          displayedName="Nazwa firmy"
-          change={editRegistrationDataDelivery}
-          required={false}
-        />
-      </div>
-      <div className={style.inputBox}>
-        <Input
-          type="text"
           name="deliveryStreet"
           value={registrationData.delivery.deliveryStreet}
           displayedName="Ulica"

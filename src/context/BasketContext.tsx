@@ -15,12 +15,21 @@ export const UseBasketContext = () => useContext(BasketContext);
 export const BasketContextProvider = ({children}: Props) => {
   const [basket, setBasket] = useState<BasketInterface[]>([]);
   const [fullPrice, setFullPrice] = useState<number>(0);
+  const [typeOfDelivery, setTypeOfDelivery] = useState<string>('');
+  const [typeOfPayments, setTypeOfPayments] = useState<string>('');
+  const [costOfDelivery, setCostOfDelivery] = useState<number>(0);
 
   const BasketContextObject = {
     basket,
     setBasket,
     fullPrice,
     setFullPrice,
+    typeOfDelivery,
+    setTypeOfDelivery,
+    typeOfPayments,
+    setTypeOfPayments,
+    costOfDelivery,
+    setCostOfDelivery,
   };
 
   return (

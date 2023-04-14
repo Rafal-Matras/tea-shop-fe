@@ -91,7 +91,7 @@ export const productDefault: ProductInterface = {
 export const oneProductInBasketDefault: BasketOneProductInterface = {
   id: '',
   name: '',
-  category:Category.tea,
+  category: Category.tea,
   type: [],
   image: '',
   price: 0,
@@ -107,13 +107,6 @@ export const oneProductInBasketDefault: BasketOneProductInterface = {
 //   packSize: 0,
 //   quantityOfProduct: 0,
 // };
-
-
-
-
-
-
-
 
 
 export const defaultUserActive: UserInterface = {

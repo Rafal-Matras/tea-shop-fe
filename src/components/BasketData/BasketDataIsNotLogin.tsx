@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { UserLoginDataInterface, UserProfileType } from '../../types';
+import { UserInterface, UserLoginDataInterface } from '../../types';
 
 import { Progress } from '../common/Progress/Progress';
 import { Radio } from '../common/Radio/Radio';
@@ -9,9 +9,10 @@ import { BasketDataIsNotLoginHaveAccount } from './BasketDataIsNotLoginHaveAccou
 import { BasketDataNotLoginBuyAsGuest } from './BasketDataNotLoginBuyAsGuest';
 
 import style from './BasketData.module.css';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
-  userData: UserProfileType;
+  userData: UserInterface;
   changeUserData: (name: string, value: string) => void;
   changeUserDataDelivery: (name: string, value: string) => void;
   loginDetails: UserLoginDataInterface;
@@ -24,6 +25,7 @@ interface Props {
 
 export const BasketDataIsNotLogin = ({userData, changeUserData, changeUserDataDelivery, loginDetails, changeLoginDetails, deliveryActive, setDeliveryActive, accept, setAccept,}: Props) => {
 
+  const navigate = useNavigate();
   const [account, setAccount] = useState<string>('Posiadam konto w sklepie');
   let buttonName: string = '';
   const radioData = ['Posiadam konto w sklepie', 'Nie posiadam konta i chcę sie zarejestrować', 'Kontynuuj jako gość'];
@@ -50,6 +52,7 @@ export const BasketDataIsNotLogin = ({userData, changeUserData, changeUserDataDe
           setDeliveryActive={setDeliveryActive}
           accept={accept}
           setAccept={setAccept}
+          setAccount={setAccount}
         />;
       case 'Kontynuuj jako gość':
         buttonName = 'Kontynuuj';

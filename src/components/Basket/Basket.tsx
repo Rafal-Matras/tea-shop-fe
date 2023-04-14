@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { UseUserContext } from '../../context/UserContext';
 import { UseProductContext } from '../../context/ProductContext';
 import { UseBasketContext } from '../../context/BasketContext';
 
@@ -18,16 +17,16 @@ import style from './Basket.module.css';
 
 export const Basket = () => {
 
-  const {user} = UseUserContext();
-  const {allProducts} = UseProductContext()
-  const {basket,fullPrice, setFullPrice} = UseBasketContext();
+  const navigate = useNavigate();
+  const {allProducts} = UseProductContext();
+  const {basket, fullPrice, setFullPrice, setTypeOfDelivery, setTypeOfPayments, setCostOfDelivery} = UseBasketContext();
   const [formOfDelivery, setFormOfDelivery] = useState('Kurier GLS');
   const [formOfPayments, setFormOfPayments] = useState('Przelewy24.pl');
   const [deliveryCost, setDeliveryCost] = useState(8.99);
   const [flag, setFlag] = useState<boolean>(false);
 
   useEffect(() => {
-    setFullPrice(useSetNewFullPrice(basket,allProducts));
+    setFullPrice(useSetNewFullPrice(basket, allProducts));
   }, [flag]);
 
   useEffect(() => {
@@ -41,7 +40,11 @@ export const Basket = () => {
   const handleFormOfPayments = (name: string, value: string) => setFormOfPayments(value);
 
   const handleNext = () => {
-
+    setTypeOfDelivery(formOfDelivery);
+    setTypeOfPayments(formOfPayments);
+    setCostOfDelivery(deliveryCost);
+    navigate('/basket/data');
+    window.scrollTo(0, 0);
   };
 
   return (

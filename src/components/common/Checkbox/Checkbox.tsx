@@ -11,14 +11,16 @@ interface Props {
 export const Checkbox = ({children, active, change}: Props) => {
 
   return (
-    <div className={style.container}>
-      <label className={style.label}>{children}
+    <div className={style.container} >
+      <label className={style.label} >
         <input
           className={style.input}
           type="checkbox"
+          tabIndex={-1}
           onChange={() => change(!active)}
         />
-        <span className={style.checkmark}></span>
+        <span className={style.checkmark} tabIndex={0}></span>
+        {children}
       </label>
     </div>
   );

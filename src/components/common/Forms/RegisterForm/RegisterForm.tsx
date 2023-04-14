@@ -1,11 +1,11 @@
-import { UserProfileType } from '../../../../types';
+import { UserProfileType, UserRegisterInterface } from '../../../../types';
 
 import { Input } from '../../Input/Input';
 
 import style from './RegisterForm.module.css';
 
 interface Props {
-  registrationData: UserProfileType;
+  registrationData: UserRegisterInterface;
   editRegistrationData: (name: string, value: string) => void;
   confirmPassword: string;
   editConfirmPassword: (name: string, value: string) => void;

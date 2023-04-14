@@ -1,21 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { UserInterface, UserLoginDataInterface } from '../../types';
 
 import { UseUserContext } from '../../context/UserContext';
 
 import { BasketDataIsNotLogin } from './BasketDataIsNotLogin';
 import { BasketDataIsLogin } from './BasketDataIsLogin';
-import { UserLoginDataInterface, UserProfileType } from '../../types';
+
+import { defaultUser, defaultUserLogin } from '../../assets/defaultData';
 
 export const BasketData = () => {
 
   const {user} = UseUserContext();
   const [deliveryActive, setDeliveryActive] = useState<boolean>(false);
-  const [userData, setUserData] = useState<UserProfileType>(user);
+  const [userData, setUserData] = useState<UserInterface>(defaultUser);
   const [accept, setAccept] = useState<boolean>(false);
-  const [loginDetails, setLoginDetails] = useState<UserLoginDataInterface>({
-    email: '',
-    password: '',
-  });
+  const [loginDetails, setLoginDetails] = useState<UserLoginDataInterface>(defaultUserLogin);
+
+  useEffect(() => {
+    setUserData(user);
+  }, [user]);
 
   const changeUserData = (name: string, value: string) => {
     setUserData(userData => ({

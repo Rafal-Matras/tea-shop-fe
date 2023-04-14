@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { UserProfileType } from '../../../../types';
 
 import { Radio } from '../../Radio/Radio';

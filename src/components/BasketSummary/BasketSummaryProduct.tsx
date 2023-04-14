@@ -8,23 +8,27 @@ import style from './BasketSummary.module.css';
 
 export const BasketSummaryProduct = () => {
 
-  const {basket, fullPrice} = UseBasketContext();
+  const {basket, fullPrice, costOfDelivery, typeOfDelivery, typeOfPayments} = UseBasketContext();
 
   return (
     <div className={style.sectionProducts}>
       <table className={style.table}>
-          <tr className={style.titleProductSummaryContainer}>
-            <th className={style.thImageAndName} colSpan={2}>Produkty</th>
-            <th className={style.thProductSummaryQuantity}>Ilość</th>
-            <th className={style.thProductSummaryUnitPrice}></th>
-            <th className={style.thProductSummaryPrice}>Wartość</th>
-          </tr>
+        <thead>
+        <tr className={style.titleProductSummaryContainer}>
+          <th className={style.thImageAndName} colSpan={2}>Produkty</th>
+          <th className={style.thProductSummaryQuantity}>Ilość</th>
+          <th className={style.thProductSummaryUnitPrice}></th>
+          <th className={style.thProductSummaryPrice}>Wartość</th>
+        </tr>
+        </thead>
+        <tbody>
         {basket.map(item => (
           <OneProductInSummary
             key={item.id}
             basketItem={item}
           />
         ))}
+        </tbody>
       </table>
       <div className={style.summaryBox}>
         <p className={style.timeDelivery}>Szaczowany czas wysyłki 24h</p>
@@ -33,19 +37,19 @@ export const BasketSummaryProduct = () => {
       <div className={style.summaryBox}>
         <div className={style.textBox}>
           <p className={style.deliveryAndPayment}>Forma dostawy</p>
-          <p className={style.deliveryAndPaymentSpan}></p>
+          <p className={style.deliveryAndPaymentSpan}>{typeOfDelivery}</p>
         </div>
         <div className={style.textBox}>
           <p className={style.deliveryAndPayment}>Forma płatności</p>
-          <p className={style.deliveryAndPaymentSpan}></p>
+          <p className={style.deliveryAndPaymentSpan}>{typeOfPayments}</p>
         </div>
         <div className={style.textBox}>
           <p className={style.deliveryAndPayment}>Koszt przesyłki</p>
-          <p className={style.deliveryAndPaymentSpan}>{useConvertPriceToString(0)} zł</p>
+          <p className={style.deliveryAndPaymentSpan}>{useConvertPriceToString(costOfDelivery)} zł</p>
         </div>
       </div>
       <div className={style.summaryBox}>
-        <p className={style.fullPrice}>razem <span>{useConvertPriceToString(fullPrice)} zł</span></p>
+        <p className={style.fullPrice}>razem <span>{useConvertPriceToString(fullPrice + costOfDelivery)} zł</span></p>
       </div>
     </div>
   );
