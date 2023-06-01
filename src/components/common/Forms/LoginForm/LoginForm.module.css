@@ -4,7 +4,7 @@
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    height: 200px;
+    height: 400px;
 }
 
 .inputBox {
@@ -16,9 +16,11 @@
 
 .forgetPassword {
     margin-top: 10px;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    font-weight: 500;
     text-decoration: none;
     color: var(--primary-color);
+    cursor: pointer;
 }
 
 .errorMassage {
@@ -31,14 +33,78 @@
     color: transparent;
 }
 
+.forgotPwdText {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.invalidEmail {
+    display: flex;
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--third-color);
+}
+
+.invalidEmailNone {
+    display: none;
+}
+
+.buttonBox {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.buttonRegister,
+.buttonLogin {
+    display: flex;
+    justify-content: center;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    width: 45%;
+    max-width: 240px;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--grey-dark);
+}
+
+.buttonLogin {
+    background-color: var(--secondary-color);
+}
+
 @media (min-width: 768px) {
 
     .form {
-        height: 300px;
+        height: 600px;
     }
 
     .inputBox {
         height: 60px;
     }
+}
 
+@media (min-width: 992px) {
+
+    .buttonLogin {
+        cursor: pointer;
+    }
+
+    .buttonRegister,
+    .buttonLogin {
+        box-shadow: none;
+        transition: all .3s;
+    }
+
+    .buttonRegister:hover {
+        box-shadow: 0 0 8px 2px var(--grey-dark);
+    }
+
+    .buttonLogin:hover {
+        box-shadow: 0 0 8px 2px var(--secondary-color);
+    }
 }

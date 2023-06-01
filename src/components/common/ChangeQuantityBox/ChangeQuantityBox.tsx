@@ -5,19 +5,19 @@ interface Props {
   packSize: number;
   unit: 'g' | 'szt';
   state: number;
-  quantityOfProduct: number;
-  setQuantityOfProducts: (number: number) => void;
+  count: number;
+  setCount: (value: number) => void;
   value: string;
   setValue: (name: string) => void;
 }
 
-export const ChangeQuantityBox = ({numberOfUnits, packSize, unit, quantityOfProduct, setQuantityOfProducts, state, value, setValue,}: Props) => {
+export const ChangeQuantityBox = ({numberOfUnits, packSize, unit, count, setCount, state, value, setValue,}: Props) => {
 
   const changeValue = (e: any) => {
     const valueNumber = Number(e);
     const number = numberOfUnits * packSize;
     if (isNaN(valueNumber)) {
-      setValue((number * quantityOfProduct).toString());
+      setValue((number * count).toString());
     }
     if(valueNumber > state){
       setValue(state.toString())
@@ -25,23 +25,23 @@ export const ChangeQuantityBox = ({numberOfUnits, packSize, unit, quantityOfProd
     {
       if (valueNumber % (number) < (number / 2)) {
         setValue((valueNumber - (valueNumber % number)).toString());
-        setQuantityOfProducts((valueNumber - (valueNumber % number)) / number);
+        setCount((valueNumber - (valueNumber % number)) / number);
       } else {
         setValue((valueNumber - (valueNumber % number) + number).toString());
-        setQuantityOfProducts((valueNumber - (valueNumber % number) + number) / number);
+        setCount((valueNumber - (valueNumber % number) + number) / number);
       }
     }
   };
 
   const quantityUp = () => {
-    if ((numberOfUnits * packSize) <= (state - packSize * numberOfUnits * quantityOfProduct)) {
-      setQuantityOfProducts(quantityOfProduct + 1);
+    if ((numberOfUnits * packSize) <= (state - packSize * numberOfUnits * count)) {
+      setCount(count + 1);
     }
   };
 
   const quantityDown = () => {
-    if (quantityOfProduct > 1) {
-      setQuantityOfProducts(quantityOfProduct - 1);
+    if (count > 1) {
+      setCount(count - 1);
     }
   };
 

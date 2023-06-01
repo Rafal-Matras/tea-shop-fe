@@ -1,35 +1,45 @@
-import { UserProfileType } from '../../../../types';
+import { DeliveryRegisterInterface } from '../../../../types';
 
 import { Input } from '../../Input/Input';
 
 import style from './DeliveryForm.module.css';
 
 interface Props {
-  registrationData: UserProfileType;
-  editRegistrationDataDelivery: (name: string, value: string) => void;
+  deliveryData: DeliveryRegisterInterface;
+  editDeliveryData: (name: string, value: string) => void;
 }
 
-export const DeliveryForm = ({registrationData, editRegistrationDataDelivery}: Props) => {
+export const DeliveryForm = ({deliveryData, editDeliveryData}: Props) => {
 
   return (
-    <div className={style.form}>
+    <form className={style.form}>
       <div className={style.inputBox}>
         <Input
           type="text"
           name="deliveryName"
-          value={registrationData.delivery.deliveryName}
+          value={deliveryData.deliveryName}
           displayedName="Imię"
-          change={editRegistrationDataDelivery}
-          required={false}
+          change={editDeliveryData}
+          required={true}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
           name="deliverySurName"
-          value={registrationData.delivery.deliverySurName}
+          value={deliveryData.deliverySurName}
           displayedName="Nazwisko"
-          change={editRegistrationDataDelivery}
+          change={editDeliveryData}
+          required={true}
+        />
+      </div>
+      <div className={style.inputBox}>
+        <Input
+          type="text"
+          name="deliveryCompanyName"
+          value={deliveryData.deliveryCompanyName}
+          displayedName="Nazwa firmy"
+          change={editDeliveryData}
           required={false}
         />
       </div>
@@ -37,42 +47,42 @@ export const DeliveryForm = ({registrationData, editRegistrationDataDelivery}: P
         <Input
           type="text"
           name="deliveryStreet"
-          value={registrationData.delivery.deliveryStreet}
+          value={deliveryData.deliveryStreet}
           displayedName="Ulica"
-          change={editRegistrationDataDelivery}
+          change={editDeliveryData}
           required={false}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
-          name="deliveryHomeNumber"
-          value={registrationData.delivery.deliveryHomeNumber}
-          displayedName="Nr. domu"
-          change={editRegistrationDataDelivery}
-          required={false}
+          name="deliveryFlatNumber"
+          value={deliveryData.deliveryFlatNumber}
+          displayedName="Nr. lokalu"
+          change={editDeliveryData}
+          required={true}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
           name="deliveryPostCode"
-          value={registrationData.delivery.deliveryPostCode}
+          value={deliveryData.deliveryPostCode}
           displayedName="Kod pocztowy"
-          change={editRegistrationDataDelivery}
-          required={false}
+          change={editDeliveryData}
+          required={true}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
           name="deliveryCity"
-          value={registrationData.delivery.deliveryCity}
+          value={deliveryData.deliveryCity}
           displayedName="Miejscowość"
-          change={editRegistrationDataDelivery}
-          required={false}
+          change={editDeliveryData}
+          required={true}
         />
       </div>
-    </div>
+    </form>
   );
 };

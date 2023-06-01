@@ -1,9 +1,9 @@
 import { ChangeEvent, CSSProperties, useState } from 'react';
 
+import { config } from '../../../config/config';
+
 import { ShowIcon } from '../SvgIcons/ShowIcon';
 import { HideIcon } from '../SvgIcons/HideIcon';
-
-import { REGEX_EMAIL, REGEX_PASSWORD, REGEX_POSTCODE } from '../../../assets/regexFiles';
 
 import style from './Input.module.css';
 
@@ -16,9 +16,20 @@ interface Props {
   change: (name: string, value: string) => void;
   required: boolean;
   samePassword?: () => boolean;
+  checkEmail?: (email: string) => Promise<Response>;
 }
 
-export const Input = ({styles, type, name, displayedName, value, change, required, samePassword}: Props) => {
+export const Input = ({
+                        styles,
+                        type,
+                        name,
+                        displayedName,
+                        value,
+                        change,
+                        required,
+                        samePassword,
+                        checkEmail,
+                      }: Props) => {
 
   const [errorText, setErrorText] = useState<string>('');
   const [active, setActive] = useState<boolean>(false);
@@ -27,22 +38,45 @@ export const Input = ({styles, type, name, displayedName, value, change, require
     return value.match(reg);
   };
 
-  const checkData = () => {
+  const checkData = async () => {
     if (required && value === '') {
       setErrorText('To pole jest wymagane.');
-    } else if (name === 'email' && !checkReg(REGEX_EMAIL)) {
+      return;
+    }
+    if (name === 'email' && !checkReg(config.REGEX_EMAIL)) {
       setErrorText('Niepoprawny email');
-    } else if ((name === 'password' || name === 'confirmPassword') && !checkReg(REGEX_PASSWORD)) {
-      setErrorText('niepoprawne hasło ');
-    } else if (name === 'postCode' && !checkReg(REGEX_POSTCODE)) {
-      setErrorText('niepoprawny kod pocztowy');
-    } else if (name === 'confirmPassword') {
-      if (samePassword) {
-        if (!samePassword()) {
-          setErrorText('Hasła muszą być takie same');
-        } else setErrorText('');
+      return;
+    }
+    if (name === 'email' && checkEmail) {
+      const data = await checkEmail(value);
+      if (data.ok) {
+        setErrorText('Taki email już istnieje');
+        return;
       }
-    } else setErrorText('');
+    }
+    if ((name === 'pwdHash' || name === 'confirmPassword') && !checkReg(config.REGEX_PASSWORD)) {
+      setErrorText('niepoprawne hasło ');
+      return;
+    }
+    if (name === 'postCode' && !checkReg(config.REGEX_POSTCODE)) {
+      setErrorText('niepoprawny kod pocztowy ( 00-000 )');
+      return;
+    }
+    if (name === 'phone' && !checkReg(config.REGEX_PHONE)) {
+      setErrorText('niepoprawny numer telefonu');
+      return;
+    }
+    if (name === 'nip' && !checkReg(config.REGEX_NIP)) {
+      setErrorText('niepoprawny numer nip');
+      return;
+    }
+    if (name === 'confirmPassword' && samePassword) {
+      if (!samePassword()) {
+        setErrorText('Hasła muszą być takie same');
+        return;
+      }
+    }
+    setErrorText('');
   };
 
   return (

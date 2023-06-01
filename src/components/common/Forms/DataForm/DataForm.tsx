@@ -1,63 +1,64 @@
-import { UserProfileType } from '../../../../types';
+import { UserRegisterInterface } from '../../../../types';
 
 import { Radio } from '../../Radio/Radio';
 import { Input } from '../../Input/Input';
 
 import style from './DataForm.module.css';
+
 interface Props {
-  registrationData: UserProfileType;
-  editRegistrationData: (name: string, value: string) => void;
+  userData: UserRegisterInterface;
+  editUserData: (name: string, value: string) => void;
 }
 
-export const DataForm = ({registrationData, editRegistrationData}: Props) => {
+export const DataForm = ({userData, editUserData}: Props) => {
 
   return (
     <form className={style.form}>
       <Radio
         data={['Paragon', 'Faktura VAT']}
         name="Rachunek"
-        account={registrationData.accountType}
-        setAccount={editRegistrationData}
+        account={userData.documentType}
+        setAccount={editUserData}
       />
       <div className={style.inputBox}>
         <Input
           type="text"
           name="name"
-          value={registrationData.name}
+          value={userData.name}
           displayedName="Imię"
-          change={editRegistrationData}
-          required={false}
+          change={editUserData}
+          required={true}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
           name="surName"
-          value={registrationData.surName}
+          value={userData.surName}
           displayedName="Nazwisko"
-          change={editRegistrationData}
-          required={false}
+          change={editUserData}
+          required={true}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
           name="companyName"
-          value={registrationData.companyName}
+          value={userData.companyName}
           displayedName="Nazwa firmy"
-          change={editRegistrationData}
+          change={editUserData}
           required={false}
         />
       </div>
-      {registrationData.accountType === 'Faktura VAT'
+      {userData.documentType === 'Faktura VAT'
         ? <div className={style.inputBox}>
           <Input
             type="text"
             name="nip"
-            value={registrationData.nip}
+            value={userData.nip}
             displayedName="Nip"
-            change={editRegistrationData}
-            required={false}
+            change={editUserData}
+            required={true}
           />
         </div>
         : null
@@ -66,19 +67,19 @@ export const DataForm = ({registrationData, editRegistrationData}: Props) => {
         <Input
           type="text"
           name="street"
-          value={registrationData.street}
+          value={userData.street}
           displayedName="Ulica"
-          change={editRegistrationData}
-          required={false}
+          change={editUserData}
+          required={true}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
-          name="homeNumber"
-          value={registrationData.homeNumber}
+          name="flatNumber"
+          value={userData.flatNumber}
           displayedName="Nr. domu"
-          change={editRegistrationData}
+          change={editUserData}
           required={false}
         />
       </div>
@@ -86,30 +87,30 @@ export const DataForm = ({registrationData, editRegistrationData}: Props) => {
         <Input
           type="text"
           name="postCode"
-          value={registrationData.postCode}
+          value={userData.postCode}
           displayedName="Kod pocztowy"
-          change={editRegistrationData}
-          required={false}
+          change={editUserData}
+          required={true}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
           name="city"
-          value={registrationData.city}
+          value={userData.city}
           displayedName="Miejscowość"
-          change={editRegistrationData}
-          required={false}
+          change={editUserData}
+          required={true}
         />
       </div>
       <div className={style.inputBox}>
         <Input
           type="text"
           name="phone"
-          value={registrationData.phone}
+          value={userData.phone}
           displayedName="Telefon"
-          change={editRegistrationData}
-          required={false}
+          change={editUserData}
+          required={true}
         />
       </div>
     </form>
