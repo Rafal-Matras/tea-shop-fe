@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.box,
+.activeBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 4px;
+    width: 34px;
+    height: 34px;
+    padding: 2px;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--primary-color);
+    background-color: #fff;
+    transition: color .6s, background-color .6s;
+}
+
+.activeBox {
+    color: #fff;
+    background-color: var(--primary-color);
+}
