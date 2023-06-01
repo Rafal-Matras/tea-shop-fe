@@ -4,12 +4,12 @@ import style from './DeliveryAndPayments.module.css';
 
 interface Props {
   formOfPayments: string;
-  setFormOfPayments: (name: string,value:string) => void;
+  setFormOfPayments: (name: string, value: string) => void;
 }
 
 export const Payments = ({formOfPayments, setFormOfPayments}: Props) => {
 
-  const dataPayments: string[] = ['Przelewy24.pl', 'Visa / Mastercard', 'Blik', 'Tradycyjny przelew', 'Za pobraniem'];
+  const dataPayments: string[] = ['przelewy24.pl', 'visa / mastercard', 'blik', 'tradycyjny przelew', 'za pobraniem'];
 
   return (
     <div className={style.payments}>
