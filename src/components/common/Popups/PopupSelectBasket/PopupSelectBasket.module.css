@@ -1,0 +1,133 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.infoBox {
+    margin-top: 10%;
+    width: 100%;
+    max-width: 700px;
+    background-color: #fff;
+}
+
+.title,
+.titleSecond {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: .1rem;
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+.title {
+    padding-top: 10px;
+    font-size: 1.6rem;
+}
+
+.basketsBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.basket {
+    width: 96%;
+}
+
+.basketTitle{
+    font-weight: 500;
+}
+
+.basketList {
+    width: 100%;
+    font-weight: 500;
+    border-collapse: collapse;
+}
+
+.basketList td:nth-child(1) {
+    width: 5%;
+}
+
+.basketList td:nth-child(2) {
+    width: 60%;
+}
+
+.basketList td:nth-child(3),
+.basketList td:nth-child(4) {
+    width: 15%;
+}
+
+.buttonBox {
+    display: none;
+}
+
+.buttonMobile,
+.button {
+    padding: 10px;
+    width: 96%;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    color: #fff;
+    background-color: var(--secondary-color);
+}
+
+.buttonMobile {
+    margin: 10px 0;
+}
+
+@media (min-width: 786px) {
+
+    .infoBox{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+    }
+
+    .basketsBox {
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .basket{
+        width: 48%;
+    }
+
+    .basketTitle{
+        padding: 5px;
+        text-align: center;
+    }
+
+    .buttonMobile {
+        display: none;
+    }
+
+    .buttonBox {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 40px 0 20px;
+        width: 96%;
+    }
+
+    .button {
+        width: 46%;
+    }
+}

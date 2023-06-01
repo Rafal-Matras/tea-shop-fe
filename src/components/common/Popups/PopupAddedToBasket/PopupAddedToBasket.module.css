@@ -1,0 +1,140 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.box {
+    width: 100%;
+    max-width: 700px;
+}
+
+.title {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+.delivery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    font-size: 1.4rem;
+    background-color: var(--grey-light);
+}
+
+.product {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin-bottom: -1px;
+    padding: 30px 0 5px;
+    background-color: #fff;
+}
+
+.image {
+    width: 40%;
+    max-width: 160px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+}
+
+.name {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.categoryType {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.categoryTypeName {
+    font-size: 1.2rem;
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -1px;
+    padding: 10px 0;
+    width: 100%;
+    font-size: 2.6rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    background-color: #fff;
+}
+
+.price span {
+    padding-left: 4px;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.buttonBox {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+}
+
+.button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    border: none;
+    border-radius: 5px;
+    width: 48%;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: #fff;
+    background-color: #717171;
+}
+
+.icon {
+    display: none;
+}
+
+.button:nth-child(2) {
+    background-color: var(--secondary-color);
+}
+
+@media (min-width: 768px) {
+
+    .icon {
+        display: block;
+        position: absolute;
+        left: 10px;
+        fill: #fff;
+    }
+
+}
