@@ -1,4 +1,4 @@
-import {  useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { ProductsListInterface } from '../../types';
@@ -8,11 +8,12 @@ import { UseProductContext } from '../../context/ProductContext';
 import { SearchIcon } from '../common/SvgIcons/SearchIcon';
 
 import style from './Header.module.css';
+import { config } from '../../config/config';
 
 export const Search = () => {
 
   const navigate = useNavigate();
-  const {allProducts, setProductName, setProductType} = UseProductContext();
+  const {setProductName, setProductType} = UseProductContext();
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchList, setSearchList] = useState<ProductsListInterface[]>([]);
 
@@ -20,8 +21,12 @@ export const Search = () => {
     if (searchValue === '') {
       setSearchList([]);
     } else {
-      const list = allProducts.filter(item => item.name.toLowerCase().includes(searchValue.toLowerCase()));
-      setSearchList(list);
+      (async () => {
+        const response = await fetch(`${config.URL}shop/search/${searchValue}`);
+        const list = await response.json();
+        setSearchList(list);
+      })();
+
     }
   }, [searchValue]);
 
@@ -53,7 +58,7 @@ export const Search = () => {
             <Link
               className={style.searchListItem}
               key={item.id}
-              to={`/product/:${item.id}`}
+              to={`/product/${item.id}`}
               onClick={() => setSearchValue('')}
             >{item.name} - {item.category} {item.type?.[0]}</Link>
           ))

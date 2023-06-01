@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { UseUserContext } from '../../context/UserContext';
 import { UseBasketContext } from '../../context/BasketContext';
@@ -7,20 +8,48 @@ import { UseProductContext } from '../../context/ProductContext';
 import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
 import { useSetNewFullPrice } from '../../hooks/useSetNewFullPrice';
 
+import { config } from '../../config/config';
+
 import { BasketIcon } from '../common/SvgIcons/BasketIcon';
+import { defaultUser } from '../../assets/defaultData';
 
 import style from './Header.module.css';
-import { useEffect } from 'react';
 
 export const BasketBox = () => {
 
-  const {user} = UseUserContext();
-  const {allProducts, setActiveProductType} = UseProductContext();
-  const {fullPrice, setFullPrice, basket} = UseBasketContext();
+  const {user, setUser} = UseUserContext();
+  const {setActiveProductType} = UseProductContext();
+  const {fullPrice,setFullPrice, basket} = UseBasketContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setFullPrice(useSetNewFullPrice(basket, allProducts));
+    (async () => {
+      setFullPrice(await useSetNewFullPrice(basket));
+    })();
   }, [basket]);
+
+  const handleClick = () => {
+    setActiveProductType('');
+    window.scrollTo(0, 0);
+  };
+
+  const logout = async () => {
+    try {
+      const response = await fetch(`${config.URL}auth/logout`, {
+        credentials: 'include',
+      });
+      const data = await response.json();
+      if (!data.logout) {
+        navigate('/user/logout');
+        return {isSuccess: false};
+      }
+      setUser(defaultUser);
+      navigate('/user/logout');
+      return {isSuccess: true};
+    } catch (err) {
+      throw new Error('New error message', {cause: err});
+    }
+  };
 
   return (
     <div className={style.basketBox}>
@@ -35,29 +64,28 @@ export const BasketBox = () => {
             ? <Link
               className={style.basketBottomText}
               to="/user/profile"
-              onClick={() => setActiveProductType('')}
+              onClick={handleClick}
             >panel klienta
             </Link>
             : <Link
               className={style.basketBottomText}
               to="/user/login"
-              onClick={() => setActiveProductType('')}
+              onClick={handleClick}
             >logowanie
             </Link>
           }
         </div>
         <div className={style.basketBottomBox}>
           {user.role === 'user'
-            ? <Link
+            ? <button
               className={style.basketBottomText}
-              to="/user/logout"
-              onClick={() => setActiveProductType('')}
+              onClick={logout}
             >wyloguj
-            </Link>
+            </button>
             : <Link
               className={style.basketBottomText}
               to="/user/register"
-              onClick={() => setActiveProductType('')}
+              onClick={handleClick}
             >rejestracja
             </Link>
           }
