@@ -1,5 +1,5 @@
 import { UserInterface } from './userTypes';
-import { BasketInterface, ProductsListInterface } from './productsTypes';
+import { BasketInterface } from './productsTypes';
 
 export interface UserContextInterface {
   user: UserInterface;
@@ -7,25 +7,29 @@ export interface UserContextInterface {
 }
 
 export interface ProductContextInterface {
-  allProducts: ProductsListInterface[];
-  setAllProducts: (product: ProductsListInterface[]) => void;
   productName: string;
   setProductName: (name: string) => void;
   productType: string;
   setProductType: (name: string) => void;
   activeProductType: string;
   setActiveProductType: (name: string) => void;
+  currentPage: number;
+  setCurrentPage: (number: number) => void;
 }
 
 export interface BasketContextInterface {
-  basket: BasketInterface[],
+  basket: BasketInterface[];
   setBasket: (basket: BasketInterface[]) => void;
   fullPrice: number;
   setFullPrice: (price: number) => void;
-  typeOfDelivery:string,
-  setTypeOfDelivery:(name:string) => void,
-  typeOfPayments: string,
-  setTypeOfPayments:(name:string) => void,
-  costOfDelivery:number,
-  setCostOfDelivery:(number:number) => void
+  orderStart: boolean;
+  setOrderStart: (boolean: boolean) => void;
+  formOfDelivery: string;
+  setFormOfDelivery: (delivery: string) => void;
+  formOfPayments: string;
+  setFormOfPayments: (payment: string) => void;
+  deliveryCost: number;
+  setDeliveryCost: (deliveryCost: number) => void;
+  selectedBasket: 'local' | 'server' | null;
+  setSelectedBasket: (selected: 'local' | 'server' | null) => void;
 }

@@ -1,72 +1,57 @@
+import { DocumentType } from './productsTypes';
+
+export interface DeliveryUserInterface {
+  deliveryName: string;
+  deliverySurName: string;
+  deliveryCompanyName: string;
+  deliveryStreet: string;
+  deliveryFlatNumber: string;
+  deliveryPostCode: string;
+  deliveryCity: string;
+}
+
+export enum Role {
+  admin = 'admin',
+  user = 'user',
+}
+
 export interface UserInterface {
   id: string;
-  role: '' | 'user' | 'admin';
+  role: Role | null;
   email: string;
-  password: string,
-  accountType: 'Paragon' | 'Faktura VAT';
+  pwdHash: string,
+  documentType: DocumentType;
   name: string;
   surName: string;
   companyName: string;
   nip: string;
   street: string;
-  homeNumber: string;
+  flatNumber: string;
   postCode: string;
   city: string;
   phone: string;
+  otherDeliveryAddress: 1 | 0;
   delivery: DeliveryUserInterface;
 }
 
-export interface DeliveryUserInterface {
-  deliveryName: string;
-  deliverySurName: string;
-  deliveryStreet: string;
-  deliveryHomeNumber: string;
-  deliveryPostCode: string;
-  deliveryCity: string;
-}
+export type UserProfileType = Omit<UserInterface, 'role' | 'pwdHash'>
 
-export type UserProfileType = Omit<UserInterface, 'role' | 'password'>
-
-export type UserRegisterInterface = Omit<UserInterface, 'role'>
+export type UserRegisterInterface = Omit<UserInterface, 'delivery'>
+export type DeliveryRegisterInterface = DeliveryUserInterface;
 
 export interface UserLoginDataInterface {
   email: string;
-  password: string;
+  pwdHash: string;
 }
+
+export interface ChangePasswordForgotInterface {
+  pwd: string;
+  confirmPwd: string;
+}
+
 
 export interface ChangePasswordInterface {
-  password: string,
-  newPassword: string;
-  confirmNewPassword: string;
+  pwdHash: string,
+  newPwd: string;
+  confirmNewPwd: string;
 }
-
-export type DataToAccountType = Omit<UserInterface, 'id' | 'role' | 'email' | 'password' | 'delivery'>
-
-export interface HistoryOrdersInterface {
-  orderNumber: string;
-  data: string;
-  price: string;
-  deliveryPrice: string;
-  provider: string;
-  trackingNumber: string;
-  dataToAccount: DataToAccountType;
-  status: OrderStatusEnum;
-  order: OrderDetailsInterface[];
-}
-
-export enum OrderStatusEnum {
-  new = 'Nowe',
-  implemented = 'Realizowany',
-  sent = 'Wysłano',
-  done = 'Zakończony',
-}
-
-export interface OrderDetailsInterface {
-  productId: string;
-  image: string;
-  name: string;
-  amount: string;
-  price: string;
-}
-
-export type ActivePageType = 'data' | 'password' | 'history' | 'details';
