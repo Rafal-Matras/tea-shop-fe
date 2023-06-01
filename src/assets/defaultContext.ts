@@ -1,7 +1,7 @@
 import {
   BasketContextInterface,
   BasketInterface,
-  ProductContextInterface, ProductsListInterface,
+  ProductContextInterface,
   UserContextInterface,
   UserInterface,
 } from '../types';
@@ -16,33 +16,39 @@ export const defaultUserContext: UserContextInterface = {
 
 export const defaultProductContext: ProductContextInterface = {
   activeProductType: '',
-  allProducts: [],
   productName: '',
   productType: '',
+  currentPage: 0,
   setActiveProductType: (name: string): void => {
-  },
-  setAllProducts: (product: ProductsListInterface[]): void => {
   },
   setProductName: (name: string): void => {
   },
   setProductType: (name: string): void => {
   },
+  setCurrentPage: (number: number): void => {
+  },
 };
 
 export const defaultBasketContext: BasketContextInterface = {
   basket: [] as BasketInterface[],
+  fullPrice: 0,
+  orderStart: false,
+  formOfDelivery: 'kurier GLS',
+  formOfPayments: 'przelewy24.pl',
+  deliveryCost: 0,
+  selectedBasket: null,
   setBasket: (basket: BasketInterface[]): void => {
   },
-  fullPrice: 0,
   setFullPrice: (price: number): void => {
   },
-  typeOfDelivery: '',
-  setTypeOfDelivery: (name: string): void => {
+  setOrderStart: (boolean: boolean): void => {
   },
-  typeOfPayments: '',
-  setTypeOfPayments: (name: string): void => {
+  setFormOfDelivery: (delivery: string): void => {
   },
-  costOfDelivery: 0,
-  setCostOfDelivery: (number: number): void => {
+  setFormOfPayments: (payments: string): void => {
+  },
+  setDeliveryCost: (cost: number): void => {
+  },
+  setSelectedBasket: (selected: 'local' | 'server' | null): void => {
   },
 };

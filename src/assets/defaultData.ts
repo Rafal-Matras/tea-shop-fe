@@ -1,6 +1,9 @@
 import {
   BasketOneProductInterface,
   Category,
+  ChangePasswordForgotInterface,
+  DeliveryRegisterInterface,
+  DocumentType,
   ProductInterface,
   UserInterface,
   UserLoginDataInterface,
@@ -9,24 +12,26 @@ import {
 
 export const defaultUser: UserInterface = {
   id: '',
-  role: '',
+  role: null,
   email: '',
-  accountType: 'Paragon',
-  password: '',
+  documentType: DocumentType.receipt,
+  pwdHash: '',
   name: '',
   surName: '',
   companyName: '',
   nip: '',
   street: '',
-  homeNumber: '',
+  flatNumber: '',
   postCode: '',
   city: '',
   phone: '',
+  otherDeliveryAddress: 0,
   delivery: {
     deliveryName: '',
     deliverySurName: '',
+    deliveryCompanyName:'',
     deliveryStreet: '',
-    deliveryHomeNumber: '',
+    deliveryFlatNumber: '',
     deliveryPostCode: '',
     deliveryCity: '',
   },
@@ -34,31 +39,40 @@ export const defaultUser: UserInterface = {
 
 export const defaultUserLogin: UserLoginDataInterface = {
   email: '',
-  password: '',
+  pwdHash: '',
 };
 
 export const defaultUserRegister: UserRegisterInterface = {
   id: '',
+  role: null,
   email: '',
-  password: '',
-  accountType: 'Paragon',
+  pwdHash: '',
+  documentType: DocumentType.receipt,
   name: '',
   surName: '',
   companyName: '',
   nip: '',
   street: '',
-  homeNumber: '',
+  flatNumber: '',
   postCode: '',
   city: '',
   phone: '',
-  delivery: {
-    deliveryName: '',
-    deliverySurName: '',
-    deliveryStreet: '',
-    deliveryHomeNumber: '',
-    deliveryPostCode: '',
-    deliveryCity: '',
-  },
+  otherDeliveryAddress: 0,
+};
+
+export const defaultChangePassword: ChangePasswordForgotInterface = {
+  pwd: '',
+  confirmPwd: '',
+};
+
+export const defaultDeliveryRegister: DeliveryRegisterInterface = {
+  deliveryName: '',
+  deliverySurName: '',
+  deliveryCompanyName:'',
+  deliveryStreet: '',
+  deliveryFlatNumber: '',
+  deliveryPostCode: '',
+  deliveryCity: '',
 };
 
 export const productDefault: ProductInterface = {
@@ -69,7 +83,7 @@ export const productDefault: ProductInterface = {
   image: '',
   price: 0,
   promo: null,
-  numberOfUnits: 50,
+  numberOfUnits: 0,
   unit: 'g',
   state: 0,
   forGift: null,
@@ -98,38 +112,4 @@ export const oneProductInBasketDefault: BasketOneProductInterface = {
   numberOfUnits: 0,
   unit: 'g',
   state: 0,
-};
-
-// export const defaultBasket: BasketInterface = {
-//   id: '',
-//   userId: '',
-//   productId: '',
-//   packSize: 0,
-//   quantityOfProduct: 0,
-// };
-
-
-export const defaultUserActive: UserInterface = {
-  id: '123',
-  role: 'user',
-  email: 'rafal@gmail.com',
-  password: 'brpio3t89hgehugh87sehiuh',
-  accountType: 'Paragon',
-  name: 'Rafał',
-  surName: 'Matraś',
-  companyName: 'APB S.A.',
-  nip: '123-123-85-85',
-  street: 'Nowodworska 29b',
-  homeNumber: '103',
-  postCode: '03-140',
-  city: 'Warszawa',
-  phone: '606 455 202',
-  delivery: {
-    deliveryName: 'Rafał ',
-    deliverySurName: 'Matraś',
-    deliveryStreet: 'Nowa',
-    deliveryHomeNumber: '12 m 1',
-    deliveryPostCode: '03-123',
-    deliveryCity: 'Warszawa',
-  },
 };
