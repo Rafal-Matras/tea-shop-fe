@@ -7,7 +7,7 @@ export const TeaShopDescription = () => {
   return (
     <section className={style.container}>
       <TitleBar title="Sklep z herbatą - herbaciany zakątek"/>
-      <img className={style.image} src="/images/photo/herbata-opis.webp" alt="widok herbacianego pola"/>
+      <img className={style.image} src="/images/onPage/herbata-opis.webp" alt="widok herbacianego pola"/>
       <p className={style.text}><strong>KerbacianyZakatek.pl to sklep internetowy z herbatami.</strong> Pomysł na naszą
         działalność zrodził się z zamiłowania do herbat i ziół. Picie oraz korzystanie z dobrodziejstw herbat i ziół to
         dla nas tradycja. Istniejemy już blisko 20 lat na rynku.</p>

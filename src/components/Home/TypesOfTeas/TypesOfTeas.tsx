@@ -9,15 +9,20 @@ import { OneTypeOfTea } from './OneTypeOfTea';
 import { ArrowLeftIcon } from '../../common/SvgIcons/ArrowLeftIcon';
 import { ArrowRightIcon } from '../../common/SvgIcons/ArrowRightIcon';
 
-import { teaTypes } from '../../../assets/teaTypes';
+import { teaTypes } from '../../../assets/data';
 
 import style from './TypesOfTeas.module.css';
+import { useNavigate } from 'react-router-dom';
+import { CloseIcon } from '../../common/SvgIcons/CloseIcon';
 
 export const TypesOfTeas = () => {
 
+  const navigate = useNavigate();
   const {setProductType, setProductName} = UseProductContext();
   const [positionNumber, setPositionNumber] = useState<number>(0);
   const [value, setValue] = useState<number>(0);
+  const [moreOfTea, setMoreOfTea] = useState<boolean>(false);
+  const [typeIndex, setTypeIndex] = useState<number>(0);
   let multiplier = 1;
 
   useEffect(() => {
@@ -72,9 +77,11 @@ export const TypesOfTeas = () => {
     }
   };
 
-  const transformToPage = (name: string) => {
+  const goToTeas = () => {
+    setMoreOfTea(false);
     setProductName('herbaty');
-    setProductType(name);
+    setProductType(teaTypes[typeIndex].type);
+    navigate('/shop');
   };
 
   return (
@@ -85,16 +92,37 @@ export const TypesOfTeas = () => {
         <button className={style.rightButton}>
           <ArrowRightIcon className={style.arrowIcon} onClick={positionNumberUp}/></button>
       </TitleBar>
-      <div className={style.teaTypeBox}>
-        {teaTypes.map(item => (
-          <OneTypeOfTea
-            key={item.name}
-            item={item}
-            value={value}
-            transformToPage={transformToPage}
-          />
-        ))}
-      </div>
+      {moreOfTea
+        ? <div className={style.description}>
+          <button
+            className={style.descriptionClose}
+            onClick={() => setMoreOfTea(false)}
+          ><CloseIcon className={style.descriptionIcon}/>
+          </button>
+          <div className={style.descriptionBox}>
+            <h1 className={style.descriptionTitle}>{teaTypes[typeIndex].name}</h1>
+            <img
+              className={style.descriptionImage}
+              src={`/images/tea-types/${teaTypes[typeIndex].image}`}
+              alt="zdjęcie herbaty"
+            />
+          </div>
+          <div className={style.descriptionText}>{teaTypes[typeIndex].fullDescription}</div>
+          <button className={style.descriptionButton} onClick={goToTeas}>Przejdź do herbat</button>
+        </div>
+        : <div className={style.teaTypeBox}>
+          {teaTypes.map((item, index) => (
+            <OneTypeOfTea
+              key={item.name}
+              item={item}
+              index={index}
+              value={value}
+              setMoreOfTea={setMoreOfTea}
+              setTypeIndex={setTypeIndex}
+            />
+          ))}
+        </div>
+      }
     </section>
   );
 };

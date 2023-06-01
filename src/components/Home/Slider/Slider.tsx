@@ -7,50 +7,36 @@ import { UseProductContext } from '../../../context/ProductContext';
 
 import style from './Slider.module.css';
 
-import { sliderData } from '../../../assets/sliderList';
+import { sliderList } from '../../../assets/data';
+import { Spinner } from '../../common/Spinner/Spinner';
 
 export const Slider = () => {
 
-  const {setProductName, setProductType} = UseProductContext();
-  const [slidersList, setSlidersList] = useState<SliderInterface[]>([]);
-  const [activeSlide, setActiveSlide] = useState<SliderInterface | null>(null);
+  const {setProductName, setProductType,setActiveProductType} = UseProductContext();
+  const [activeSlide, setActiveSlide] = useState<SliderInterface>(sliderList[0]);
 
   useEffect(() => {
-    // (async () => {
-    //   const response = await fetch(URL - slider);
-    //   const data = await response.json();
-    //   setSlidersList(data);
-    // })();
+    const interval = setInterval(() => {
+      if (activeSlide.id < sliderList.length) {
+        const currentSlider = sliderList.find(item => item.id === activeSlide.id + 1);
+        if (currentSlider) setActiveSlide(currentSlider);
+      } else {
+        const currentSlider = sliderList.find(item => item.id === 1);
+        if (currentSlider) setActiveSlide(currentSlider);
+      }
+    }, 5000);
+    return () => clearInterval(interval);
 
-
-    setSlidersList(sliderData);
-  }, []);
-
-  useEffect(() => {
-    if (slidersList) {
-      setActiveSlide(slidersList[0]);
-    }
-  }, [slidersList]);
-
-  useEffect(() => {
-    if (activeSlide) {
-      const interval = setInterval(() => {
-        if (activeSlide.id < slidersList.length) {
-          const currentSlider = sliderData.find(item => item.id === activeSlide.id + 1);
-          if (currentSlider) setActiveSlide(currentSlider);
-        } else {
-          const currentSlider = sliderData.find(item => item.id === 1);
-          if (currentSlider) setActiveSlide(currentSlider);
-        }
-      }, 5000);
-      return () => clearInterval(interval);
-    }
   }, [activeSlide]);
 
   const goToCurrentPage = () => {
+    setProductName('');
+    setProductType('');
     if (activeSlide) {
       setProductName(activeSlide.product);
-      if (activeSlide.productType) setProductType(activeSlide.productType);
+      if (activeSlide.productType) {
+        setProductType(activeSlide.productType);
+      }
     }
   };
 
@@ -64,18 +50,15 @@ export const Slider = () => {
           />
         </Link>
         <div className={style.sliderNav}>
-          {slidersList.map(item => (
+          {sliderList.map(item => (
             <button
               key={item.id}
-              className={`
-              ${style.sliderNavButton}
-              ${item.id === activeSlide.id ? style.active : null}
-              `}
+              className={item.id === activeSlide.id ? style.sliderNavButtonActive : style.sliderNavButton}
               onClick={() => setActiveSlide(item)}
             ></button>
           ))}
         </div>
       </div>
-      : <h1>Loading...</h1>
+      : <Spinner/>
   );
 };

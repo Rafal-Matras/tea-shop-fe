@@ -6,35 +6,32 @@ import style from './TypesOfTeas.module.css';
 
 interface Props {
   item: TeaTypeInterface;
+  index: number;
   value: number;
-  transformToPage: (name: string) => void;
+  setMoreOfTea: (boolean: boolean) => void;
+  setTypeIndex: (name: number) => void;
 }
 
-export const OneTypeOfTea = ({item, value, transformToPage}: Props) => {
+export const OneTypeOfTea = ({item, index, value, setMoreOfTea, setTypeIndex}: Props) => {
+
+  const expandDescription = () => {
+    setMoreOfTea(true);
+    setTypeIndex(index);
+  };
 
   return (
     <div
       className={style.teaType}
       style={{left: `-${value}px`}}
       key={item.name}>
-      <Link to="/shop">
         <img
           className={style.teaTypeImage}
           src={`/images/tea-types/${item.image}`}
           alt="zdjęcie herbaty"
-          onClick={() => transformToPage(item.type)}
         />
-      </Link>
-      <Link to="/shop"
-            className={style.teaTypeTitle}
-            onClick={() => transformToPage(item.type)}
-      >{item.name}
-      </Link>
+      <h1 className={style.teaTypeTitle}>{item.name}</h1>
       <p className={style.teaTypeText}>{item.description}</p>
-      <Link to="/shop"
-            className={style.teaTypeButton}
-            onClick={() => transformToPage(item.type)}
-      >{item.name}</Link>
+      <button className={style.teaTypeButton} onClick={expandDescription}>Czytaj więcej</button>
     </div>
   );
 };
