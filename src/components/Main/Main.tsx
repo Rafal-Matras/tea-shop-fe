@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
+import { Role } from '../../types';
+
 import { HomeViews } from '../../views/HomeViews';
 import { NotFoundViews } from '../../views/NotFoundViews';
 import { ShopViews } from '../../views/ShopViews';
@@ -23,6 +25,7 @@ import { HowDoWePackageView } from '../../views/HowDoWePackageView';
 import { ReturnPolicyViews } from '../../views/ReturnPolicyViews';
 import { PrivacyPolicyViews } from '../../views/PrivacyPolicyViews';
 import { ForgotPasswordViews } from '../../views/ForgotPasswordViews';
+import { SecurePath } from '../common/SecurePath';
 
 import style from '../App/App.module.css';
 
@@ -45,18 +48,18 @@ export const Main = () => {
         <Route path="/user/login" element={<LoginViews/>}/>
         <Route path="/user/register" element={<RegisterViews/>}/>
         <Route path="/user/forgot-password/:id" element={<ForgotPasswordViews/>}/>
-        <Route path="/user/profile" element={<UserProfileViews/>}/>
+        <Route path="/user/profile" element={<SecurePath role={Role.user} view={<UserProfileViews/>}/>}/>
 
         <Route path="/basket" element={<BasketViews/>}/>
         <Route path="/basket/data" element={<BasketDataViews/>}/>
         <Route path="/basket/summary" element={<BasketSummaryViews/>}/>
         <Route path="/basket/done" element={<BasketDoneViews/>}/>
 
-        <Route path="/admin/admin-panel" element={<AdminPanelViews/>}/>
-        <Route path="/admin/products-list" element={<AdminProductsListViews/>}/>
-        <Route path="/admin/product-add" element={<AdminAddProductViews/>}/>
-        <Route path="/admin/active-orders-list" element={<AdminListOfActiveOrdersViews/>}/>
-        <Route path="/admin/complete-orders-list" element={<AdminListOfCompletedOrdersViews/>}/>
+        <Route path="/admin/admin-panel" element={<SecurePath role={Role.admin} view={<AdminPanelViews/>}/>}/>
+        <Route path="/admin/products-list" element={<SecurePath role={Role.admin} view={<AdminProductsListViews/>}/>}/>
+        <Route path="/admin/product-add" element={<SecurePath role={Role.admin} view={<AdminAddProductViews/>}/>}/>
+        <Route path="/admin/active-orders-list" element={<SecurePath role={Role.admin} view={<AdminListOfActiveOrdersViews/>}/>}/>
+        <Route path="/admin/complete-orders-list" element={<SecurePath role={Role.admin} view={<AdminListOfCompletedOrdersViews/>}/>}/>
       </Routes>
     </main>
   );
