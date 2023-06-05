@@ -5,7 +5,6 @@ import { NotFoundViews } from '../../views/NotFoundViews';
 import { ShopViews } from '../../views/ShopViews';
 import { ProductsViews } from '../../views/ProductsViews';
 import { LoginViews } from '../../views/LoginViews';
-import { LogoutViews } from '../../views/LogoutViews';
 import { RegisterViews } from '../../views/RegisterViews';
 import { UserProfileViews } from '../../views/UserProfileViews';
 import { BasketViews } from '../../views/BasketViews';
@@ -44,7 +43,6 @@ export const Main = () => {
         <Route path="/privacy-policy" element={<PrivacyPolicyViews/>}/>
 
         <Route path="/user/login" element={<LoginViews/>}/>
-        <Route path="/user/logout" element={<LogoutViews/>}/>
         <Route path="/user/register" element={<RegisterViews/>}/>
         <Route path="/user/forgot-password/:id" element={<ForgotPasswordViews/>}/>
         <Route path="/user/profile" element={<UserProfileViews/>}/>
