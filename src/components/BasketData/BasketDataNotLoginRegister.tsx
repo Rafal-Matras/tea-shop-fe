@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { UserInterface } from '../../types';
 
-import { UseUserContext } from '../../context/UserContext';
+import { config } from '../../config/config';
 
 import { RegisterForm } from '../common/Forms/RegisterForm/RegisterForm';
 import { DataForm } from '../common/Forms/DataForm/DataForm';
 import { DeliveryForm } from '../common/Forms/DeliveryForm/DeliveryForm';
 import { Checkbox } from '../common/Checkbox/Checkbox';
+import { BackAndNextButtons } from '../common/BackAndNextButtons/BackAndNextButtons';
+import { PopupRegistered } from '../common/Popups/PopupRegistered/PopupRegistered';
 
-import { BasketDataAcceptanceAndButtons } from './BasketDataAcceptanceAndButtons';
 import { validation } from './validation';
 
 import style from './BasketData.module.css';
@@ -18,51 +20,70 @@ interface Props {
   userData: UserInterface;
   changeUserData: (name: string, value: string) => void;
   changeUserDataDelivery: (name: string, value: string) => void;
-  deliveryActive: boolean;
-  setDeliveryActive: (name: boolean) => void;
-  accept: boolean;
-  setAccept: (name: boolean) => void;
   setAccount: (name: string) => void;
+  changeOtherDeliveryAddress: () => void;
+  isAllData: boolean;
+  setIsAllData: (isAllData: boolean) => void;
+  checkEmail: (email: string) => Promise<Response>;
 }
 
 export const BasketDataNotLoginRegister = ({
                                              userData,
                                              changeUserData,
                                              changeUserDataDelivery,
-                                             deliveryActive,
-                                             setDeliveryActive,
-                                             accept,
-                                             setAccept,
                                              setAccount,
+                                             changeOtherDeliveryAddress,
+                                             isAllData,
+                                             setIsAllData,
+                                             checkEmail,
                                            }: Props) => {
 
-  const {setUser} = UseUserContext();
+  const navigate = useNavigate();
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const [isAccepted, setIsAccepted] = useState<boolean>(false);
-  const [isAllData, setIsAllData] = useState<boolean>(false);
   const [popupActive, setPopupActive] = useState<boolean>(false);
+  const [errorActive, setErrorActive] = useState<boolean>(true);
 
   const editConfirmPassword = (name: string, value: string) => {
     setConfirmPassword(value);
   };
 
-  const handleRegister = async () => {
-    if (!validation({accept, setIsAccepted, userData, confirmPassword, setIsAllData, deliveryActive})) return;
-    // const response = await fetch('URL', {
-    //   method: 'post',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(userData),
-    // });
-    // const data = await response.json();
-    // if (!data) return;
-    setPopupActive(true);
+
+  const handleRegister = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    try {
+
+      if (!validation(1, () => {
+      }, userData, confirmPassword, setIsAllData, false)) return;
+
+      const response = await fetch(`${config.URL}user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userDto: userData,
+          deliveryDto: userData.delivery,
+        }),
+      });
+      if (!response.ok) {
+        setErrorActive(false);
+        return;
+      }
+      setErrorActive(true);
+      setPopupActive(true);
+    } catch (err) {
+      setErrorActive(false);
+      throw new Error('', {cause: err});
+    }
+  };
+
+  const handleBack = () => {
+    window.scroll(0,0)
+    navigate('/basket');
   };
 
   const handleNext = () => {
     setPopupActive(false);
-    setUser(userData);
     setAccount('Posiadam konto w sklepie');
     window.scrollTo(0, 0);
   };
@@ -75,46 +96,39 @@ export const BasketDataNotLoginRegister = ({
         editRegistrationData={changeUserData}
         confirmPassword={confirmPassword}
         editConfirmPassword={editConfirmPassword}
+        checkEmail={checkEmail}
+        register={handleRegister}
       />
       <h2 className={style.sectionTitle}>Dane do rachunku i dostawy</h2>
       <DataForm
-        registrationData={userData}
-        editRegistrationData={changeUserData}
+        userData={userData}
+        editUserData={changeUserData}
       />
       <div className={style.deliveryBox}>
         <Checkbox
           children="Inne dane do wysyłki"
-          active={deliveryActive}
-          change={setDeliveryActive}
+          active={userData.otherDeliveryAddress}
+          change={changeOtherDeliveryAddress}
         />
       </div>
-      {deliveryActive
+      {userData.otherDeliveryAddress === 1
         ? <>
           <h2 className={style.sectionTitle}>Dane do wysyłki</h2>
           <DeliveryForm
-            registrationData={userData}
-            editRegistrationDataDelivery={changeUserDataDelivery}
+            deliveryData={userData.delivery}
+            editDeliveryData={changeUserDataDelivery}
           />
         </>
         : null}
-      <p className={isAllData ? style.errorMassageOn : style.errorMassageOff}>Proszę uzupełnić brakujące dane</p>
-      <BasketDataAcceptanceAndButtons
-        accept={accept}
-        setAccept={setAccept}
-        isAccepted={isAccepted}
+      <p className={isAllData ? style.errorMassageOff : style.errorMassageOn}>Proszę uzupełnić brakujące dane</p>
+      <p className={errorActive ? style.errorMassageOff : style.errorMassageOn}>Coś poszło nie tak , spróbuj
+        ponownie</p>
+      <BackAndNextButtons
+        textNext="dalej"
+        handleBack={handleBack}
         handleNext={handleRegister}
-        buttonName="Zarejestruj"
-        showAccepted={false}
       />
-      {popupActive
-        ? <div className={style.popup}>
-          <div className={style.popupBox}>
-            <p className={style.popupText}>Konto zostało utworzone, można się zalogować </p>
-            <button className={style.popupButton} onClick={handleNext}>Dalej</button>
-          </div>
-        </div>
-        : null
-      }
+      {popupActive ? <PopupRegistered handleNext={handleNext}/> : null}
     </div>
   );
 };

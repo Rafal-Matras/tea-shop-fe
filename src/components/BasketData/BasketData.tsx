@@ -1,27 +1,39 @@
 import { useEffect, useState } from 'react';
 
-import { UserInterface, UserLoginDataInterface } from '../../types';
+import { DeliveryRegisterInterface, UserInterface } from '../../types';
 
 import { UseUserContext } from '../../context/UserContext';
 
+import { defaultDeliveryRegister, defaultUser } from '../../assets/defaultData';
+
 import { BasketDataIsNotLogin } from './BasketDataIsNotLogin';
 import { BasketDataIsLogin } from './BasketDataIsLogin';
+import { Progress } from '../common/Progress/Progress';
 
-import { defaultUser, defaultUserLogin } from '../../assets/defaultData';
+import style from './BasketData.module.css';
+import { config } from '../../config/config';
+import { validation } from './validation';
+import { useNavigate } from 'react-router-dom';
 
 export const BasketData = () => {
 
-  const {user} = UseUserContext();
-  const [deliveryActive, setDeliveryActive] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const {user, setUser} = UseUserContext();
   const [userData, setUserData] = useState<UserInterface>(defaultUser);
-  const [accept, setAccept] = useState<boolean>(false);
-  const [loginDetails, setLoginDetails] = useState<UserLoginDataInterface>(defaultUserLogin);
+  const [accept, setAccept] = useState<0 | 1>(0);
+  const [isAllData, setIsAllData] = useState<boolean>(true);
+  const [isAccepted, setIsAccepted] = useState<boolean>(false);
 
   useEffect(() => {
+    if (user.delivery === null) {
+      const newUser = user;
+      newUser.delivery = defaultDeliveryRegister;
+      setUserData(newUser);
+    }
     setUserData(user);
   }, [user]);
 
-  const changeUserData = (name: string, value: string) => {
+  const changeUserData = (name: string, value: string | number | DeliveryRegisterInterface) => {
     setUserData(userData => ({
       ...userData,
       [name]: value,
@@ -35,34 +47,64 @@ export const BasketData = () => {
     }));
   };
 
-  const changeLoginDetails = (name: string, value: string) => {
-    setLoginDetails(loginDetails => ({
-      ...loginDetails,
-      [name]: value,
-    }));
+  const changeOtherDeliveryAddress = () => {
+    setAccept(accept === 1 ? 0 : 1);
+    changeUserData('otherDeliveryAddress', accept === 1 ? 0 : 1);
   };
 
-  return (
-    user.role === 'user'
-      ? <BasketDataIsLogin
-        userData={userData}
-        changeUserData={changeUserData}
-        changeUserDataDelivery={changeUserDataDelivery}
-        deliveryActive={deliveryActive}
-        setDeliveryActive={setDeliveryActive}
-        accept={accept}
-        setAccept={setAccept}
+  const checkEmail = async (email: string) => {
+    const response = await fetch(`${config.URL}user/is-in-database/${email}`);
+    return response.json();
+  };
+
+  const handleNext = () => {
+    if (!validation(accept, setIsAccepted, userData, null, setIsAllData, true)) return;
+    setUser(userData);
+    navigate('/basket/summary');
+    window.scrollTo(0, 0);
+  };
+
+  const handleBack = () => {
+    window.scroll(0, 0);
+    navigate('/basket');
+  };
+
+  return (<div className={style.container}>
+      <Progress
+        name="Rejestracja"
+        progressNumber={2}
       />
-      : <BasketDataIsNotLogin
-        userData={userData}
-        changeUserData={changeUserData}
-        changeUserDataDelivery={changeUserDataDelivery}
-        loginDetails={loginDetails}
-        changeLoginDetails={changeLoginDetails}
-        deliveryActive={deliveryActive}
-        setDeliveryActive={setDeliveryActive}
-        accept={accept}
-        setAccept={setAccept}
-      />
+      <h1 className={style.title}>Prosimy o wypełnienie formularza oraz o podanie adresu dostawy zamówionych
+        produktów.</h1>
+      {user.role === 'user'
+        ? <BasketDataIsLogin
+          userData={userData}
+          changeUserData={changeUserData}
+          changeUserDataDelivery={changeUserDataDelivery}
+          accept={accept}
+          setAccept={setAccept}
+          changeOtherDeliveryAddress={changeOtherDeliveryAddress}
+          isAllData={isAllData}
+          isAccepted={isAccepted}
+          setIsAccepted={setIsAccepted}
+          handleNext={handleNext}
+          handleBack={handleBack}
+        />
+        : <BasketDataIsNotLogin
+          userData={userData}
+          changeUserData={changeUserData}
+          changeUserDataDelivery={changeUserDataDelivery}
+          accept={accept}
+          setAccept={setAccept}
+          changeOtherDeliveryAddress={changeOtherDeliveryAddress}
+          isAllData={isAllData}
+          setIsAllData={setIsAllData}
+          isAccepted={isAccepted}
+          setIsAccepted={setIsAccepted}
+          checkEmail={checkEmail}
+          handleNext={handleNext}
+          handleBack={handleBack}
+        />}
+    </div>
   );
 };

@@ -1,57 +1,98 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { UserLoginDataInterface } from '../../types';
 
 import { UseUserContext } from '../../context/UserContext';
 
+import { config } from '../../config/config';
+
+import { defaultUserLogin } from '../../assets/defaultData';
+import { ForgotPasswordForm } from '../common/Forms/ForgotPasswordForm/ForgotPasswordForm';
 import { LoginForm } from '../common/Forms/LoginForm/LoginForm';
-
-import { BasketDataAcceptanceAndButtons } from './BasketDataAcceptanceAndButtons';
-
-import { defaultUserActive } from '../../assets/defaultData';
+import { BackAndNextButtons } from '../common/BackAndNextButtons/BackAndNextButtons';
 
 import style from './BasketData.module.css';
 
 interface Props {
-  loginDetails: UserLoginDataInterface;
-  changeLoginDetails: (name: string, value: string) => void;
-  accept:boolean;
-  setAccept: (value:boolean) => void;
+  setAccount: (account: string) => void;
 }
 
-export const BasketDataIsNotLoginHaveAccount = ({loginDetails, changeLoginDetails,accept,setAccept}: Props) => {
+export const BasketDataIsNotLoginHaveAccount = ({setAccount}: Props) => {
 
-  const {setUser} = UseUserContext();
   const navigate = useNavigate();
-  const [errorLogin, setErrorLogin] = useState<boolean>(false);
+  const {setUser} = UseUserContext();
+  const [loginDetails, setLoginDetails] = useState<UserLoginDataInterface>(defaultUserLogin);
+  const [forgotPwd, setForgotPwd] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const handleLogin = async () => {
-    // const response = await fetch(URL);
-    // const data = await response.json();
-    // if(!data) return setErrorLogin(true);
-    // setErrorLogin(false);
-     setUser(defaultUserActive);
-    navigate('/basket/data');
-    window.scrollTo(0, 0);
+  const editLoginDetails = (name: string, value: string) => {
+    setLoginDetails(loginDetails => ({
+      ...loginDetails,
+      [name]: value,
+    }));
+  };
+
+  const validation = () => {
+    return !!(loginDetails.email.match(config.REGEX_EMAIL) && loginDetails.pwdHash.match(config.REGEX_PASSWORD));
+  };
+
+  const handleLogin = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    if (validation()) {
+      try {
+        const response = await fetch(`${config.URL}auth/login`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(loginDetails),
+        });
+        const data = await response.json();
+
+        if (data.login) {
+          setUser(data.user);
+          window.scrollTo(0, 0);
+          setAccount('Posiadam konto w sklepie');
+        } else {
+          setErrorMessage('niepoprawne logowanie');
+        }
+      } catch (err) {
+        throw new Error('New error message', {cause: err});
+      }
+    } else {
+      setErrorMessage('proszę uzupełnić poprawnie wszystkie pola');
+    }
+  };
+
+  const handleBack = () => {
+    window.scroll(0,0)
+    navigate('/basket');
   };
 
   return (
-    <div className={style.notLoginSection}>
+    <>
       <h2 className={style.sectionTitle}>Zaloguj się</h2>
-      <LoginForm
-        loginDetails={loginDetails}
-        editLoginDetails={changeLoginDetails}
-        handleLogin={handleLogin}
-        errorLogin={errorLogin}
-      />
-      <BasketDataAcceptanceAndButtons
-        accept={accept}
-        setAccept={setAccept}
-        handleNext={handleLogin}
-        buttonName='Zaloguj'
-        showAccepted={false}
-      />
-    </div>
+      {forgotPwd
+        ? <ForgotPasswordForm
+          setForgotPwd={setForgotPwd}
+        />
+        : <>
+          <LoginForm
+            loginDetails={loginDetails}
+            editLoginDetails={editLoginDetails}
+            handleLogin={handleLogin}
+            setForgotPwd={setForgotPwd}
+            errorMessage={errorMessage}
+          />
+          <BackAndNextButtons
+            textNext="zaloguj"
+            handleBack={handleBack}
+            handleNext={handleLogin}
+          />
+        </>
+      }
+    </>
   );
 };

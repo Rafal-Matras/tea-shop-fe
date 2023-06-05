@@ -1,31 +1,46 @@
 import { useState } from 'react';
 
-import { UserInterface, UserLoginDataInterface } from '../../types';
+import { UserInterface } from '../../types';
 
-import { Progress } from '../common/Progress/Progress';
 import { Radio } from '../common/Radio/Radio';
 import { BasketDataNotLoginRegister } from './BasketDataNotLoginRegister';
 import { BasketDataIsNotLoginHaveAccount } from './BasketDataIsNotLoginHaveAccount';
 import { BasketDataNotLoginBuyAsGuest } from './BasketDataNotLoginBuyAsGuest';
 
 import style from './BasketData.module.css';
-import { useNavigate } from 'react-router-dom';
 
 interface Props {
   userData: UserInterface;
   changeUserData: (name: string, value: string) => void;
   changeUserDataDelivery: (name: string, value: string) => void;
-  loginDetails: UserLoginDataInterface;
-  changeLoginDetails: (name: string, value: string) => void;
-  deliveryActive: boolean;
-  setDeliveryActive: (name: boolean) => void;
-  accept: boolean;
-  setAccept: (name: boolean) => void;
+  accept: 0 | 1;
+  setAccept: (number: 0 | 1) => void;
+  changeOtherDeliveryAddress: () => void;
+  isAllData: boolean;
+  setIsAllData: (isAllData: boolean) => void;
+  isAccepted: boolean;
+  setIsAccepted: (isAccepted: boolean) => void;
+  checkEmail: (email: string) => Promise<Response>;
+  handleNext: () => void;
+  handleBack: () => void;
 }
 
-export const BasketDataIsNotLogin = ({userData, changeUserData, changeUserDataDelivery, loginDetails, changeLoginDetails, deliveryActive, setDeliveryActive, accept, setAccept,}: Props) => {
+export const BasketDataIsNotLogin = ({
+                                       userData,
+                                       changeUserData,
+                                       changeUserDataDelivery,
+                                       accept,
+                                       setAccept,
+                                       changeOtherDeliveryAddress,
+                                       isAllData,
+                                       setIsAllData,
+                                       isAccepted,
+                                       setIsAccepted,
+                                       checkEmail,
+                                       handleNext,
+                                       handleBack,
+                                     }: Props) => {
 
-  const navigate = useNavigate();
   const [account, setAccount] = useState<string>('Posiadam konto w sklepie');
   let buttonName: string = '';
   const radioData = ['Posiadam konto w sklepie', 'Nie posiadam konta i chcę sie zarejestrować', 'Kontynuuj jako gość'];
@@ -37,10 +52,7 @@ export const BasketDataIsNotLogin = ({userData, changeUserData, changeUserDataDe
       case 'Posiadam konto w sklepie':
         buttonName = 'Zaloguj';
         return <BasketDataIsNotLoginHaveAccount
-          loginDetails={loginDetails}
-          changeLoginDetails={changeLoginDetails}
-          accept={accept}
-          setAccept={setAccept}
+          setAccount={setAccount}
         />;
       case 'Nie posiadam konta i chcę sie zarejestrować':
         buttonName = 'Zarejestruj';
@@ -48,11 +60,11 @@ export const BasketDataIsNotLogin = ({userData, changeUserData, changeUserDataDe
           userData={userData}
           changeUserData={changeUserData}
           changeUserDataDelivery={changeUserDataDelivery}
-          deliveryActive={deliveryActive}
-          setDeliveryActive={setDeliveryActive}
-          accept={accept}
-          setAccept={setAccept}
           setAccount={setAccount}
+          changeOtherDeliveryAddress={changeOtherDeliveryAddress}
+          isAllData={isAllData}
+          setIsAllData={setIsAllData}
+          checkEmail={checkEmail}
         />;
       case 'Kontynuuj jako gość':
         buttonName = 'Kontynuuj';
@@ -60,27 +72,30 @@ export const BasketDataIsNotLogin = ({userData, changeUserData, changeUserDataDe
           userData={userData}
           changeUserData={changeUserData}
           changeUserDataDelivery={changeUserDataDelivery}
-          deliveryActive={deliveryActive}
-          setDeliveryActive={setDeliveryActive}
+          changeOtherDeliveryAddress={changeOtherDeliveryAddress}
           accept={accept}
           setAccept={setAccept}
+          isAllData={isAllData}
+          isAccepted={isAccepted}
+          setIsAccepted={setIsAccepted}
+          checkEmail={checkEmail}
+          handleNext={handleNext}
+          handleBack={handleBack}
         />;
     }
   };
 
   return (
-    <div className={style.container}>
-      <Progress
-        name="Rejestracja"
-        progressNumber={2}
-      />
-      <h1 className={style.title}>Prosimy o wypełnienie formularza oraz o podanie adresu dostawy zamówionych
-        produktów.</h1>
+    <div className={style.sectionContainer}>
       <h2 className={style.sectionTitle}>Konto w sklepie</h2>
       <div className={style.choiceBox}>
         <Radio
           data={radioData}
-          name="" account={account} setAccount={handleAccount} vertical={true}/>
+          name=""
+          account={account}
+          setAccount={handleAccount}
+          vertical={true}
+        />
       </div>
       {accountPage()}
     </div>

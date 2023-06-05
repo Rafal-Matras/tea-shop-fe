@@ -7,22 +7,15 @@ import { ArrowLeftIcon } from '../common/SvgIcons/ArrowLeftIcon';
 import style from './BasketData.module.css';
 
 interface Props {
-  accept: boolean;
-  setAccept: (name: boolean) => void;
-  isAccepted?: boolean;
-  handleNext: () => void;
+  accept: 0 | 1;
+  setAccept: (number: 0 | 1) => void;
+  isAccepted: boolean;
+  handleNext:()=>void;
   buttonName: string;
   showAccepted: boolean;
 }
 
-export const BasketDataAcceptanceAndButtons = ({
-                                                 accept,
-                                                 setAccept,
-                                                 isAccepted = false,
-                                                 handleNext,
-                                                 buttonName,
-                                                 showAccepted,
-                                               }: Props) => {
+export const BasketDataAcceptanceAndButtons = ({accept, setAccept,isAccepted,handleNext, buttonName, showAccepted,}: Props) => {
 
   return (
     <>
@@ -60,10 +53,12 @@ export const BasketDataAcceptanceAndButtons = ({
         <Link
           className={style.button}
           to="/basket"
-        ><ArrowLeftIcon className={style.arrowIcon}/>Powrót</Link>
+        ><ArrowLeftIcon className={style.arrowIcon}/>Powrót
+        </Link>
         <button
           className={`${style.button} ${style.buttonNext}`}
           onClick={handleNext}
+          type="button"
         >{buttonName} <ArrowRightIcon className={style.arrowIcon}/>
         </button>
       </div>
