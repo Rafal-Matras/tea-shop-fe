@@ -43,6 +43,7 @@
         align-items: center;
         padding-right: 8px;
         filter: opacity(50%);
+        transition: filter .4s;
     }
 
     .topBoxItem a:hover {

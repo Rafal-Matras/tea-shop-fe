@@ -9,7 +9,7 @@ import { TwitterIcon } from '../common/SvgIcons/TwitterIcon';
 import style from './TopBar.module.css';
 
 export const TopBar = () => {
-  console.log('TopBar render');
+
   return (
     <div className={style.top}>
       <div className={style.topBoxItem}>
