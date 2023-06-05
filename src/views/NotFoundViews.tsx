@@ -1,6 +1,7 @@
+import { NotFound } from '../components/NotFound/NotFound';
+
 export const NotFoundViews = () => {
 
-  return(
-    <h1>Not-found</h1>
-  )
-}
+  return <NotFound/>;
+
+};
