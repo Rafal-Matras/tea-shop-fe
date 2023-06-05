@@ -1,26 +1,38 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { UseUserContext } from '../../context/UserContext';
-
 import style from './Logout.module.css';
+import { useEffect } from 'react';
+import { UseBasketContext } from '../../context/BasketContext';
 
-import {defaultUser} from '../../assets/defaultData'
+interface Props {
+  isSuccess: boolean;
+}
 
-export const Logout = () => {
+export const Logout = ({isSuccess}: Props) => {
 
-  const {setUser} = UseUserContext();
+  const {setBasket, setSelectedBasket} = UseBasketContext();
 
   useEffect(() => {
-    setUser(defaultUser);
+    setSelectedBasket(null);
+    if (localStorage.getItem('basket')) {
+      setBasket(JSON.parse(localStorage.getItem('basket') || ''));
+    } else {
+      setBasket([]);
+    }
   }, []);
 
   return (
     <div className={style.container}>
-      <h1 className={style.title}>Zostałeś pomyślnie wylogowany<br/>
-        kliknij Przycisk aby wrócić do strony startowej
-      </h1>
-      <Link className={style.button} to="/">Strona startowa</Link>
+      {isSuccess
+        ? <h1 className={style.title}>Nadal jesteś zalogowany <br/>sprubuj jeszcze raz
+        </h1>
+        : <>
+          <h1 className={style.title}>Zostałeś pomyślnie wylogowany<br/>
+            kliknij Przycisk aby wrócić do strony startowej
+          </h1>
+          <Link className={style.button} to="/">Strona startowa</Link>
+        </>
+      }
     </div>
   );
 };
