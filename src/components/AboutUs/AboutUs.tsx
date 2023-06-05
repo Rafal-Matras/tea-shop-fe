@@ -5,7 +5,7 @@ export const AboutUs = () => {
   return (
     <section className={style.container}>
       <h1 className={style.title}>Sklep z herbatą i kawą z całego świata</h1>
-      <img className={style.image} src="/images/photo/about_us.webp" alt="zdjęcie szczęśliwej rodzinki"/>
+      <img className={style.image} src="/images/onPage/about_us.webp" alt="zdjęcie szczęśliwej rodzinki"/>
       <h2 className={style.textTitle}>W 100% naturalne</h2>
       <p className={style.text}>Wszechobecne konserwanty, utwardzone tłuszcze, nadmiar soli, cukru i innych ulepszaczy w
         jedzeniu - to

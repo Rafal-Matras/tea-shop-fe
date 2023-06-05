@@ -10,7 +10,7 @@ import { UseUserContext } from '../../context/UserContext';
 export const Footer = () => {
 
   const {user, setUser} = UseUserContext();
-  console.log('Footer render');
+
   const scrollUp = () => {
     window.scrollTo(0, 0);
   };

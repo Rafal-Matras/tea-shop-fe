@@ -12,7 +12,7 @@ export const ReturnPolicy = () => {
       <h1 className={style.title}>Polityka zwrotów</h1>
       <img
         className={style.image}
-        src="/images/photo/polityka-zwrotow.webp"
+        src="/images/onPage/polityka-zwrotow.webp"
         alt="zdjęcie kobiety pijącej herbatę"
       />
       <p className={style.text}>

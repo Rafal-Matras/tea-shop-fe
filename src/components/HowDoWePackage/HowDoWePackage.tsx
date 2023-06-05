@@ -7,7 +7,7 @@ export const HowDoWePackage = () => {
       <h1 className={style.title}>Jak pakujemy?</h1>
       <img
         className={style.textImage}
-        src="/images/photo/torebka-doypack.webp"
+        src="/images/onPage/torebka-doypack.webp"
         alt="zdjęcie przedstawiające opakowanie herbat"
       />
       <p className={style.text}>
@@ -42,7 +42,7 @@ export const HowDoWePackage = () => {
       </p>
       <h2 className={style.textTitle}>Zalety opakowań Doypack</h2>
       <img className={style.image}
-           src="/images/photo/opakowanie-doypack-zalety.webp"
+           src="/images/onPage/opakowanie-doypack-zalety.webp"
            alt="zdjęcie zalet opakowania doypack"
       />
       <h2 className={style.textTitle}>Pakowanie przesyłek</h2>
@@ -60,7 +60,7 @@ export const HowDoWePackage = () => {
       </p>
         <img
           className={style.endImage}
-          src="/images/photo/pakowanie-paczek.webp"
+          src="/images/onPage/pakowanie-paczek.webp"
           alt="zdjęcie przedstawiające sposób pakowania paczek"
         />
     </section>

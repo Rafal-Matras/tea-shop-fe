@@ -7,7 +7,7 @@ export const DeliveryAndPayment = () => {
   return (
     <section className={style.container}>
       <h1 className={style.title}>Dostawa i Płatności</h1>
-      <img className={style.image} src="/images/photo/dostawa.webp" alt="zdjęcie pani kurier"/>
+      <img className={style.image} src="/images/onPage/dostawa.webp" alt="zdjęcie pani kurier"/>
       <h2 className={style.textTitle}>Dostawa</h2>
       <p className={style.text}>
         Po złożeniu zamówienia towar jest pakowany w dobrze zabezpieczone, szczelne opakowanie. Dzięki temu przed długi czas zachowuje swoje właściwości i pozostaje bezpieczny przez cały proces wysyłki.</p>
@@ -28,18 +28,18 @@ export const DeliveryAndPayment = () => {
         </li>
       </ol>
       <h2 className={style.orderTitle}>Cennik Dostawy</h2>
-      <h2 className={style.tableTitle}>Kurier DHL / GLS</h2>
+      <h2 className={style.tableTitle}>Kurier DHL / GLS / InPost</h2>
       <table className={style.table}>
         <thead>
         <tr>
           <th>&nbsp;</th>
           <th>
-            <p className={style.normalText}>Zakupy poniżej 99 zł</p>
-            <p className={style.mobileText}> &lt; 99 zł</p>
+            <p className={style.normalText}>Zakupy poniżej 80 zł</p>
+            <p className={style.mobileText}> &lt; 80 zł</p>
           </th>
           <th>
-            <p className={style.normalText}>Zakupy powyżej 99 zł</p>
-            <p className={style.mobileText}> &gt; 99 zł</p>
+            <p className={style.normalText}>Zakupy powyżej 80 zł</p>
+            <p className={style.mobileText}> &gt; 80 zł</p>
           </th>
         </tr>
         </thead>
@@ -62,12 +62,12 @@ export const DeliveryAndPayment = () => {
         <tr>
           <th>&nbsp;</th>
           <th>
-            <p className={style.normalText}>Zakupy poniżej 99 zł</p>
-            <p className={style.mobileText}> &lt; 99 zł</p>
+            <p className={style.normalText}>Zakupy poniżej 80 zł</p>
+            <p className={style.mobileText}> &lt; 80 zł</p>
           </th>
           <th>
-            <p className={style.normalText}>Zakupy powyżej 99 zł</p>
-            <p className={style.mobileText}> &gt; 99 zł</p>
+            <p className={style.normalText}>Zakupy powyżej 80 zł</p>
+            <p className={style.mobileText}> &gt; 80 zł</p>
           </th>
         </tr>
         </thead>
@@ -90,12 +90,12 @@ export const DeliveryAndPayment = () => {
         <tr>
           <th>&nbsp;</th>
           <th>
-            <p className={style.normalText}>Zakupy poniżej 99 zł</p>
-            <p className={style.mobileText}> &lt; 99 zł</p>
+            <p className={style.normalText}>Zakupy poniżej 80 zł</p>
+            <p className={style.mobileText}> &lt; 80 zł</p>
           </th>
           <th>
-            <p className={style.normalText}>Zakupy powyżej 99 zł</p>
-            <p className={style.mobileText}> &gt; 99 zł</p>
+            <p className={style.normalText}>Zakupy powyżej 80 zł</p>
+            <p className={style.mobileText}> &gt; 80 zł</p>
           </th>
         </tr>
         </thead>
@@ -112,10 +112,6 @@ export const DeliveryAndPayment = () => {
         </tr>
         </tbody>
       </table>
-      <h2 className={style.textTitle}>Przesyłki zagraniczne</h2>
-      <p className={style.text}>
-        Realizujemy również przesyłki zagraniczne do wszystkich krajów Unii Europejskiej, Szwajcarii, Rosji i Stanów Zjednoczonych. Koszt przesyłki jest widoczny po wybraniu odpowiedniego kraju dostawy w koszyku zamówienia.
-      </p>
       <h2 className={style.textTitle}>Płatności</h2>
       <p className={style.text}>Dostępne są trzy formy płatności za zamówienia:</p>
       <ol className={style.list}>
