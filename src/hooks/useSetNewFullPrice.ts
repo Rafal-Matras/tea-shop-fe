@@ -1,15 +1,10 @@
-import {  BasketInterface, ProductsListInterface } from '../types';
+import { BasketInterface } from '../types';
 
-export const useSetNewFullPrice = (basket: BasketInterface[], allProducts: ProductsListInterface[]) => {
-  if (basket.length === 0) return 0;
+export const useSetNewFullPrice = async (basket: BasketInterface[]): Promise<number> => {
 
+  if (basket.length < 1) return 0;
 
-  let fullPrice: number = 0;
-  basket.forEach(async (item: BasketInterface) => {
-    const price = allProducts.find(price => price.id === item.productId);
-    if (price) {
-      fullPrice = fullPrice + price.price * item.packSize * item.quantityOfProduct;
-    }
-  });
-  return fullPrice;
+  return basket
+    .map(item => ((item.product.promo? item.product.promo:item.product.price) * 100 * item.packSize * item.count) / 100)
+    .reduce((prev, curr) => prev + curr ,0)
 };
