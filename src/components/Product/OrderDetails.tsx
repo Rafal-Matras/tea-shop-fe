@@ -1,7 +1,7 @@
-import {  useEffect, useState } from 'react';
-import * as uuid from 'uuid';
+import { useEffect, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
-import { BasketInterface } from '../../types';
+import { ProductInterface } from '../../types';
 
 import { UseUserContext } from '../../context/UserContext';
 import { UseBasketContext } from '../../context/BasketContext';
@@ -12,65 +12,101 @@ import { ChangeQuantityBox } from '../common/ChangeQuantityBox/ChangeQuantityBox
 import { BasketIcon } from '../common/SvgIcons/BasketIcon';
 
 import style from './Product.module.css';
+import { config } from '../../config/config';
+import { useSetNewFullPrice } from '../../hooks/useSetNewFullPrice';
 
 interface Props {
   id: string;
   numberOfUnits: number;
-  price: number;
   packSize: number;
   setPackSize: (number: number) => void;
-  quantityOfProduct: number;
-  setQuantityOfProducts: (number: number) => void;
+  count: number;
+  setCount: (number: number) => void;
   unit: 'g' | 'szt';
   state: number;
-  setAddToBasket: (name: boolean) => void;
+  setAddedToBasket: (name: boolean) => void;
 }
-export const OrderDetails = ({id, numberOfUnits, price, packSize, setPackSize, quantityOfProduct, setQuantityOfProducts, unit, state, setAddToBasket,}: Props) => {
+
+export const OrderDetails = ({
+                               id,
+                               numberOfUnits,
+                               packSize,
+                               setPackSize,
+                               count,
+                               setCount,
+                               unit,
+                               state,
+                               setAddedToBasket,
+                             }: Props) => {
 
 
   const {user} = UseUserContext();
-  const {basket, setBasket, fullPrice, setFullPrice} = UseBasketContext();
+  const {basket, setBasket, setFullPrice} = UseBasketContext();
   const [value, setValue] = useState<string>('');
 
   useEffect(() => {
-    setValue((numberOfUnits * packSize * quantityOfProduct).toString());
-  }, [quantityOfProduct, packSize]);
+    setValue((numberOfUnits * packSize * count).toString());
+  }, [count, packSize]);
 
   const changePackSize = (number: number) => {
     setPackSize(number);
-    setQuantityOfProducts(1);
+    setCount(1);
+  };
+
+  const findProduct = async () => {
+    try {
+      const response = await fetch(`${config.URL}shop/product/${id}`);
+      return await response.json();
+    } catch (err) {
+      throw new Error('New error message', {cause: err});
+    }
   };
 
   const addToBasket = async () => {
-    const newProductInBasket: BasketInterface = {
-      id: uuid.v4(),
-      userId: user.id,
-      productId: id,
-      quantityOfProduct: quantityOfProduct,
-      packSize: packSize,
-    };
-    const newBasket = basket.length === 0 ? [newProductInBasket] : [...basket, newProductInBasket];
-    //server
-    if (user.role === 'user') {
-      // const response = await fetch(URL, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(newBasket),
-      // });
 
-    }
-    //localStore
-    if (localStorage.getItem('basket')) {
-      localStorage.setItem('basket', JSON.stringify(newBasket));
+    if (user.role === 'user') {
+      try {
+        const response = await fetch(`${config.URL}basket`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            count,
+            packSize,
+            productId: id,
+          }),
+        });
+        const data = await response.json();
+        const newProductBasket = {
+          id: data.id,
+          count,
+          packSize,
+          product: await findProduct(),
+        };
+        const newBasket = [...basket, newProductBasket];
+        setBasket(newBasket);
+      } catch (err) {
+        throw new Error('New error message', {cause: err});
+      }
     } else {
-      localStorage.setItem('basket', JSON.stringify(newBasket));
+      const newProductBasket = {
+        id: uuid(),
+        count,
+        packSize,
+        product: await findProduct(),
+      };
+      const newBasket = [...basket, newProductBasket];
+      setBasket(newBasket);
+      if (localStorage.getItem('basket')) {
+        localStorage.setItem('basket', JSON.stringify(newBasket));
+      } else {
+        localStorage.setItem('basket', JSON.stringify([newProductBasket]));
+      }
     }
-    setBasket(newBasket);
-    const newFullPrice = +(fullPrice + Math.ceil((price * packSize * quantityOfProduct) * 100) / 100).toFixed(2);
-    setFullPrice(newFullPrice);
-    setAddToBasket(true);
+    setFullPrice(await useSetNewFullPrice(basket));
+    setAddedToBasket(true);
   };
 
   return (
@@ -88,15 +124,15 @@ export const OrderDetails = ({id, numberOfUnits, price, packSize, setPackSize, q
         packSize={packSize}
         unit={unit}
         state={state}
-        quantityOfProduct={quantityOfProduct}
-        setQuantityOfProducts={setQuantityOfProducts}
+        count={count}
+        setCount={setCount}
         value={value}
         setValue={setValue}
       />
       <AvailableProduct
         unit={unit}
         state={state}
-        orderState={state - numberOfUnits * packSize * quantityOfProduct}
+        orderState={state - numberOfUnits * packSize * count}
       />
       <button
         className={style.orderDetailButton}
