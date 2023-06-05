@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
-import { UserProfileType } from '../../types';
+import { UserInterface } from '../../types';
+
+import { config } from '../../config/config';
 
 import { Input } from '../common/Input/Input';
 import { Checkbox } from '../common/Checkbox/Checkbox';
@@ -10,14 +12,20 @@ import { DeliveryForm } from '../common/Forms/DeliveryForm/DeliveryForm';
 import style from './UserProfile.module.css';
 
 interface Props {
-  userData: UserProfileType;
+  userData: UserInterface;
   changeUserData: (name: string, value: string) => void;
   changeUserDataDelivery: (name: string, value: string) => void;
+  handleSave: () => Promise<void>;
 }
 
-export const ProfileUserData = ({userData, changeUserData, changeUserDataDelivery}: Props) => {
+export const ProfileUserData = ({userData, changeUserData, changeUserDataDelivery, handleSave}: Props) => {
 
-  const [deliveryActive, setDeliveryActive] = useState<boolean>(false);
+  const checkEmail = async (email: string) => {
+    const response = await fetch(`${config.URL}user/is-in-database/${email}`);
+    return response.json();
+  };
+
+  const [accept, setAccept] = useState<0 | 1>(0);
 
   return (
     <div className={style.pageContainer}>
@@ -30,31 +38,32 @@ export const ProfileUserData = ({userData, changeUserData, changeUserDataDeliver
             displayedName="Email"
             value={userData.email}
             change={changeUserData}
-            required={false}
+            checkEmail={checkEmail}
+            required={true}
           />
         </div>
       </div>
-        <h2 className={style.title}>Dane do rachunku</h2>
-        <DataForm
-          registrationData={userData}
-          editRegistrationData={changeUserData}
-        />
-        <Checkbox
-          children="Inne dane do wysyłki"
-          active={deliveryActive}
-          change={setDeliveryActive}
-        />
-      {deliveryActive
+      <h2 className={style.title}>Dane do rachunku</h2>
+      <DataForm
+        userData={userData}
+        editUserData={changeUserData}
+      />
+      <Checkbox
+        children="Inne dane do wysyłki"
+        active={userData.otherDeliveryAddress}
+        change={setAccept}
+      />
+      {accept
         ? <>
           <h2 className={style.title}>Dane do wysyłki</h2>
           <DeliveryForm
-            registrationData={userData}
-            editRegistrationDataDelivery={changeUserDataDelivery}
+            deliveryData={userData.delivery}
+            editDeliveryData={changeUserDataDelivery}
           />
         </>
         : null
       }
-      <button className={style.button}>Zapisz</button>
+      <button className={style.button} onClick={handleSave}>Zapisz</button>
     </div>
   );
 };

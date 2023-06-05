@@ -22,7 +22,7 @@ export const ProfileOrderDetails = ({orderList, setActivePage}: Props) => {
       </div>
       <h2 className={style.title}>Dane do rachunku</h2>
       <div className={style.historyOrderBoxData}>
-        <p className={style.text}>Rachunek: <span>{orderList.dataToAccount.accountType}</span></p>
+        <p className={style.text}>Rachunek: <span>{orderList.dataToAccount.documentType}</span></p>
         <p className={style.text}>Imię: <span>{orderList.dataToAccount.name}</span></p>
         <p className={style.text}>Nazwisko: <span>{orderList.dataToAccount.surName}</span></p>
         <p className={style.text}>Ulica: <span>{orderList.dataToAccount.street}</span></p>

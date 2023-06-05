@@ -1,12 +1,13 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+import { ActivePageType } from '../../types';
 
-import style from './UserProfile.module.css';
+import { UseUserContext } from '../../context/UserContext';
 
 import { defaultUser } from '../../assets/defaultData';
-import { ActivePageType } from '../../types';
-import { UseUserContext } from '../../context/UserContext';
+import { config } from '../../config/config';
+
+import style from './UserProfile.module.css';
 
 interface Props {
   activePage: string;
@@ -16,6 +17,7 @@ interface Props {
 export const ProfileNavList = ({activePage, setActivePage}: Props) => {
 
   const {setUser} = UseUserContext();
+  const navigate = useNavigate();
 
   const changeActivePage = (name: ActivePageType | null) => {
     if (name) {
@@ -26,6 +28,25 @@ export const ProfileNavList = ({activePage, setActivePage}: Props) => {
     window.scrollTo(0, 0);
   };
 
+  const logout = async () => {
+    try {
+      const response = await fetch(`${config.URL}auth/logout`, {
+        credentials: 'include',
+      });
+      const data = await response.json();
+      console.log(data);
+      if (!data.logout) {
+        navigate('/user/logout');
+        return {isSuccess: false};
+      }
+      setUser(defaultUser);
+      navigate('/user/logout');
+      return {isSuccess: true};
+    } catch (err) {
+      throw new Error('New error message', {cause: err});
+    }
+  };
+
   return (
     <ul className={style.navList}>
       <li
@@ -34,8 +55,8 @@ export const ProfileNavList = ({activePage, setActivePage}: Props) => {
       >Moje dane
       </li>
       <li
-        className={`${style.navItem} ${activePage === 'password' ? style.active : ''}`}
-        onClick={() => changeActivePage('password')}
+        className={`${style.navItem} ${activePage === 'changePassword' ? style.active : ''}`}
+        onClick={() => changeActivePage('changePassword')}
       >Zmień hasło
       </li>
       <li
@@ -43,12 +64,11 @@ export const ProfileNavList = ({activePage, setActivePage}: Props) => {
         onClick={() => changeActivePage('history')}
       >Historia zakupów
       </li>
-      <Link
+      <button
         className={`${style.navItem} ${style.logout}`}
-        to="/user/logout"
-        onClick={() => changeActivePage(null)}
+        onClick={logout}
       >Wyloguj
-      </Link>
+      </button>
     </ul>
   );
 };

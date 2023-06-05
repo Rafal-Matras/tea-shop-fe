@@ -59,8 +59,10 @@
     position: absolute;
     top: 0;
     right: 10px;
+    border:none;
     text-decoration: none;
     background-color: var(--secondary-color);
+    cursor: pointer;
 }
 
 .title {

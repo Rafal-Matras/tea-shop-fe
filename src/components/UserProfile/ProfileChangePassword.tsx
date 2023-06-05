@@ -6,17 +6,12 @@ import { Input } from '../common/Input/Input';
 
 import style from './UserProfile.module.css';
 
-interface Props {
-  email: string;
-  changeUserData: (name: string, value: string) => void;
-}
-
-export const ProfileChangePassword = ({email, changeUserData}: Props) => {
+export const ProfileChangePassword = () => {
 
   const [dataPassword, setDataPassword] = useState<ChangePasswordInterface>({
-    password: '',
-    newPassword: '',
-    confirmNewPassword: '',
+    pwdHash: '',
+    newPwd: '',
+    confirmNewPwd: '',
   });
 
   const changePassword = (name: string, value: string) => {
@@ -37,9 +32,9 @@ export const ProfileChangePassword = ({email, changeUserData}: Props) => {
         <div className={style.inputBox}>
           <Input
             type="password"
-            name="password"
+            name="pwdHash"
             displayedName="Hasło"
-            value={dataPassword.password}
+            value={dataPassword.pwdHash}
             change={changePassword}
             required={true}
           />
@@ -47,9 +42,9 @@ export const ProfileChangePassword = ({email, changeUserData}: Props) => {
         <div className={style.inputBox}>
           <Input
             type="password"
-            name="newPassword"
+            name="newPwd"
             displayedName="Nowe hasło"
-            value={dataPassword.newPassword}
+            value={dataPassword.newPwd}
             change={changePassword}
             required={true}
           />
@@ -57,9 +52,9 @@ export const ProfileChangePassword = ({email, changeUserData}: Props) => {
         <div className={style.inputBox}>
           <Input
             type="password"
-            name="confirmNewPassword"
+            name="confirmNewPwd"
             displayedName="Powtuż nowe hasło"
-            value={dataPassword.confirmNewPassword}
+            value={dataPassword.confirmNewPwd}
             change={changePassword}
             required={true}
           />
