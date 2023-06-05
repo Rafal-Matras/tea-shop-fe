@@ -81,6 +81,24 @@
     height: 30px;
 }
 
+.removeBasketBox {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px;
+}
+
+.removeBasket {
+    margin-right: 40px;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #fff;
+    background-color: #ff2424;
+}
+
 .info {
     display: flex;
     flex-direction: column;

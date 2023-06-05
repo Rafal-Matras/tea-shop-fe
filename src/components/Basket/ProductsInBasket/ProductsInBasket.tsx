@@ -5,15 +5,29 @@ import { useConvertPriceToString } from '../../../hooks/useConvertPriceToString'
 import { OneProductInBasket } from './OneProductInBasket';
 
 import style from './ProductsInBasket.module.css';
+import { config } from '../../../config/config';
+import { UseUserContext } from '../../../context/UserContext';
 
-interface Props {
-  flag:boolean;
-  setFlag:(flag:boolean)=>void;
-}
+export const ProductsInBasket = () => {
 
-export const ProductsInBasket = ({flag,setFlag}: Props) => {
+  const {user} = UseUserContext();
+  const {basket, setBasket, fullPrice} = UseBasketContext();
 
-  const {basket,fullPrice} = UseBasketContext();
+  const removeAllBasket = async () => {
+    if (user.role === 'user') {
+      try {
+        await fetch(`${config.URL}basket/all`, {
+          method: 'DELETE',
+          credentials: 'include',
+        });
+      } catch (err) {
+        throw new Error('', {cause: err});
+      }
+    } else {
+      localStorage.removeItem('basket');
+    }
+    setBasket([]);
+  };
 
   return (
     <div className={style.container}>
@@ -23,10 +37,11 @@ export const ProductsInBasket = ({flag,setFlag}: Props) => {
             key={index}
             index={index}
             basketItem={item}
-            flag={flag}
-            setFlag={setFlag}
           />
         ))}
+      </div>
+      <div className={style.removeBasketBox}>
+        <button className={style.removeBasket} onClick={removeAllBasket}>usuń zawartość koszyka</button>
       </div>
       <div className={style.info}>
         <p className={style.deliveryTime}>Szacowany czas wysyłki 24h</p>

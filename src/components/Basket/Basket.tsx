@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { UseProductContext } from '../../context/ProductContext';
 import { UseBasketContext } from '../../context/BasketContext';
 
-import { useSetNewFullPrice } from '../../hooks/useSetNewFullPrice';
 import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
 
 import { ArrowRightIcon } from '../common/SvgIcons/ArrowRightIcon';
@@ -18,31 +16,34 @@ import style from './Basket.module.css';
 export const Basket = () => {
 
   const navigate = useNavigate();
-  const {allProducts} = UseProductContext();
-  const {basket, fullPrice, setFullPrice, setTypeOfDelivery, setTypeOfPayments, setCostOfDelivery} = UseBasketContext();
-  const [formOfDelivery, setFormOfDelivery] = useState('Kurier GLS');
-  const [formOfPayments, setFormOfPayments] = useState('Przelewy24.pl');
-  const [deliveryCost, setDeliveryCost] = useState(8.99);
-  const [flag, setFlag] = useState<boolean>(false);
+  const {
+    basket,
+    fullPrice,
+    setFormOfDelivery,
+    setFormOfPayments,
+    setDeliveryCost,
+    selectedBasket,
+    setSelectedBasket,
+  } = UseBasketContext();
+  const [formOfDeliveryData, setFormOfDeliveryData] = useState('kurier GLS');
+  const [formOfPaymentsData, setFormOfPaymentsData] = useState('przelewy24.pl');
+  const [deliveryCostData, setDeliveryCostData] = useState(8.99);
 
   useEffect(() => {
-    setFullPrice(useSetNewFullPrice(basket, allProducts));
-  }, [flag]);
+    formOfDeliveryData === 'paczkomat Inpost' ? setDeliveryCostData(9.99) : setDeliveryCostData(8.99);
+    formOfPaymentsData === 'za pobraniem' ? setDeliveryCostData(12.99) : setDeliveryCostData(deliveryCostData => deliveryCostData);
+    if (fullPrice > 80) setDeliveryCostData(0);
+  }, [formOfDeliveryData, formOfPaymentsData, fullPrice]);
 
-  useEffect(() => {
-    formOfDelivery !== 'Paczkomaty 24/7' ? setDeliveryCost(8.99) : setDeliveryCost(9.99);
-    formOfPayments === 'Za pobraniem' ? setDeliveryCost(12.99) : setDeliveryCost(deliveryCost => deliveryCost);
-    if (fullPrice > 80) setDeliveryCost(0);
-  }, [formOfDelivery, formOfPayments, fullPrice]);
+  const handleFormOfDelivery = (name: string, value: string) => setFormOfDeliveryData(value);
 
-  const handleFormOfDelivery = (name: string, value: string) => setFormOfDelivery(value);
-
-  const handleFormOfPayments = (name: string, value: string) => setFormOfPayments(value);
+  const handleFormOfPayments = (name: string, value: string) => setFormOfPaymentsData(value);
 
   const handleNext = () => {
-    setTypeOfDelivery(formOfDelivery);
-    setTypeOfPayments(formOfPayments);
-    setCostOfDelivery(deliveryCost);
+    if (!selectedBasket) setSelectedBasket('local');
+    setFormOfDelivery(formOfDeliveryData);
+    setFormOfPayments(formOfPaymentsData);
+    setDeliveryCost(deliveryCostData);
     navigate('/basket/data');
     window.scrollTo(0, 0);
   };
@@ -54,22 +55,19 @@ export const Basket = () => {
         progressNumber={1}
       />
       {basket.length > 0
-        ? <ProductsInBasket
-          flag={flag}
-          setFlag={setFlag}
-        />
+        ? <ProductsInBasket/>
         : <h1 className={style.emptyBasket}>Twój koszyk jest pusty</h1>
       }
       <DeliveryAndPayments
-        formOfDelivery={formOfDelivery}
+        formOfDelivery={formOfDeliveryData}
         setFormOfDelivery={handleFormOfDelivery}
-        formOfPayments={formOfPayments}
+        formOfPayments={formOfPaymentsData}
         setFormOfPayments={handleFormOfPayments}
-        deliveryCost={deliveryCost}
+        deliveryCost={deliveryCostData}
       />
       <div className={style.endBox}>
         <p
-          className={style.fullPriceText}>razem: <span>{useConvertPriceToString(fullPrice + deliveryCost)} zł</span>
+          className={style.fullPriceText}>razem: <span>{useConvertPriceToString(fullPrice + deliveryCostData)} zł</span>
         </p>
         {basket.length > 0
           ? <Link
