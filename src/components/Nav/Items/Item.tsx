@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 
 import { TypesOfProductsInterface } from '../../../types';
 
+import { UseProductContext } from '../../../context/ProductContext';
+
 import { ArrowDownIcon } from '../../common/SvgIcons/ArrowDownIcon';
 
 import style from './Item.module.css';
-import { UseProductContext } from '../../../context/ProductContext';
 
 interface Props {
   item: TypesOfProductsInterface;
@@ -15,13 +16,12 @@ interface Props {
 
 export const Item = ({item, onlyProductType, selectProductType}: Props) => {
 
-  const {productName,setProductName,setProductType,activeProductType} = UseProductContext();
+  const {setProductName,setProductType,activeProductType} = UseProductContext();
 
   const setProduct = () => {
-    setProductName(item.category);
+    setProductName(item.name);
     setProductType('')
     selectProductType(item.name);
-  // console.log(item);
   };
   return (
       <li

@@ -11,10 +11,11 @@ interface Props {
 
 export const ItemType = ({name, closeMenu}: Props) => {
 
-  const {productType, setProductType} = UseProductContext();
+  const {productType, setProductType, setCurrentPage} = UseProductContext();
 
   const selectType = () => {
     setProductType(name);
+    setCurrentPage(0);
     if (window.screen.width < 992) {
       closeMenu();
     }

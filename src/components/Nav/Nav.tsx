@@ -10,7 +10,7 @@ import { ItemType } from './Items/ItemType';
 
 import { CloseIcon } from '../common/SvgIcons/CloseIcon';
 
-import {productType} from '../../assets/productsType';
+import {productType} from '../../assets/data';
 
 import style from './Nav.module.css';
 
@@ -71,7 +71,7 @@ export const Nav = ({activeMenu, setActiveMenu}: Props) => {
       <ul className={style.productsList}>
         {typesOfProducts.map(item => (
           <Item
-            key={item.id}
+            key={item.name}
             item={item}
             onlyProductType={onlyProductType}
             selectProductType={selectProductType}
