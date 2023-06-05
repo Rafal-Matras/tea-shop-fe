@@ -13,9 +13,9 @@ import { BasketDataViews } from '../../views/BasketDataViews';
 import { BasketSummaryViews } from '../../views/BasketSummaryViews';
 import { BasketDoneViews } from '../../views/BasketDoneViews';
 import { AdminPanelViews } from '../../views/AdminPanelViews';
-import { AdminAddProduct } from '../../views/AdminAddProduct';
-import { AdminListOfActiveOrders } from '../../views/AdminListOfActiveOrders';
-import { AdminListOfCompletedOrders } from '../../views/AdminListOfCompletedOrders';
+import { AdminAddProductViews } from '../../views/AdminAddProductViews';
+import { AdminListOfActiveOrdersViews } from '../../views/AdminListOfActiveOrdersViews';
+import { AdminListOfCompletedOrdersViews } from '../../views/AdminListOfCompletedOrdersViews';
 import { AdminProductsListViews } from '../../views/AdminProductsListViews';
 import { AboutUsViews } from '../../views/AboutUsViews';
 import { RegulationsViews } from '../../views/RegulationsViews';
@@ -23,6 +23,7 @@ import { DeliveryAndPaymentViews } from '../../views/DeliveryAndPaymentViews';
 import { HowDoWePackageView } from '../../views/HowDoWePackageView';
 import { ReturnPolicyViews } from '../../views/ReturnPolicyViews';
 import { PrivacyPolicyViews } from '../../views/PrivacyPolicyViews';
+import { ForgotPasswordViews } from '../../views/ForgotPasswordViews';
 
 import style from '../App/App.module.css';
 
@@ -45,6 +46,7 @@ export const Main = () => {
         <Route path="/user/login" element={<LoginViews/>}/>
         <Route path="/user/logout" element={<LogoutViews/>}/>
         <Route path="/user/register" element={<RegisterViews/>}/>
+        <Route path="/user/forgot-password/:id" element={<ForgotPasswordViews/>}/>
         <Route path="/user/profile" element={<UserProfileViews/>}/>
 
         <Route path="/basket" element={<BasketViews/>}/>
@@ -54,9 +56,9 @@ export const Main = () => {
 
         <Route path="/admin/admin-panel" element={<AdminPanelViews/>}/>
         <Route path="/admin/products-list" element={<AdminProductsListViews/>}/>
-        <Route path="/admin/product-add" element={<AdminAddProduct/>}/>
-        <Route path="/admin/active-orders-list" element={<AdminListOfActiveOrders/>}/>
-        <Route path="/admin/complete-orders-list" element={<AdminListOfCompletedOrders/>}/>
+        <Route path="/admin/product-add" element={<AdminAddProductViews/>}/>
+        <Route path="/admin/active-orders-list" element={<AdminListOfActiveOrdersViews/>}/>
+        <Route path="/admin/complete-orders-list" element={<AdminListOfCompletedOrdersViews/>}/>
       </Routes>
     </main>
   );
