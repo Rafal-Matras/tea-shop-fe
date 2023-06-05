@@ -18,15 +18,20 @@ export const OneProductInList = ({item}: Props) => {
   const {setActiveProductType} = UseProductContext();
   const {id, name, category, type, price, image, numberOfUnits, unit, promo} = item;
 
-  const categoryType = type
-    ? type.map(item => (
+  const categoryText = () => {
+    if (category === 'herbaty') return 'Herbata';
+    if (category === 'kawy') return 'Kawa';
+    if (category === 'zioła') return 'Zioła';
+    return '';
+  };
+
+  const categoryType = type.map(item => (
       <p
         className={style.category}
         key={item}
-      >{useFirstLetterBig(category)} {useFirstLetterBig(item)}
+      >{categoryText()} {useFirstLetterBig(item)}
       </p>
     ))
-    : <p className={style.category}>{useFirstLetterBig(category)}</p>;
 
   const clear = () => {
     setActiveProductType('');
@@ -36,7 +41,7 @@ export const OneProductInList = ({item}: Props) => {
   return (
     <Link
       className={style.productBox}
-      to={`/product/:${id}`}
+      to={`/product/${id}`}
       onClick={clear}
     >{promo
       ? <img className={style.promo} src="/images/icons/promoIcon.png" alt="ikonka promocji"/>
@@ -44,7 +49,7 @@ export const OneProductInList = ({item}: Props) => {
     }
       <img
         className={style.image}
-        src={`/images/products/${image}`}
+        src={`/images/products/${category}/${image}`}
         alt={`obrazek produktu ${name}`}
       />
       <h1 className={style.name}>{name}</h1>
