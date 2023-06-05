@@ -1,101 +1,133 @@
 import { SyntheticEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { UserProfileType } from '../../types';
+import { DeliveryRegisterInterface, UserRegisterInterface } from '../../types';
+
+import { config } from '../../config/config';
 
 import { RegisterForm } from '../common/Forms/RegisterForm/RegisterForm';
 import { DataForm } from '../common/Forms/DataForm/DataForm';
 import { DeliveryForm } from '../common/Forms/DeliveryForm/DeliveryForm';
 import { Checkbox } from '../common/Checkbox/Checkbox';
-
-import { REGEX_EMAIL, REGEX_PASSWORD } from '../../assets/regexFiles';
+import { BackAndNextButtons } from '../common/BackAndNextButtons/BackAndNextButtons';
+import { defaultDeliveryRegister, defaultUserRegister } from '../../assets/defaultData';
 
 import style from './Register.module.css';
-
-import { defaultUserRegister } from '../../assets/defaultData';
+import { RegisterValidation } from './RegisterValidation';
 
 export const Register = () => {
 
-  const navigate = useNavigate();
-  const [deliveryActive, setDeliveryActive] = useState<boolean>(false);
-  const [registrationData, setRegistrationData] = useState<UserProfileType>(defaultUserRegister);
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const navigate = useNavigate();
+    const [deliveryActive, setDeliveryActive] = useState<0 | 1>(0);
+    const [userRegistrationData, setUserRegistrationData] = useState<UserRegisterInterface>(defaultUserRegister);
+    const [deliveryRegistrationData, setDeliveryRegistrationData] = useState<DeliveryRegisterInterface>(defaultDeliveryRegister);
+    const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const editRegistrationData = (name: string, value: string) => {
-    setRegistrationData(registrationData => ({
-      ...registrationData,
-      [name]: value,
-    }));
-  };
+    const editUserRegistrationData = (name: string, value: string | number) => {
+      setUserRegistrationData(userRegistrationData => ({
+        ...userRegistrationData,
+        [name]: value,
+      }));
+    };
 
-  const editRegistrationDataDelivery = (name: string, value: string) => {
-    setRegistrationData(registrationData => ({
-      ...registrationData,
-      delivery: {...registrationData.delivery, [name]: value},
-    }));
-  };
+    const editDeliveryRegistrationData = (name: string, value: string) => {
+      setDeliveryRegistrationData(deliveryRegistrationData => ({
+        ...deliveryRegistrationData,
+        [name]: value,
+      }));
+    };
 
-  const editConfirmPassword = (name: string, value: string) => {
-    setConfirmPassword(value);
-  };
+    const editConfirmPassword = (name: string, value: string) => {
+      setConfirmPassword(value);
+    };
 
-  const validation = () => {
-    if (registrationData.email === '' || !registrationData.email.match(REGEX_EMAIL)) return true;
-    if (registrationData.password === '' || !registrationData.password.match(REGEX_PASSWORD)) return true;
-    if (confirmPassword !== registrationData.password) return true;
-  };
+    const editDeliveryActive = (value: number) => {
+      setDeliveryActive(deliveryActive === 1 ? 0 : 1);
+      editUserRegistrationData('otherDeliveryAddress', value);
+    };
 
-  const register = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    if (validation()) return;
+    const checkEmail = async (email: string) => {
+      const response = await fetch(`${config.URL}user/is-in-database/${email}`);
+      return response.json();
+    };
 
-    // const response = await fetch(`${config.URL}login/${encodeURIComponent(loginDetails.email)}/${encodeURIComponent(loginDetails.password)}`);
-    // const data = await response.json();
-    // if (data) {
-    //   setErrorLogin(true);
-    //   return;
-    // }
-    navigate('/');
-  };
+    const handleLogin = () => {
+      navigate('/user/login');
+    };
 
-  return (
-    <div className={style.container}>
-      <h1 className={style.titleRegistration}>Rejestracja</h1>
-      <h2 className={style.title}>Dane logowania</h2>
-      <RegisterForm
-        registrationData={registrationData}
-        editRegistrationData={editRegistrationData}
-        confirmPassword={confirmPassword}
-        editConfirmPassword={editConfirmPassword}
-      />
-      <h2 className={style.title}>Dane do rachunku</h2>
-      <DataForm
-        registrationData={registrationData}
-        editRegistrationData={editRegistrationData}
-      />
-      <Checkbox
-        children="Inne dane do wysyłki"
-        active={deliveryActive}
-        change={setDeliveryActive}
-      />
-      {deliveryActive
-        ? <>
-          <h2 className={style.title}>Dane do wysyłki</h2>
-          <DeliveryForm
-            registrationData={registrationData}
-            editRegistrationDataDelivery={editRegistrationDataDelivery}
-          />
-        </>
-        : null}
-      <div className={style.buttonBox}>
-        <Link className={style.buttonLogin}
-              to="/user/login"
-        >{window.screen.width > 450 ? 'zaloguj się' : 'zaloguj'}
-        </Link>
-        <button className={style.buttonRegister} onClick={register}
-        >{window.screen.width > 450 ? 'zarejestruj się' : 'zarejestruj'}
-        </button>
+    const handleRegister = async (e: SyntheticEvent) => {
+      e.preventDefault();
+      if (RegisterValidation(userRegistrationData, deliveryRegistrationData, confirmPassword)) {
+        try {
+          const res = await checkEmail(userRegistrationData.email);
+          if (!res.ok) {
+            const response = await fetch(`${config.URL}user`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                userDto: userRegistrationData,
+                deliveryDto: deliveryRegistrationData,
+              }),
+            });
+            const data = await response.json();
+            if (data.ok) {
+              navigate('/user/login');
+              window.scrollTo(0, 0);
+            }
+          } else {
+            setErrorMessage('taki e-mail już istnieje');
+          }
+        } catch (err) {
+          throw new Error('', {cause: err});
+        }
+      } else {
+        setErrorMessage('wypełnij wszystkie dane');
+      }
+    };
+
+    return (
+      <div className={style.container}>
+        <h1 className={style.titleRegistration}>Rejestracja</h1>
+        <h2 className={style.title}>Dane logowania</h2>
+        <RegisterForm
+          registrationData={userRegistrationData}
+          editRegistrationData={editUserRegistrationData}
+          confirmPassword={confirmPassword}
+          editConfirmPassword={editConfirmPassword}
+          checkEmail={checkEmail}
+          register={handleRegister}
+        />
+        <h2 className={style.title}>Dane do rachunku</h2>
+        <DataForm
+          userData={userRegistrationData}
+          editUserData={editUserRegistrationData}
+        />
+        <Checkbox
+          children="Inne dane do wysyłki"
+          active={deliveryActive}
+          change={editDeliveryActive}
+        />
+        {deliveryActive === 1
+          ? <>
+            <h2 className={style.title}>Dane do wysyłki</h2>
+            <DeliveryForm
+              deliveryData={deliveryRegistrationData}
+              editDeliveryData={editDeliveryRegistrationData}
+            />
+          </>
+          : null}
+        {<p className={errorMessage !== '' ? style.errorMessage : style.errorMessageDisable}>{errorMessage}</p>}
+        <BackAndNextButtons
+          textBack={window.screen.width > 450 ? 'zaloguj się' : 'zaloguj'}
+          textNext={window.screen.width > 450 ? 'zarejestruj się' : 'zarejestruj'}
+          icons={false}
+          handleBack={handleLogin}
+          handleNext={handleRegister}
+        />
       </div>
-    </div>
-  );
-};
+    );
+  }
+;
