@@ -82,6 +82,10 @@
     font-size: 1.3rem;
 }
 
+.productInfoTypeList {
+    text-align: center;
+}
+
 .productInfoType {
     text-decoration: none;
     font-size: 1.3rem;
@@ -118,6 +122,10 @@
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid var(--grey);
+}
+
+.summaryBox:last-child {
+    margin-bottom: 40px;
 }
 
 .textBox {
@@ -158,34 +166,16 @@
     font-weight: 500;
 }
 
-.buttonBox {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 10px 40px;
-    width: 100%;
+.errorMessageOn {
+    position: relative;
+    top: -20px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--third-color);
 }
 
-.button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 5%;
-    border: none;
-    border-radius: 5px;
-    text-transform: uppercase;
-    color: #fff;
-    background-color: var(--grey-dark);
-}
-
-.icon {
-    width: 20px;
-    height: 20px;
-    fill: #fff;
-}
-
-.buttonNext {
-    background-color: var(--secondary-color);
+.errorMessageOff {
+    display: none;
 }
 
 @media (min-width: 576px) {

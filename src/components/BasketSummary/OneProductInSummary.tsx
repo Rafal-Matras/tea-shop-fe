@@ -18,22 +18,27 @@ interface Props {
 
 export const OneProductInSummary = ({basketItem}: Props) => {
 
-  const {allProducts, setProductType} = UseProductContext();
+  const {setProductType} = UseProductContext();
   const [product, setProduct] = useState<BasketOneProductInterface>(oneProductInBasketDefault);
+  const {id, name, image, category, type, price, state, numberOfUnits, unit} = basketItem.product;
+  const categoryText = () => {
+    if (product.category === 'herbaty') return 'Herbata';
+    if (product.category === 'kawy') return 'Kawa';
+    if (product.category === 'zioła') return 'Zioła';
+    return '';
+  };
 
   useEffect(() => {
-    const data = allProducts.find(item => item.id === basketItem.productId);
-    if (!data) return;
     const newProduct: BasketOneProductInterface = {
-      id: data.id,
-      name: data.name,
-      image: data.image,
-      category: data.category,
-      type: data.type,
-      price: data.price,
-      state: data.state,
-      numberOfUnits: data.numberOfUnits,
-      unit: data.unit,
+      id,
+      name,
+      image,
+      category,
+      type,
+      price,
+      state,
+      numberOfUnits,
+      unit,
     };
     setProduct(newProduct);
   }, []);
@@ -41,7 +46,7 @@ export const OneProductInSummary = ({basketItem}: Props) => {
   return (
     <tr className={style.oneProductSummaryContainer}>
       <td className={style.tdImageAndName}>
-        <img className={style.image} src={`/images/products/${product.image}`} alt=""/>
+        <img className={style.image} src={`/images/products/${category}/${product.image}`} alt=""/>
         <div className={style.productInfoNameBox}>
           <p className={style.productInfoName}>{product.name}</p>
           <div className={style.productInfoTypeList}>
@@ -50,7 +55,7 @@ export const OneProductInSummary = ({basketItem}: Props) => {
                 className={style.productInfoType}
                 to="/shop"
                 onClick={() => setProductType(item)}
-                key={item}>{useFirstLetterBig(product.category)} {useFirstLetterBig(item)}
+                key={item}>{useFirstLetterBig(categoryText())} {useFirstLetterBig(item)}
                 {(product.type.length > 0 && index < product.type.length - 1)
                   ? ', '
                   : ''
@@ -62,7 +67,7 @@ export const OneProductInSummary = ({basketItem}: Props) => {
       </td>
       <td className={style.tdProductSummaryQuantity}>
         <p className={style.oneProductSummaryQuantity}
-        >{basketItem.packSize * basketItem.quantityOfProduct * product.numberOfUnits} {product.unit}
+        >{basketItem.packSize * basketItem.count * product.numberOfUnits} {product.unit}
         </p>
       </td>
       <td className={style.tdProductSummaryUnitPrice}>
@@ -74,7 +79,7 @@ export const OneProductInSummary = ({basketItem}: Props) => {
         <p className={style.oneProductSummaryPrice}
         >
           <span>cena: </span>
-          {useConvertPriceToString(product.price * basketItem.packSize * basketItem.quantityOfProduct)} zł
+          {useConvertPriceToString(product.price * basketItem.packSize * basketItem.count)} zł
         </p>
       </td>
     </tr>

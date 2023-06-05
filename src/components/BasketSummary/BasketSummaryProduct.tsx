@@ -8,7 +8,8 @@ import style from './BasketSummary.module.css';
 
 export const BasketSummaryProduct = () => {
 
-  const {basket, fullPrice, costOfDelivery, typeOfDelivery, typeOfPayments} = UseBasketContext();
+  const {basket, fullPrice} = UseBasketContext();
+  const {formOfDelivery, formOfPayments, deliveryCost} = UseBasketContext();
 
   return (
     <div className={style.sectionProducts}>
@@ -37,19 +38,19 @@ export const BasketSummaryProduct = () => {
       <div className={style.summaryBox}>
         <div className={style.textBox}>
           <p className={style.deliveryAndPayment}>Forma dostawy</p>
-          <p className={style.deliveryAndPaymentSpan}>{typeOfDelivery}</p>
+          <p className={style.deliveryAndPaymentSpan}>{formOfDelivery}</p>
         </div>
         <div className={style.textBox}>
           <p className={style.deliveryAndPayment}>Forma płatności</p>
-          <p className={style.deliveryAndPaymentSpan}>{typeOfPayments}</p>
+          <p className={style.deliveryAndPaymentSpan}>{formOfPayments}</p>
         </div>
         <div className={style.textBox}>
           <p className={style.deliveryAndPayment}>Koszt przesyłki</p>
-          <p className={style.deliveryAndPaymentSpan}>{useConvertPriceToString(costOfDelivery)} zł</p>
+          <p className={style.deliveryAndPaymentSpan}>{useConvertPriceToString(deliveryCost)} zł</p>
         </div>
       </div>
       <div className={style.summaryBox}>
-        <p className={style.fullPrice}>razem <span>{useConvertPriceToString(fullPrice + costOfDelivery)} zł</span></p>
+        <p className={style.fullPrice}>razem <span>{useConvertPriceToString(fullPrice + deliveryCost)} zł</span></p>
       </div>
     </div>
   );
