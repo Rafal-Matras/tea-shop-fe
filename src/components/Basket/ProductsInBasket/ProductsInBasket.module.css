@@ -97,6 +97,11 @@
     font-weight: 500;
     color: #fff;
     background-color: #ff2424;
+    cursor: pointer;
+}
+
+.removeBasket:hover{
+    box-shadow: 0 0 4px 0 var(--third-color);
 }
 
 .info {

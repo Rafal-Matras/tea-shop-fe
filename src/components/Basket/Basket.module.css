@@ -31,7 +31,6 @@
     padding: 5px 15px;
     border-radius: 5px;
     font-size: 1.4rem;
-    text-transform: uppercase;
     text-decoration: none;
     letter-spacing: 1px;
     color: #fff;
@@ -40,7 +39,7 @@
 }
 
 .button:hover {
-    box-shadow: 0 0 4px 4px var(--secondary-color);
+    box-shadow: 0 0 4px 0 var(--secondary-color);
 }
 
 .ArrowRightIcon {
