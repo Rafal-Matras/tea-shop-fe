@@ -110,6 +110,11 @@
     width: 40px;
     height: 40px;
     cursor: pointer;
+    transition: fill .3s;
+}
+
+.descriptionIcon:hover{
+    fill: var(--primary-dark-color);
 }
 
 .descriptionBox {
@@ -161,6 +166,12 @@
     text-transform: uppercase;
     color: #fff;
     background-color: var(--primary-color);
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.descriptionButton:hover {
+    background-color: var(--primary-dark-color);
 }
 
 @media (min-width: 480px) {

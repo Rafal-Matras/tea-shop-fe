@@ -23,7 +23,7 @@ export const TypesOfTeas = () => {
   const [value, setValue] = useState<number>(0);
   const [moreOfTea, setMoreOfTea] = useState<boolean>(false);
   const [typeIndex, setTypeIndex] = useState<number>(0);
-  let multiplier = 1;
+  let multiplier: number;
 
   useEffect(() => {
     setValue(multiplier * positionNumber);
@@ -38,27 +38,41 @@ export const TypesOfTeas = () => {
   } else multiplier = 940;
 
   const positionNumberUp = () => {
-    if (window.screen.width < 480) {
-      if (positionNumber < 9) {
-        setPositionNumber(positionNumber => positionNumber + 1);
-      } else setPositionNumber(0);
-    } else if (window.screen.width < 720) {
-      if (positionNumber < 4) {
-        setPositionNumber(positionNumber => positionNumber + 1);
-      } else setPositionNumber(0);
-    } else if (window.screen.width < 992) {
-      if (positionNumber < 3) {
-        setPositionNumber(positionNumber => positionNumber + 1);
-      } else setPositionNumber(0);
+    if (moreOfTea) {
+      if (typeIndex < 9) {
+        setTypeIndex(typeIndex + 1);
+      } else {
+        setTypeIndex(0);
+      }
     } else {
-      if (positionNumber < 2) {
-        setPositionNumber(positionNumber => positionNumber + 1);
-      } else setPositionNumber(0);
+      if (window.screen.width < 480) {
+        if (positionNumber < 9) {
+          setPositionNumber(positionNumber => positionNumber + 1);
+        } else setPositionNumber(0);
+      } else if (window.screen.width < 720) {
+        if (positionNumber < 4) {
+          setPositionNumber(positionNumber => positionNumber + 1);
+        } else setPositionNumber(0);
+      } else if (window.screen.width < 992) {
+        if (positionNumber < 3) {
+          setPositionNumber(positionNumber => positionNumber + 1);
+        } else setPositionNumber(0);
+      } else {
+        if (positionNumber < 2) {
+          setPositionNumber(positionNumber => positionNumber + 1);
+        } else setPositionNumber(0);
+      }
     }
   };
 
   const positionNumberDown = () => {
-    if (window.screen.width < 480) {
+    if (moreOfTea) {
+      if (typeIndex > 0) {
+        setTypeIndex(typeIndex - 1);
+      } else {
+        setTypeIndex(9);
+      }
+    }if (window.screen.width < 480) {
       if (positionNumber === 0) {
         setPositionNumber(9);
       } else setPositionNumber(positionNumber => positionNumber - 1);
