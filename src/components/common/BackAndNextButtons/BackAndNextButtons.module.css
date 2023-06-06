@@ -29,6 +29,14 @@
     background-color: var(--secondary-color);
 }
 
+.buttonBack:hover {
+    box-shadow: 0 0 4px 0 var(--grey-dark);
+}
+
+.buttonNext:hover {
+    box-shadow: 0 0 4px 0 var(--secondary-color);
+}
+
 .icon {
     fill: #fff;
 }
