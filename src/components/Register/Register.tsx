@@ -14,6 +14,7 @@ import { defaultDeliveryRegister, defaultUserRegister } from '../../assets/defau
 
 import style from './Register.module.css';
 import { RegisterValidation } from './RegisterValidation';
+import { PopupRegistered } from '../common/Popups/PopupRegistered/PopupRegistered';
 
 export const Register = () => {
 
@@ -23,6 +24,7 @@ export const Register = () => {
     const [deliveryRegistrationData, setDeliveryRegistrationData] = useState<DeliveryRegisterInterface>(defaultDeliveryRegister);
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const [activeRegister, setActiveRegister] = useState<boolean>(false);
 
     const editUserRegistrationData = (name: string, value: string | number) => {
       setUserRegistrationData(userRegistrationData => ({
@@ -74,8 +76,7 @@ export const Register = () => {
             });
             const data = await response.json();
             if (data.ok) {
-              navigate('/user/login');
-              window.scrollTo(0, 0);
+              setActiveRegister(true);
             }
           } else {
             setErrorMessage('taki e-mail już istnieje');
@@ -88,46 +89,54 @@ export const Register = () => {
       }
     };
 
+    const handleNext = () => {
+      setActiveRegister(false);
+      navigate('/user/login');
+      window.scrollTo(0, 0);
+    };
+
     return (
-      <div className={style.container}>
-        <h1 className={style.titleRegistration}>Rejestracja</h1>
-        <h2 className={style.title}>Dane logowania</h2>
-        <RegisterForm
-          registrationData={userRegistrationData}
-          editRegistrationData={editUserRegistrationData}
-          confirmPassword={confirmPassword}
-          editConfirmPassword={editConfirmPassword}
-          checkEmail={checkEmail}
-          register={handleRegister}
-        />
-        <h2 className={style.title}>Dane do rachunku</h2>
-        <DataForm
-          userData={userRegistrationData}
-          editUserData={editUserRegistrationData}
-        />
-        <Checkbox
-          children="Inne dane do wysyłki"
-          active={deliveryActive}
-          change={editDeliveryActive}
-        />
-        {deliveryActive === 1
-          ? <>
-            <h2 className={style.title}>Dane do wysyłki</h2>
-            <DeliveryForm
-              deliveryData={deliveryRegistrationData}
-              editDeliveryData={editDeliveryRegistrationData}
-            />
-          </>
-          : null}
-        {<p className={errorMessage !== '' ? style.errorMessage : style.errorMessageDisable}>{errorMessage}</p>}
-        <BackAndNextButtons
-          textBack={window.screen.width > 450 ? 'zaloguj się' : 'zaloguj'}
-          textNext={window.screen.width > 450 ? 'zarejestruj się' : 'zarejestruj'}
-          icons={false}
-          handleBack={handleLogin}
-          handleNext={handleRegister}
-        />
-      </div>
+      activeRegister
+        ? <PopupRegistered handleNext={handleNext}/>
+        : <div className={style.container}>
+          <h1 className={style.titleRegistration}>Rejestracja</h1>
+          <h2 className={style.title}>Dane logowania</h2>
+          <RegisterForm
+            registrationData={userRegistrationData}
+            editRegistrationData={editUserRegistrationData}
+            confirmPassword={confirmPassword}
+            editConfirmPassword={editConfirmPassword}
+            checkEmail={checkEmail}
+            register={handleRegister}
+          />
+          <h2 className={style.title}>Dane do rachunku</h2>
+          <DataForm
+            userData={userRegistrationData}
+            editUserData={editUserRegistrationData}
+          />
+          <Checkbox
+            children="Inne dane do wysyłki"
+            active={deliveryActive}
+            change={editDeliveryActive}
+          />
+          {deliveryActive === 1
+            ? <>
+              <h2 className={style.title}>Dane do wysyłki</h2>
+              <DeliveryForm
+                deliveryData={deliveryRegistrationData}
+                editDeliveryData={editDeliveryRegistrationData}
+              />
+            </>
+            : null}
+          {<p className={errorMessage !== '' ? style.errorMessage : style.errorMessageDisable}>{errorMessage}</p>}
+          <BackAndNextButtons
+            textBack={window.screen.width > 450 ? 'zaloguj się' : 'zaloguj'}
+            textNext={window.screen.width > 450 ? 'zarejestruj się' : 'zarejestruj'}
+            icons={false}
+            handleBack={handleLogin}
+            handleNext={handleRegister}
+          />
+        </div>
     );
   }
 ;
