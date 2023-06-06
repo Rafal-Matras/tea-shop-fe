@@ -1,7 +1,7 @@
-import { Role } from '../../types';
+import { Role } from '../../../types';
 
-import { NotFoundViews } from '../../views/NotFoundViews';
-import { UseUserContext } from '../../context/UserContext';
+import { NotFoundViews } from '../../../views/NotFoundViews';
+import { UseUserContext } from '../../../context/UserContext';
 
 interface Props {
   role: Role;

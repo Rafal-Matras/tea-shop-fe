@@ -25,7 +25,7 @@ import { HowDoWePackageView } from '../../views/HowDoWePackageView';
 import { ReturnPolicyViews } from '../../views/ReturnPolicyViews';
 import { PrivacyPolicyViews } from '../../views/PrivacyPolicyViews';
 import { ForgotPasswordViews } from '../../views/ForgotPasswordViews';
-import { SecurePath } from '../common/SecurePath';
+import { SecurePath } from '../common/SecurePath/SecurePath';
 
 import style from '../App/App.module.css';
 
