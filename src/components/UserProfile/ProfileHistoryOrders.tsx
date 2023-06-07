@@ -1,6 +1,7 @@
 import { ActivePageType, HistoryOrdersInterface } from '../../types';
 
 import style from './UserProfile.module.css';
+import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
 
 interface Props {
   orderList: HistoryOrdersInterface[];
@@ -27,8 +28,8 @@ export const ProfileHistoryOrders = ({orderList, setOrderDetails}: Props) => {
           <tr key={index} onClick={() => setOrderDetails('details', index)}>
             <td>{index + 1}</td>
             <td>{item.orderNumber}</td>
-            <td>{item.data}</td>
-            <td>{item.price}</td>
+            <td>{item.createdAd}</td>
+            <td>{useConvertPriceToString(item.price)}</td>
             <td>{item.status}</td>
           </tr>
         ))}

@@ -18,23 +18,23 @@ import { defaultDeliveryRegister } from '../../assets/defaultData';
 export const UserProfile = () => {
 
   const {user, setUser} = UseUserContext();
-  const {state} = useLocation();
   const [userData, setUserData] = useState<UserInterface>(user);
   const [activePage, setActivePage] = useState<ActivePageType>('data');
   const [ordersList, setOrderList] = useState<HistoryOrdersInterface[]>([]);
   const [activeOrder, setActiveOrder] = useState<number>(0);
 
-  // useEffect(() => {
-  //   console.log(state);
-  //   if (state) {
-  //     setActivePage(state);
-  //   }
-  //   (async () => {
-  //
-  //   })();
-  //   setOrderList(orderListDefault);
-  // }, [state]);
-
+  useEffect(()=>{
+    (async ()=>{
+      try {
+        const response = await fetch(`${config.URL}order/all`,{
+          credentials:'include'
+        })
+        setOrderList(await response.json())
+      }catch (err){
+        throw new Error('',{cause:err})
+      }
+    })()
+  },[])
   const changeUserData = (name: string, value: string) => {
     setUserData(userData => ({
       ...userData,

@@ -89,10 +89,11 @@ export interface OrderBasketInterface extends Omit<ProductsListInterface, 'categ
 export interface HistoryOrdersInterface {
   id: string;
   orderNumber: string;
-  createdAd: Date;
+  createdAd: string;
   price: number;
   status: Status;
   formOfDelivery: string | null;
+  deliveryCost:number;
   trackingNumber: string | null;
   details: Details;
 }
@@ -142,9 +143,11 @@ export interface OrderDetailsInterface {
 }
 
 export interface OrderListDetails {
+  id:string;
   image: string;
-  productName: string;
-  productType: string[];
+  category:string,
+  name: string;
+  type: string[];
   count: number;
   unit: string;
   price: number;
@@ -156,4 +159,5 @@ export interface SendOrderInterface extends Omit<Details, 'id'> {
   userId: string | null;
   price: number;
   formOfDelivery: string;
+  deliveryCost:number;
 }

@@ -9,7 +9,7 @@
     font-weight: 600;
 }
 
-.pageContainer{
+.pageContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,7 +59,7 @@
     position: absolute;
     top: 0;
     right: 10px;
-    border:none;
+    border: none;
     text-decoration: none;
     background-color: var(--secondary-color);
     cursor: pointer;
@@ -128,24 +128,35 @@ th, td {
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    border-bottom:1px solid var(--grey-light);
+    border-bottom: 2px solid var(--grey-light);
 }
 
 .orderItemBoxLinkImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 20%;
     max-width: 100px;
 }
 
 .orderItemBox img {
-    width: 100%;
+    padding: 10px;
+    width: 90%;
 }
 
-.orderItemBoxLinkName {
+.orderItemBoxName {
     width: 50%;
     font-size: 1.4rem;
-    text-decoration: none;
-    color: var(--primary-dark-color)
+    color: var(--primary-dark-color);
 }
+
+.orderItemBoxText {
+    width: 10%;
+    max-width: 90px;
+    font-size: 1.4rem;
+    text-align: right;
+}
+
 
 .orderItemBoxTextSum,
 .orderItemBoxTextDelivery {
@@ -156,6 +167,7 @@ th, td {
 
 .orderItemBoxTextSum {
     font-weight: 500;
+    border-bottom: 2px solid var(--grey-dark);
 }
 
 .orderItemBoxTextSum span,
@@ -232,13 +244,13 @@ th, td {
         width: 220px;
     }
 
-    .buttonBack{
+    .buttonBack {
         cursor: pointer;
         box-shadow: 0 0 2px 2px transparent;
         transition: .3s;
     }
 
-    .buttonBack:hover{
+    .buttonBack:hover {
         box-shadow: 0 0 2px 2px var(--grey-dark);
     }
 }

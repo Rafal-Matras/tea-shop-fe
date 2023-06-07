@@ -47,14 +47,12 @@ export const BasketDataNotLoginRegister = ({
     setConfirmPassword(value);
   };
 
-
   const handleRegister = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
 
       if (!validation(1, () => {
       }, userData, confirmPassword, setIsAllData, false)) return;
-
       const response = await fetch(`${config.URL}user`, {
         method: 'POST',
         headers: {
