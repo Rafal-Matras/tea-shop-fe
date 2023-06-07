@@ -14,28 +14,31 @@ import { Progress } from '../common/Progress/Progress';
 import { BackAndNextButtons } from '../common/BackAndNextButtons/BackAndNextButtons';
 
 import style from './BasketSummary.module.css';
+import { useConvertPriceToString } from '../../hooks/useConvertPriceToString';
 
 export const BasketSummary = () => {
 
   const navigate = useNavigate();
   const {user} = UseUserContext();
-  const {basket, setBasket, fullPrice, selectedBasket, setSelectedBasket, formOfDelivery} = UseBasketContext();
+  const {basket, setBasket, fullPrice, selectedBasket, setSelectedBasket, formOfDelivery,deliveryCost} = UseBasketContext();
   const [errorMessage, setErrorMessage] = useState<boolean>(false);
 
   const handleNext = async () => {
-    console.log('summary---------------');
     const orderList = basket.map(item => ({
+      id:item.id,
+      category:item.product.category,
       image: item.product.image,
-      productName: item.product.name,
-      productType: item.product.type,
-      count: item.count * item.packSize * item.product.numberOfUnits,
+      name: item.product.name,
+      type: item.product.type,
+      count: Math.round(item.count * item.packSize * item.product.numberOfUnits),
       unit: item.product.unit,
-      price: item.product.price * item.count * item.packSize,
+      price: useConvertPriceToString(item.product.price * item.count * item.packSize),
     }));
 
     const sendData: SendOrderInterface = {
       price: fullPrice,
-      formOfDelivery: formOfDelivery,
+      formOfDelivery,
+      deliveryCost,
       userId: user.id ?? null,
       orderList: JSON.stringify(orderList),
       email: user.email,

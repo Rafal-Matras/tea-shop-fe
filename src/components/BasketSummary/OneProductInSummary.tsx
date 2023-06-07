@@ -25,7 +25,7 @@ export const OneProductInSummary = ({basketItem}: Props) => {
     if (product.category === 'herbaty') return 'Herbata';
     if (product.category === 'kawy') return 'Kawa';
     if (product.category === 'zioła') return 'Zioła';
-    return '';
+    if (product.category === 'akcesoria') return 'Akcesoria'
   };
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export const OneProductInSummary = ({basketItem}: Props) => {
                 className={style.productInfoType}
                 to="/shop"
                 onClick={() => setProductType(item)}
-                key={item}>{useFirstLetterBig(categoryText())} {useFirstLetterBig(item)}
+                key={item}>{categoryText()} {useFirstLetterBig(item)}
                 {(product.type.length > 0 && index < product.type.length - 1)
                   ? ', '
                   : ''
