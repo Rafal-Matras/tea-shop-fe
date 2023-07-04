@@ -1,5 +1,4 @@
 import { SyntheticEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { UserLoginDataInterface } from '../../../../types';
 
@@ -28,29 +27,26 @@ export const ForgotPasswordForm = ({setForgotPwd}: Props) => {
   };
   const handleForgetPassword = async (e: SyntheticEvent) => {
     e.preventDefault();
-    try {
-      const response = await fetch(`${config.URL}user/is-in-database/${loginDetails.email}`);
-      if (!response.ok) {
-        setInvalidText('Nie ma takiego e-maila w bazie');
-        setInvalidEmail(true);
-        return;
-      }
-
+    try{
       const res = await fetch(`${config.URL}user/forgot-password/${loginDetails.email}`);
-      console.log(res);
       if (!res.ok) {
         setInvalidText('coś poszło nie tak spróbuj jeszcze raz zrestartować hasło');
         setInvalidEmail(true);
         return;
       }
-
+      const data = await res.json()
+      if(!data.ok){
+        setInvalidText('Nie ma takiego e-maila w bazie');
+          setInvalidEmail(true);
+          return;
+      }
+    } catch (err) {
+      throw new Error('New error message!!', {cause: err});
+    }
       window.scrollTo(0, 0);
       setInvalidText('');
       setInvalidEmail(false);
       setForgotPwd(false);
-    } catch (err) {
-      throw new Error('New error message', {cause: err});
-    }
   };
 
   return (
