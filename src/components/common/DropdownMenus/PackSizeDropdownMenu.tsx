@@ -4,7 +4,7 @@ import { useOnClickOutside } from '../../../hooks/useOneClickOut';
 
 import { ArrowDownIcon } from '../SvgIcons/ArrowDownIcon';
 
-import style from './PackSizeDropdownMenu.module.css';
+import style from './DropdownMenus.module.css';
 
 interface Props {
   numberOfUnits: number;

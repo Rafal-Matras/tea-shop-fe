@@ -3,6 +3,17 @@
     width: 180px;
 }
 
+.input {
+    position: relative;
+    margin: 5px auto;
+    padding: 2px 5px 2px 15px;
+    border: 2px solid var(--grey);
+    border-radius: 5px;
+    z-index: 10;
+    width: 200px;
+    cursor: pointer;
+}
+
 .packSize {
     display: flex;
     justify-content: space-between;
@@ -25,14 +36,16 @@
 
 .packSizeMenuActive {
     position: absolute;
-    border: 1px solid var(--grey-light);
+    top: 40px;
+    left: 0;
+    border: 2px solid var(--grey-light);
     width: 100%;
-    background-color: #fff;
+    background-color: #f7f7f7;
 }
 
 .packSizeItem {
     display: flex;
-    justify-content: end;
+    justify-content: center;
     padding: 4px 27px;
     width: 100%;
     font-size: 1.4rem;
