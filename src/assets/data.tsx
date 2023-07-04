@@ -3,12 +3,12 @@ import { SliderInterface, TeaTypeInterface, TypesOfProductsInterface } from '../
 export const productType: TypesOfProductsInterface[] = [
   {
     name: 'herbaty',
-    types: ['czarna', 'zielona', 'czerwona', 'biała', 'żułta', 'niebieska', 'specialna', 'earl grey', 'owocowa', 'japońska', 'oolong', 'rooibos', 'yerba mate', 'kwitnąca'],
+    types: ['czarna', 'zielona', 'czerwona', 'biała', 'żułta', 'niebieska', 'specjalna','świąteczna', 'earl grey', 'owocowa', 'japońska', 'oolong', 'rooibos', 'yerba mate','matcha', 'kwitnąca'],
     icon: 'herbata',
   },
   {
     name: 'kawy',
-    types: ['klasyczna', 'smakowa', 'świąteczna', 'naturalna eko'],
+    types: ['klasyczna', 'smakowa', 'świąteczna'],
     icon: 'kawa',
   },
   {
@@ -18,7 +18,7 @@ export const productType: TypesOfProductsInterface[] = [
   },
   {
     name: 'akcesoria',
-    types: ['kubki', 'filiżanki', 'puszki', 'czajniki', 'zaparzaczei filtry do herbaty', 'zaparzacze i filtry do kawy', 'yerba mate', 'inne'],
+    types: ['porcelana', 'kawiarki', 'puszki', 'szklanki z podwujnym dnem', 'zaparzacze', 'filtry do herbaty', 'filtry do kawy', 'akcesoria do yerba mate','akcesoria do matchy', 'inne'],
     icon: 'akcesoria',
   },
   {name: 'na prezent', types: [], icon: 'prezenty'},
