@@ -14,11 +14,10 @@ import { useSetNewFullPrice } from '../../../hooks/useSetNewFullPrice';
 import { config } from '../../../config/config';
 
 import { ChangeQuantityBox } from '../../common/ChangeQuantityBox/ChangeQuantityBox';
-import { PackSizeDropdownMenu } from '../../common/PackSizeDropdownMenu/PackSizeDropdownMenu';
+import { PackSizeDropdownMenu } from '../../common/DropdownMenus/PackSizeDropdownMenu';
 import { CloseIcon } from '../../common/SvgIcons/CloseIcon';
-import stylePackSize from '../../common/PackSizeDropdownMenu/PackSizeDropdownMenu.module.css';
 
-
+import stylePackSize from '../../common/DropdownMenus/DropdownMenus.module.css';
 import style from './ProductsInBasket.module.css';
 
 interface Props {
@@ -149,7 +148,7 @@ export const OneProductInBasket = ({basketItem, index}: Props) => {
         <div className={style.productOrderPrice}>
           <p
             className={style.productOrderPriceText}
-          >cena: <span>{useConvertPriceToString((promo ? promo : price) * basketItem.count * basketItem.packSize)}</span>
+          >cena: <span>{useConvertPriceToString((+(price - price * promo).toFixed(2)) * basketItem.count * basketItem.packSize)}</span>
           </p>
         </div>
         <div className={style.productOrderRemove}>

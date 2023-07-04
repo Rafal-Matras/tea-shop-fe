@@ -18,7 +18,7 @@ import style from './BasketData.module.css';
 
 interface Props {
   userData: UserInterface;
-  changeUserData: (name: string, value: string) => void;
+  changeUserData: (name: string, value: string | number) => void;
   changeUserDataDelivery: (name: string, value: string) => void;
   setAccount: (name: string) => void;
   changeOtherDeliveryAddress: () => void;

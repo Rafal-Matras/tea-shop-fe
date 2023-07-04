@@ -35,9 +35,13 @@ export const Basket = () => {
     if (fullPrice > 80) setDeliveryCostData(0);
   }, [formOfDeliveryData, formOfPaymentsData, fullPrice]);
 
-  const handleFormOfDelivery = (name: string, value: string) => setFormOfDeliveryData(value);
+  const handleFormOfDelivery = (name: string, value: string |number) => {
+    if (typeof value === 'string')setFormOfDeliveryData(value)
+  };
 
-  const handleFormOfPayments = (name: string, value: string) => setFormOfPaymentsData(value);
+  const handleFormOfPayments = (name: string, value: string | number) => {
+    if (typeof value === 'string')setFormOfPaymentsData(value)
+  };
 
   const handleNext = () => {
     if (!selectedBasket) setSelectedBasket('local');

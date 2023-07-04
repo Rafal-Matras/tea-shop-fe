@@ -72,7 +72,7 @@ export const BasketDataIsNotLoginHaveAccount = ({setAccount}: Props) => {
   };
 
   return (
-    <>
+    <div className={style.notLoginSection}>
       <h2 className={style.sectionTitle}>Zaloguj się</h2>
       {forgotPwd
         ? <ForgotPasswordForm
@@ -82,7 +82,6 @@ export const BasketDataIsNotLoginHaveAccount = ({setAccount}: Props) => {
           <LoginForm
             loginDetails={loginDetails}
             editLoginDetails={editLoginDetails}
-            handleLogin={handleLogin}
             setForgotPwd={setForgotPwd}
             errorMessage={errorMessage}
           />
@@ -93,6 +92,6 @@ export const BasketDataIsNotLoginHaveAccount = ({setAccount}: Props) => {
           />
         </>
       }
-    </>
+    </div>
   );
 };

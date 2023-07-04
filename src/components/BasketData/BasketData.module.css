@@ -4,6 +4,14 @@
     align-items: center;
 }
 
+.notLoginSection{
+ display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 400px;
+}
+
 .title {
     margin: 20px auto;
     width: 80%;

@@ -20,19 +20,27 @@ export const BasketSummary = () => {
 
   const navigate = useNavigate();
   const {user} = UseUserContext();
-  const {basket, setBasket, fullPrice, selectedBasket, setSelectedBasket, formOfDelivery,deliveryCost} = UseBasketContext();
+  const {
+    basket,
+    setBasket,
+    fullPrice,
+    selectedBasket,
+    setSelectedBasket,
+    formOfDelivery,
+    deliveryCost,
+  } = UseBasketContext();
   const [errorMessage, setErrorMessage] = useState<boolean>(false);
 
   const handleNext = async () => {
     const orderList = basket.map(item => ({
-      id:item.id,
-      category:item.product.category,
+      id: item.id,
+      category: item.product.category,
       image: item.product.image,
       name: item.product.name,
       type: item.product.type,
       count: Math.round(item.count * item.packSize * item.product.numberOfUnits),
       unit: item.product.unit,
-      price: useConvertPriceToString(item.product.price * item.count * item.packSize),
+      price: useConvertPriceToString(+(item.product.price - item.product.price * item.product.promo).toFixed(2) * item.count * item.packSize),
     }));
 
     const sendData: SendOrderInterface = {
@@ -63,30 +71,23 @@ export const BasketSummary = () => {
     };
 
     try {
-      const response = await fetch(`http://localhost:3000/order`, {
+      const response = await fetch(`${config.URL}order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(sendData),
+        body: JSON.stringify({
+          dataOrder: sendData,
+          basket: basket,
+        }),
       });
-
       if (!response.ok) {
         setErrorMessage(true);
         return;
       }
-      if (selectedBasket === 'server') {
-        const response = await fetch(`${config.URL}basket/all`, {
-          method: 'DELETE',
-          credentials: 'include',
-        });
-        if (!response.ok) {
-          setErrorMessage(true);
-          return;
-        }
-        setErrorMessage(false);
-      }
-      localStorage.removeItem('basket');
+      if (selectedBasket === 'local') localStorage.removeItem('basket');
+
+      setErrorMessage(false);
       setSelectedBasket(null);
       setBasket([]);
       navigate('/basket/done');

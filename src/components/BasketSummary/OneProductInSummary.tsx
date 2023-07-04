@@ -20,7 +20,7 @@ export const OneProductInSummary = ({basketItem}: Props) => {
 
   const {setProductType} = UseProductContext();
   const [product, setProduct] = useState<BasketOneProductInterface>(oneProductInBasketDefault);
-  const {id, name, image, category, type, price, state, numberOfUnits, unit} = basketItem.product;
+  const {id, name, image, category, type, price,promo, state, numberOfUnits, unit} = basketItem.product;
   const categoryText = () => {
     if (product.category === 'herbaty') return 'Herbata';
     if (product.category === 'kawy') return 'Kawa';
@@ -36,6 +36,7 @@ export const OneProductInSummary = ({basketItem}: Props) => {
       category,
       type,
       price,
+      promo,
       state,
       numberOfUnits,
       unit,
@@ -72,14 +73,14 @@ export const OneProductInSummary = ({basketItem}: Props) => {
       </td>
       <td className={style.tdProductSummaryUnitPrice}>
         <p className={style.oneProductSummaryUnitPrice}
-        ><span>{useConvertPriceToString(product.price)} / </span>{product.numberOfUnits} {product.unit}
+        ><span>{useConvertPriceToString(+(product.price - product.price * product.promo).toFixed(2))} / </span>{product.numberOfUnits} {product.unit}
         </p>
       </td>
       <td className={style.tdProductSummaryPrice}>
         <p className={style.oneProductSummaryPrice}
         >
           <span>cena: </span>
-          {useConvertPriceToString(product.price * basketItem.packSize * basketItem.count)} zł
+          {useConvertPriceToString(+(product.price - product.price * product.promo).toFixed(2) * basketItem.packSize * basketItem.count)} zł
         </p>
       </td>
     </tr>

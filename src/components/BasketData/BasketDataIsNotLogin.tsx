@@ -11,7 +11,7 @@ import style from './BasketData.module.css';
 
 interface Props {
   userData: UserInterface;
-  changeUserData: (name: string, value: string) => void;
+  changeUserData: (name: string, value: string | number) => void;
   changeUserDataDelivery: (name: string, value: string) => void;
   accept: 0 | 1;
   setAccept: (number: 0 | 1) => void;
@@ -45,7 +45,9 @@ export const BasketDataIsNotLogin = ({
   let buttonName: string = '';
   const radioData = ['Posiadam konto w sklepie', 'Nie posiadam konta i chcę sie zarejestrować', 'Kontynuuj jako gość'];
 
-  const handleAccount = (name: string, value: string) => setAccount(value);
+  const handleAccount = (name: string, value: string | number) => {
+    if(typeof value === 'string')setAccount(value);
+  }
 
   const accountPage = () => {
     switch (account) {
@@ -92,6 +94,7 @@ export const BasketDataIsNotLogin = ({
         <Radio
           data={radioData}
           name=""
+          text=''
           account={account}
           setAccount={handleAccount}
           vertical={true}

@@ -4,7 +4,7 @@ import style from './DeliveryAndPayments.module.css';
 
 interface Props {
   formOfPayments: string;
-  setFormOfPayments: (name: string, value: string) => void;
+  setFormOfPayments: (name: string, value: string | number) => void;
 }
 
 export const Payments = ({formOfPayments, setFormOfPayments}: Props) => {
@@ -15,7 +15,8 @@ export const Payments = ({formOfPayments, setFormOfPayments}: Props) => {
     <div className={style.payments}>
       <Radio
         data={dataPayments}
-        name="Forma płatności"
+        text="Forma płatności"
+        name=""
         account={formOfPayments}
         setAccount={setFormOfPayments}
         vertical={true}

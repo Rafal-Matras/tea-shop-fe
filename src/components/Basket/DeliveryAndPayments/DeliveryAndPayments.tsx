@@ -7,9 +7,9 @@ import style from './DeliveryAndPayments.module.css';
 
 interface Props {
   formOfDelivery: string;
-  setFormOfDelivery: (name: string, value: string) => void;
+  setFormOfDelivery: (name: string, value: string | number) => void;
   formOfPayments: string;
-  setFormOfPayments: (name: string, value: string) => void;
+  setFormOfPayments: (name: string, value: string | number) => void;
   deliveryCost: number;
 }
 

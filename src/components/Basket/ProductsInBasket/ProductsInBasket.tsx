@@ -1,12 +1,12 @@
 import { UseBasketContext } from '../../../context/BasketContext';
+import { UseUserContext } from '../../../context/UserContext';
 
 import { useConvertPriceToString } from '../../../hooks/useConvertPriceToString';
 
 import { OneProductInBasket } from './OneProductInBasket';
+import { config } from '../../../config/config';
 
 import style from './ProductsInBasket.module.css';
-import { config } from '../../../config/config';
-import { UseUserContext } from '../../../context/UserContext';
 
 export const ProductsInBasket = () => {
 
