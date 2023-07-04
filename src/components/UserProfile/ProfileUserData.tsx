@@ -13,7 +13,7 @@ import style from './UserProfile.module.css';
 
 interface Props {
   userData: UserInterface;
-  changeUserData: (name: string, value: string) => void;
+  changeUserData: (name: string, value: string | number) => void;
   changeUserDataDelivery: (name: string, value: string) => void;
   handleSave: () => Promise<void>;
 }

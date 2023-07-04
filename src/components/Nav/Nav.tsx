@@ -28,7 +28,6 @@ export const Nav = ({activeMenu, setActiveMenu}: Props) => {
 
   useEffect(() => {
     if (typesOfProducts.length < 1) {
-
       setTypesOfProducts(productType);
     }
   }, []);

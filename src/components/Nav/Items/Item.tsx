@@ -16,11 +16,12 @@ interface Props {
 
 export const Item = ({item, onlyProductType, selectProductType}: Props) => {
 
-  const {setProductName,setProductType,activeProductType} = UseProductContext();
+  const {setProductName,setProductType,activeProductType,setCurrentPage} = UseProductContext();
 
   const setProduct = () => {
     setProductName(item.name);
     setProductType('')
+    setCurrentPage(0);
     selectProductType(item.name);
   };
   return (

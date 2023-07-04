@@ -9,17 +9,30 @@
 }
 
 .inputBox {
-    margin: 16px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
     width: 94%;
     max-width: 340px;
     height: 46px;
 }
 
-@media (min-width: 768px) {
+.text {
+    padding: 5px 10px;
+    font-size: 1.4rem;
+    text-align: center;
+}
 
-    /*.form {*/
-    /*    height: 340px;*/
-    /*}*/
+.inputBoxCheckbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px 15px;
+}
+@media (min-width: 768px) {
 
     .inputBox {
         height: 44px;

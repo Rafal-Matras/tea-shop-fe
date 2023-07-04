@@ -27,10 +27,14 @@ export const ForgotPassword = () => {
         if (!response.ok) {
           return;
         }
-        const user = await response.json();
+        const {user} = await response.json();
+        console.log(user.forgotPwdExpiredAt);
+        console.log( new Date(user.forgotPwdExpiredAt).getTime());
+        console.log( new Date().getTime());
+        console.log((new Date(user.forgotPwdExpiredAt).getTime() > new Date().getTime()));
         setSpinner(false);
-        if (!(new Date(user.forgotPwdExpiredAt).getTime() > new Date().getTime())) {
-          setActive(true);
+        if ((new Date(user.forgotPwdExpiredAt).getTime() > new Date().getTime())) {
+          setActive(false);
           return;
         }
       } catch (err) {

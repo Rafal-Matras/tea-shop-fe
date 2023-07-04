@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { ProductsListInterface } from '../../types';
 
@@ -38,6 +38,12 @@ export const Search = () => {
     navigate('/shop');
   };
 
+  const selectProduct = (id:string) => {
+    setSearchValue('')
+    navigate(`/product/${id}`)
+    window.location.reload()
+  }
+
   return (
     <div className={style.searchBox}>
       <form className={style.search} onSubmit={search}>
@@ -48,19 +54,19 @@ export const Search = () => {
           onChange={(e) => setSearchValue(e.target.value)}
           placeholder="wpisz szukaną nazwę..."
         />
-        <button className={style.searchButton}>
+        <p className={style.searchButton}>
           <SearchIcon className={style.searchIcon}/>
-        </button>
+        </p>
       </form>
       <ul className={searchList.length > 0 ? style.searchList : style.searchListNone}>
         {searchList.length > 0
           ? searchList.map(item => (
-            <Link
+            <li
               className={style.searchListItem}
               key={item.id}
-              to={`/product/${item.id}`}
-              onClick={() => setSearchValue('')}
-            >{item.name} - {item.category} {item.type?.[0]}</Link>
+              onClick={()=>selectProduct(item.id)}
+            >{item.name} - {item.category} {item.type?.[0]}
+            </li>
           ))
           : null
         }

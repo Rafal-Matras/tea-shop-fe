@@ -48,7 +48,7 @@ export const MobileRestItems = ({onlyProductType, closeMenu}: Props) => {
         >koszyk
         </Link>
       </li>
-      {user.role === 'User'
+      {user.role === 'user'
         ? <>
           <li className={onlyProductType ? style.productItemDisable : style.productItem}>
             <Link

@@ -54,6 +54,13 @@ export const Input = ({
         return;
       }
     }
+    if (name === 'name' && checkEmail) {
+      const data = await checkEmail(value);
+      if (data.ok) {
+        setErrorText('Taka nazwa już istnieje');
+        return;
+      }
+    }
     if ((name === 'pwdHash' || name === 'confirmPassword') && !checkReg(config.REGEX_PASSWORD)) {
       setErrorText('niepoprawne hasło ');
       return;

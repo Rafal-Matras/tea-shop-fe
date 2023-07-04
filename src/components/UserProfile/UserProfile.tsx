@@ -35,7 +35,7 @@ export const UserProfile = () => {
       }
     })()
   },[])
-  const changeUserData = (name: string, value: string) => {
+  const changeUserData = (name: string, value: string | number) => {
     setUserData(userData => ({
       ...userData,
       [name]: value,

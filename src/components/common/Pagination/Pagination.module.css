@@ -19,6 +19,7 @@
     color: var(--primary-color);
     background-color: #fff;
     transition: color .6s, background-color .6s;
+    cursor: pointer;
 }
 
 .activeBox {

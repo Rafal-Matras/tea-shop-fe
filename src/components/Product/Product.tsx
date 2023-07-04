@@ -71,7 +71,7 @@ export const Product = () => {
           <div className={style.priceAndOrderBox}>
             <div className={style.priceBox}>
               <p className={style.price}>{product.promo
-                ? useConvertPriceToString(product.promo * packSize * count)
+                ? useConvertPriceToString((+(product.price - product.price * product.promo).toFixed(2)) * packSize * count)
                 : useConvertPriceToString(product.price * packSize * count)
               } zł&nbsp;
               </p>
@@ -136,8 +136,8 @@ export const Product = () => {
           ><strong>Wymiary: </strong>{product.size}
           </p>
           <p
-            className={`${product.wayStore ? style.productDetailInfo : style.none}`}
-          ><strong>Sposób przehowywania </strong><br/>{product.wayStore}
+            className={`${product.storageMethod ? style.productDetailInfo : style.none}`}
+          ><strong>Sposób przehowywania </strong><br/>{product.storageMethod}
           </p>
         </div>
         {addedToBasket

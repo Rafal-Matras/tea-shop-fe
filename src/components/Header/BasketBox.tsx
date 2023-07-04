@@ -41,7 +41,6 @@ export const BasketBox = () => {
         credentials: 'include',
       });
       const data = await response.json();
-      console.log(data.logout);
       if (!data.logout) {
         setIsSuccess(false);
         setActivePopup(true);

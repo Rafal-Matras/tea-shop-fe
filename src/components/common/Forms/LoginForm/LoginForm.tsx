@@ -1,5 +1,3 @@
-import { SyntheticEvent } from 'react';
-
 import { UserLoginDataInterface } from '../../../../types';
 
 import { Input } from '../../Input/Input';
@@ -8,22 +6,15 @@ import style from './LoginForm.module.css';
 
 interface Props {
   setForgotPwd: (boolean: boolean) => void;
-  handleLogin: (e: SyntheticEvent) => void;
   loginDetails: UserLoginDataInterface,
   editLoginDetails: (name: string, value: string) => void
   errorMessage: string;
 }
 
-export const LoginForm = ({
-                            setForgotPwd,
-                            handleLogin,
-                            loginDetails,
-                            editLoginDetails,
-                            errorMessage,
-                          }: Props) => {
+export const LoginForm = ({setForgotPwd, loginDetails, editLoginDetails, errorMessage}: Props) => {
 
   return (
-    <form className={style.form} onSubmit={handleLogin}>
+    <>
       <p className={errorMessage !== '' ? style.errorMassage : style.errorMassageNone}>{errorMessage}</p>
       <div className={style.inputBox}>
         <Input
@@ -46,6 +37,6 @@ export const LoginForm = ({
         />
       </div>
       <p className={style.forgetPassword} onClick={() => setForgotPwd(true)}>nie pamiętasz hasła?</p>
-    </form>
+    </>
   );
 };

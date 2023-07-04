@@ -22,16 +22,16 @@ export const OneProductInList = ({item}: Props) => {
     if (category === 'herbaty') return 'Herbata';
     if (category === 'kawy') return 'Kawa';
     if (category === 'zioła') return 'Zioła';
-    return '';
+    if (category === 'akcesoria') return 'Akcesoria';
   };
 
   const categoryType = type.map(item => (
-      <p
-        className={style.category}
-        key={item}
-      >{categoryText()} {useFirstLetterBig(item)}
-      </p>
-    ))
+    <p
+      className={style.category}
+      key={item}
+    >{categoryText()} {useFirstLetterBig(item)}
+    </p>
+  ));
 
   const clear = () => {
     setActiveProductType('');
@@ -55,9 +55,9 @@ export const OneProductInList = ({item}: Props) => {
       <h1 className={style.name}>{name}</h1>
       {categoryType}
       <div className={style.priceBox}>
-        {promo
+        {promo !== 0
           ? <div className={style.pricePromoBox}>
-            <p className={style.price}>{useConvertPriceToString(promo)}</p>
+            <p className={style.price}>{useConvertPriceToString(+(price - price * promo).toFixed(2))}</p>
             <p className={style.pricePromo}>{useConvertPriceToString(price)}</p>
           </div>
           : <p className={style.price}>{useConvertPriceToString(price)}</p>

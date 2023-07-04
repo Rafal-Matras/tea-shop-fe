@@ -7,7 +7,7 @@ import { UseUserContext } from '../../context/UserContext';
 import { UseBasketContext } from '../../context/BasketContext';
 
 import { AvailableProduct } from '../common/AvailableProduct/AvailableProduct';
-import { PackSizeDropdownMenu } from '../common/PackSizeDropdownMenu/PackSizeDropdownMenu';
+import { PackSizeDropdownMenu } from '../common/DropdownMenus/PackSizeDropdownMenu';
 import { ChangeQuantityBox } from '../common/ChangeQuantityBox/ChangeQuantityBox';
 import { BasketIcon } from '../common/SvgIcons/BasketIcon';
 

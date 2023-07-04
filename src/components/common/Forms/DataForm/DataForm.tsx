@@ -7,7 +7,7 @@ import style from './DataForm.module.css';
 
 interface Props {
   userData: UserRegisterInterface;
-  editUserData: (name: string, value: string) => void;
+  editUserData: (name: string, value: string | number) => void;
 }
 
 export const DataForm = ({userData, editUserData}: Props) => {
@@ -16,9 +16,10 @@ export const DataForm = ({userData, editUserData}: Props) => {
     <form className={style.form}>
       <Radio
         data={['Paragon', 'Faktura VAT']}
-        name="Rachunek"
+        name="documentType"
         account={userData.documentType}
         setAccount={editUserData}
+        text='Rachunek'
       />
       <div className={style.inputBox}>
         <Input
