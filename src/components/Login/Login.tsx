@@ -17,7 +17,7 @@ import style from './Login.module.css';
 export const Login = () => {
 
   const navigate = useNavigate();
-  const {setUser} = UseUserContext();
+  const {setUser, activePage, setActivePage} = UseUserContext();
   const [forgotPwd, setForgotPwd] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [loginDetails, setLoginDetails] = useState<UserLoginDataInterface>(defaultUserLogin);
@@ -50,11 +50,15 @@ export const Login = () => {
           body: JSON.stringify(loginDetails),
         });
         const data = await response.json();
-
         if (data.login) {
           setUser(data.user);
           window.scrollTo(0, 0);
-          navigate(-1);
+          if (data.user.role === 'admin') {
+            navigate('/admin/admin-panel');
+          } else if (activePage === '/user/register') {
+            setActivePage('');
+            navigate(-2);
+          } else navigate(-1);
         } else {
           setErrorMessage('niepoprawne logowanie');
         }
@@ -69,13 +73,13 @@ export const Login = () => {
   return (
     <div className={style.container}>
       <h1 className={style.title}>{forgotPwd ? 'Zapomniałem hasła' : 'Logowanie'}</h1>
+
       {forgotPwd
         ? <ForgotPasswordForm
           setForgotPwd={setForgotPwd}/>
-        : <>
+        : <form className={style.form} onSubmit={handleLogin}>
           <LoginForm
             setForgotPwd={setForgotPwd}
-            handleLogin={handleLogin}
             loginDetails={loginDetails}
             editLoginDetails={editLoginDetails}
             errorMessage={errorMessage}
@@ -87,7 +91,7 @@ export const Login = () => {
             handleBack={handleRegister}
             handleNext={handleLogin}
           />
-        </>
+        </form>
       }
     </div>
   );

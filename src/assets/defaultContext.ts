@@ -10,7 +10,10 @@ import { defaultUser } from './defaultData';
 
 export const defaultUserContext: UserContextInterface = {
   user: defaultUser,
+  activePage: '',
   setUser: (user: UserInterface): void => {
+  },
+  setActivePage: (name: string): void => {
   },
 };
 

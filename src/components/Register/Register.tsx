@@ -15,9 +15,11 @@ import { defaultDeliveryRegister, defaultUserRegister } from '../../assets/defau
 import style from './Register.module.css';
 import { RegisterValidation } from './RegisterValidation';
 import { PopupRegistered } from '../common/Popups/PopupRegistered/PopupRegistered';
+import { UseUserContext } from '../../context/UserContext';
 
 export const Register = () => {
 
+    const {setActivePage} = UseUserContext();
     const navigate = useNavigate();
     const [deliveryActive, setDeliveryActive] = useState<0 | 1>(0);
     const [userRegistrationData, setUserRegistrationData] = useState<UserRegisterInterface>(defaultUserRegister);
@@ -77,6 +79,7 @@ export const Register = () => {
             const data = await response.json();
             if (data.ok) {
               setActiveRegister(true);
+              setActivePage('/user/register');
             }
           } else {
             setErrorMessage('taki e-mail już istnieje');

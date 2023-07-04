@@ -14,10 +14,13 @@ export const UseUserContext = () => useContext(UserContext);
 
 export const UserContextProvider = ({children}: Props) => {
   const [user, setUser] = useState<UserInterface>(defaultUserContext.user);
+  const [activePage, setActivePage] = useState<string>('')
 
   const UserContextObject = {
     user,
     setUser,
+    activePage,
+    setActivePage
   };
 
   return (

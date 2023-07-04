@@ -4,6 +4,8 @@ import { BasketInterface } from './productsTypes';
 export interface UserContextInterface {
   user: UserInterface;
   setUser: (user: UserInterface) => void;
+  activePage:string;
+  setActivePage: (name:string) => void;
 }
 
 export interface ProductContextInterface {
