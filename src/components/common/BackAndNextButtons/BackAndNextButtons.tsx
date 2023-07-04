@@ -25,7 +25,7 @@ export const BackAndNextButtons = ({textBack = 'Powrót', textNext, icons = true
       </button>
       <button
         className={style.buttonNext}
-        type="button"
+        type="submit"
         onClick={handleNext}>
         {textNext}{icons ? <ArrowRightIcon className={style.icon}/> : null}
       </button>

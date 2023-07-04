@@ -23,9 +23,20 @@ export enum Category {
 
 export enum NumberOfUnits {
   one = 1,
+  three = 3,
   twentyFifth = 25,
   fifty = 50,
   hundredth = 100,
+}
+
+export enum PromoEnum {
+  no = 0,
+  fifth = .05,
+  then = .10,
+  fifteen = .15,
+  twenty = .20,
+  twentyFifth = .25,
+  thirty = .30
 }
 
 export interface ProductsListInterface {
@@ -35,12 +46,12 @@ export interface ProductsListInterface {
   name: string;
   price: number;
   image: string;
-  forGift: 1 | null,
-  promo: number | null;
+  forGift: 1 | 0;
+  promo: PromoEnum;
   unit: 'g' | 'szt';
   numberOfUnits: NumberOfUnits;
-  new: 1 | null;
-  onHomePage: 1 | null;
+  new: 1 | 0;
+  onHomePage: 1 | 0;
   state: number;
 }
 
@@ -52,7 +63,7 @@ export interface ProductInterface extends ProductsListInterface {
   temperatureBrew: string | null;
   timeBrew: string | null;
   numberBrews: string | null;
-  wayStore: string | null;
+  storageMethod: string | null;
   coffeeSpecies: string | null;
   howToBrew: string | null;
   size: string | null;
@@ -78,7 +89,7 @@ export interface BasketInterface {
   product: ProductsListInterface;
 }
 
-export interface BasketOneProductInterface extends Omit<ProductsListInterface, 'forGift' | 'promo' | 'new' | 'onHomePage'> {
+export interface BasketOneProductInterface extends Omit<ProductsListInterface, 'forGift' | 'new' | 'onHomePage'> {
 }
 
 export interface OrderBasketInterface extends Omit<ProductsListInterface, 'category' | 'forGift' | 'promo' | 'new'> {

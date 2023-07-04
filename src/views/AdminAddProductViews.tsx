@@ -1,6 +1,7 @@
+import { AdminAddProduct } from '../components/Admin/AdminAddProduct/AdminAddProduct';
+
 export const AdminAddProductViews = () => {
 
-  return (
-    <h1>Admin Add product</h1>
-  );
+  return <AdminAddProduct/>;
+
 };
